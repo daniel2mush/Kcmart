@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RuffModuleSettingsStorage">
+    <option name="moduleSettings">
+      <map>
+        <entry key="backend">
+          <value>
+            <RuffModuleSettingsData>
+              <option name="enabled" value="true" />
+              <option name="executableDiscoveryMode" value="PATH" />
+              <option name="pathToExecutable" value="/opt/homebrew/bin/ruff" />
+            </RuffModuleSettingsData>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

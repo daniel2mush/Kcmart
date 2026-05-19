@@ -7,10 +7,12 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
+import RouteLoader from '../components/RouteLoader'
 
 import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
+import NavBar from '#/components/NavBar'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -24,10 +26,29 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
+        content: 'width=device-width, initial-scale=1, viewport-fit=cover',
       },
       {
         title: 'TanStack Start Starter',
+      },
+      {
+        name: 'theme-color',
+        content: '#0a0a0a',
+      },
+      /* 2. Force Dark Mode Theme Color (Fixes some Chrome/Arc bugs) */
+      {
+        name: 'theme-color',
+        media: '(prefers-color-scheme: dark)',
+        content: '#0a0a0a',
+      },
+      /* 3. Apple/iOS Specific Tags */
+      {
+        name: 'apple-mobile-web-app-capable',
+        content: 'yes',
+      },
+      {
+        name: 'apple-mobile-web-app-status-bar-style',
+        content: 'black-translucent',
       },
     ],
     links: [
@@ -47,7 +68,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <NavBar />
         {children}
+        <RouteLoader />
         <TanStackDevtools
           config={{
             position: 'bottom-right',

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,9 +38,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "api.users",
+    "api.products",
+    "corsheaders",
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -114,4 +122,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
+
 STATIC_URL = "static/"
+
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+
+AUTH_USER_MODEL = "users.User"
+
+SIMPLE_JWT = {
+    # Keeps your access tokens short-lived (e.g., 5 mins)
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    # Keeps your refresh tokens longer-lived (e.g., 1 day)
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    # 1. HERE IS YOUR SETTING:
+    "ROTATE_REFRESH_TOKENS": True,
+    # 2. HIGHLY RECOMMENDED EXTRA SETTING:
+    # This destroys the old refresh token immediately after it's used
+    # so nobody can steal it and reuse it.
+    "BLACKLIST_AFTER_ROTATION": True,
+    # Ensures SimpleJWT knows you are using 'email' as the login ID
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+}
