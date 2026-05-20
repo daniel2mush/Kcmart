@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { gsap } from 'gsap'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight } from 'lucide-react'
+import { useGSAP } from '@gsap/react'
 
 interface CardProps {
   id: number
@@ -26,6 +27,20 @@ export const Card = ({
   const overlayRefs = useRef<Array<HTMLDivElement | null>>([])
   const actionRefs = useRef<Array<HTMLDivElement | null>>([])
   const backdropRef = useRef<Array<HTMLDivElement | null>>([])
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    if (!containerRef.current) return
+
+    const timeline = gsap.timeline({
+      defaults: { ease: 'power3.out', duration: 0.8, delay: 0.6 },
+    })
+
+    timeline.from(containerRef.current, {
+      opacity: 0,
+      y: 20,
+    })
+  }, [])
 
   const handleMouseEnter = (index: number) => {
     const overlay = overlayRefs.current[index]
@@ -61,6 +76,7 @@ export const Card = ({
   const handleMouseLeave = (index: number) => {
     const overlay = overlayRefs.current[index]
     const action = actionRefs.current[index]
+    const backdrop = backdropRef.current[index]
 
     if (overlay) {
       gsap.to(overlay, {
@@ -78,8 +94,8 @@ export const Card = ({
       })
     }
 
-    if (backdropRef.current[index]) {
-      gsap.to(backdropRef.current[index], {
+    if (backdrop) {
+      gsap.to(backdrop, {
         opacity: 0,
         duration: 0.25,
         ease: 'power2.in',
@@ -88,25 +104,25 @@ export const Card = ({
   }
 
   return (
-    <div className=" space-y-6 w-full h-full p-10 ">
-      <div>
-        <h1 className="text-3xl font-bold text-center md:text-start text-secondary">
+    <div ref={containerRef} className=" space-y-6 w-full h-full p-10 ">
+      <div className=" flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-center md:text-start text-secondary flex justify-between items-center">
           {title}
         </h1>
-        <Link to={viewMoreLink || '#'} className="hidden">
-          {viewMoreLink && (
-            <Link
-              to={viewMoreLink}
-              className=" mt-4  py-2.5 px-3 rounded-md bg-app w-max block text-center text-sm font-medium text-primary transition-colors duration-200 hover:bg-app/10 border border-border  "
-            >
-              View More
-              <ArrowRight />
-            </Link>
-          )}
-        </Link>
+
+        {viewMoreLink && (
+          <Link
+            to={viewMoreLink}
+            className=" text-secondary flex justify-center items-center gap-1 text-[12px] font-medium t-2 hover:text-primary/80 transition-colors duration-200"
+          >
+            View More
+            <ArrowRight size={12} />
+          </Link>
+        )}
       </div>
       <div className=" flex justify-center items-center md:">
         <div
+          ref={containerRef}
           className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 w-full`}
         >
           {iterable.slice(0, sliceValue).map((drop, index) => (

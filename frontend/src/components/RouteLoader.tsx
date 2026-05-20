@@ -35,7 +35,7 @@ const RouteLoader = () => {
   const loaderRef = useRef<HTMLDivElement>(null)
   const loadingStartedAtRef = useRef(Date.now())
   const [isInitialLoad, setIsInitialLoad] = useState(true)
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     Promise.all([
@@ -49,7 +49,9 @@ const RouteLoader = () => {
   useEffect(() => {
     if (isRouteLoading) {
       loadingStartedAtRef.current = Date.now()
-      setIsVisible(true)
+      if (!isInitialLoad) {
+        setIsVisible(true)
+      }
       return
     }
 
