@@ -18,43 +18,13 @@ const Hero = () => {
           gsap.set(heroRef.current, {
             clearProps: 'opacity,visibility',
           })
-          gsap.set(['.hero-art', '.hero-title', '.hero-copy'], {
+          gsap.set(['.hero-title', '.hero-copy'], {
             clearProps: 'opacity,visibility,transform,filter',
-          })
-          gsap.to('.hero-art-left', {
-            x: -22,
-            scale: 1.015,
-            duration: 4.5,
-            ease: 'sine.inOut',
-            repeat: -1,
-            yoyo: true,
-          })
-          gsap.to('.hero-art-right', {
-            x: 22,
-            scale: 1.015,
-            duration: 5,
-            ease: 'sine.inOut',
-            repeat: -1,
-            yoyo: true,
           })
         },
       })
 
       timeline
-        .fromTo(
-          '.hero-art',
-          {
-            autoAlpha: 0,
-            scale: 0.96,
-            filter: 'blur(14px)',
-          },
-          {
-            autoAlpha: 1,
-            scale: 1,
-            filter: 'blur(0px)',
-            stagger: 0.12,
-          },
-        )
         .fromTo(
           '.hero-title',
           {
@@ -67,7 +37,6 @@ const Hero = () => {
             autoAlpha: 1,
             filter: 'blur(0px)',
           },
-          '-=0.45',
         )
         .fromTo(
           '.hero-copy',

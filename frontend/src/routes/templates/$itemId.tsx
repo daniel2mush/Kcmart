@@ -1,10 +1,26 @@
-import { createFileRoute } from '@tanstack/react-router'
+import ProductView from '#/components/helpers/ProductView'
+import { Templates } from '#/lib/staticResources'
+import { createFileRoute, redirect } from '@tanstack/react-router'
+import { getIsAuthenticated } from '#/lib/authentication/authenticate.ts'
 
 export const Route = createFileRoute('/templates/$itemId')({
   component: RouteComponent,
+  beforeLoad: async () => {
+    const Authenticated = await getIsAuthenticated()
+    if (Authenticated) throw redirect({ to: '/dashboard' })
+  },
 })
 
 function RouteComponent() {
   const { itemId } = Route.useParams()
-  return <div>{itemId} Hellowwwere ord</div>
+
+  const validProduct = Templates.filter(
+    (product) => product.id === Number(itemId),
+  )
+
+  return (
+    <div>
+      <ProductView validProduct={validProduct[0]} />
+    </div>
+  )
 }

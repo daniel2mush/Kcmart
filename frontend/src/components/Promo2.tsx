@@ -73,7 +73,7 @@ const Promo2 = () => {
   }
 
   return (
-    <div className=" overflow-hidden relative w-full min-h-[30dvh] bg-app">
+    <div className=" overflow-hidden relative w-full min-h-[30dvh] bg-app flex justify-center items-center">
       <div className="opacity-5 absolute inset-0">
         <img src="Hero.webp" alt="bg" />
       </div>

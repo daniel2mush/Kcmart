@@ -1,3 +1,6 @@
+import type { RegistrationSchema } from '#/validation/auth'
+import type z from 'zod'
+
 type tag = string
 
 type types =
@@ -19,3 +22,5 @@ export interface ProductTypes {
   image: string[]
   included: tag[]
 }
+
+export type RegistrationTypes = z.infer<typeof RegistrationSchema>

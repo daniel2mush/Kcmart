@@ -1,8 +1,15 @@
-import { Facebook, Instagram, Menu, MoreHorizontal, Twitter, X } from 'lucide-react'
+import {
+  Facebook,
+  Instagram,
+  Menu,
+  MoreHorizontal,
+  Twitter,
+  X,
+} from 'lucide-react'
 import type React from 'react'
 import { useRef, useState, useEffect } from 'react'
 import { useGSAP } from '@gsap/react'
-import { Link } from '@tanstack/react-router'
+import { Link, useLocation } from '@tanstack/react-router'
 import { gsap } from 'gsap'
 import { useMediaQuery } from 'react-responsive'
 import {
@@ -79,6 +86,7 @@ const iconList: IconsTypes[] = [
 ]
 
 const NavBar = () => {
+  // const { isAuthenticated } = useRouteContext({ from: '__root__' })
   const navRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
@@ -87,11 +95,16 @@ const NavBar = () => {
   const [placeholderHeight, setPlaceholderHeight] = useState<number>(0)
 
   const isMobile = useMediaQuery({ maxWidth: 1024 })
+  const pathname = useLocation().pathname
 
   useGSAP(
     () => {
-      if (!navRef.current) return
-
+      if (
+        pathname === '/dashboard' ||
+        pathname === '/signin' ||
+        pathname === 'register'
+      )
+        return null
       const timeline = gsap.timeline({
         defaults: { ease: 'power3.out', duration: 0.7 },
       })
@@ -147,7 +160,7 @@ const NavBar = () => {
           '-=0.35',
         )
     },
-    { scope: navRef },
+    { dependencies: [pathname], scope: navRef },
   )
 
   useGSAP(
@@ -213,6 +226,13 @@ const NavBar = () => {
       setIsMobileMenuOpen(true)
     }
   }
+
+  if (
+    pathname === '/dashboard' ||
+    pathname === '/signin' ||
+    pathname === 'register'
+  )
+    return null
 
   return (
     <>
@@ -310,13 +330,12 @@ const NavBar = () => {
                   ))}
                 </div>
                 <div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border border-border text-secondary hover:text-primary cursor-pointer transition-colors hover:bg-app/10"
+                  <Link
+                    to="/signin"
+                    className=" px-5 py-2 rounded-xl bg-app  border border-border text-secondary hover:text-primary cursor-pointer transition-colors hover:bg-app/80"
                   >
                     Sign In
-                  </Button>
+                  </Link>
                 </div>
               </div>
             </>

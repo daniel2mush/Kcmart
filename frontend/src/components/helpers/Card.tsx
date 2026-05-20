@@ -13,7 +13,7 @@ interface CardProps {
   image: string[]
 }
 interface ValidCardProps {
-  title: string
+  title?: string
   viewMoreLink?: string
   iterable: CardProps[]
   sliceValue?: number
@@ -54,7 +54,7 @@ export const Card = ({
             opacity: 1,
             stagger: 0.1,
           },
-          '-=0.3'
+          '-=0.3',
         )
         .fromTo(
           '.card-item',
@@ -68,10 +68,10 @@ export const Card = ({
             stagger: 0.1,
             duration: 0.6,
           },
-          '-=0.4'
+          '-=0.4',
         )
     },
-    { scope: containerRef }
+    { scope: containerRef },
   )
 
   const handleMouseEnter = (index: number) => {
@@ -82,8 +82,9 @@ export const Card = ({
     if (overlay) {
       gsap.to(overlay, {
         y: -40,
-        duration: 0.05,
-        ease: 'power2.inOut',
+        duration: 0.3,
+        ease: 'power3.out',
+        overwrite: 'auto',
       })
     }
 
@@ -91,16 +92,18 @@ export const Card = ({
       gsap.to(action, {
         opacity: 1,
         y: -10,
-        duration: 0.1,
-        ease: 'power2.inOut',
+        duration: 0.3,
+        ease: 'power3.out',
+        overwrite: 'auto',
       })
     }
 
     if (backdrop) {
       gsap.to(backdrop, {
         opacity: 1,
-        duration: 0.25,
-        ease: 'power2.inOut',
+        duration: 0.3,
+        ease: 'power3.out',
+        overwrite: 'auto',
       })
     }
   }
@@ -113,24 +116,28 @@ export const Card = ({
     if (overlay) {
       gsap.to(overlay, {
         y: 0,
-        duration: 0.05,
-        ease: 'power2.in',
+        duration: 0.3,
+        ease: 'power3.out',
+        overwrite: 'auto',
       })
     }
 
     if (action) {
       gsap.to(action, {
         opacity: 0,
-        duration: 0.1,
-        ease: 'power2.in',
+        y: 0,
+        duration: 0.3,
+        ease: 'power3.out',
+        overwrite: 'auto',
       })
     }
 
     if (backdrop) {
       gsap.to(backdrop, {
         opacity: 0,
-        duration: 0.25,
-        ease: 'power2.in',
+        duration: 0.3,
+        ease: 'power3.out',
+        overwrite: 'auto',
       })
     }
   }
@@ -164,65 +171,67 @@ export const Card = ({
         <div
           className={` grid-contents grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 w-full`}
         >
-          {iterable.slice(0, sliceValue).map((drop, index) => (
-            <div
-              key={index}
-              className="card-item relative w-full h-80 bg-app rounded-lg overflow-hidden border border-border group cursor-pointer"
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={() => handleMouseLeave(index)}
-              style={{ opacity: 0 }}
-            >
+          {iterable.slice(0, sliceValue).map((drop, index) => {
+            const link = `/${drop.types.toLowerCase()}/${drop.id.toString()}`
+
+            return (
               <div
+                key={index}
+                className="card-item relative w-full h-80 bg-app rounded-lg overflow-hidden border border-border group cursor-pointer"
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave(index)}
-                id="backdrop"
-                ref={(el) => {
-                  backdropRef.current[index] = el
-                }}
-                className=" absolute top-0 right-0 opacity-0 z-50 w-full backdrop-blur-sm bg-black/5 h-full"
-              />
-              <div>
-                <img
-                  src={drop.image[0]}
-                  alt={drop.name}
-                  className="w-full h-56 object-cover rounded-t-lg object-center"
-                />
-              </div>
-              <div
-                ref={(el) => {
-                  overlayRefs.current[index] = el
-                }}
-                className="absolute z-50 left-0 bg-surface w-full h-full px-4 transition-all duration-300"
+                style={{ opacity: 0 }}
               >
-                <div className=" flex justify-between items-center">
-                  <div>
-                    <h2 className="text-lg font-semibold mt-4 text-secondary">
-                      {drop.name}
-                    </h2>
-                    <p className="text-sm text-muted mt-2 line-clamp-3">
-                      <span className="text-md text-muted mr-4">
-                        {drop.types} - {drop.tags}
-                      </span>
-                    </p>
-                  </div>
-                  <p className="text-sm font-bold mt-4">${drop.price}</p>
+                <div
+                  id="backdrop"
+                  ref={(el) => {
+                    backdropRef.current[index] = el
+                  }}
+                  className="absolute top-0 right-0 opacity-0 z-50 w-full backdrop-blur-sm bg-black/5 h-full pointer-events-none"
+                />
+                <div>
+                  <img
+                    src={drop.image[0]}
+                    alt={drop.name}
+                    className="w-full h-56 object-cover rounded-t-lg object-center"
+                  />
                 </div>
                 <div
                   ref={(el) => {
-                    actionRefs.current[index] = el
+                    overlayRefs.current[index] = el
                   }}
-                  className="opacity-0"
+                  className="absolute z-50 left-0 bg-surface w-full h-full px-4"
                 >
-                  <Link
-                    to={drop.types.toLocaleLowerCase() + '/' + drop.id}
-                    className=" mt-4  py-2.5 px-3 rounded-md bg-app w-full block text-center text-sm font-medium text-primary transition-colors duration-200 hover:bg-app/10 border border-border  "
+                  <div className=" flex justify-between items-center">
+                    <div>
+                      <h2 className="text-lg font-semibold mt-4 text-secondary">
+                        {drop.name}
+                      </h2>
+                      <p className="text-sm text-muted mt-2 line-clamp-3">
+                        <span className="text-md text-muted mr-4">
+                          {drop.types} - {drop.tags}
+                        </span>
+                      </p>
+                    </div>
+                    <p className="text-sm font-bold mt-4">${drop.price}</p>
+                  </div>
+                  <div
+                    ref={(el) => {
+                      actionRefs.current[index] = el
+                    }}
+                    className="opacity-0"
                   >
-                    View Product
-                  </Link>
+                    <Link
+                      to={link}
+                      className=" mt-4  py-2.5 px-3 rounded-md bg-app w-full block text-center text-sm font-medium text-primary transition-colors duration-200 hover:bg-app/10 border border-border  "
+                    >
+                      View Product
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </div>

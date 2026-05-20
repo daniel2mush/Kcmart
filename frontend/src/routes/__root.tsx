@@ -11,20 +11,18 @@ import RouteLoader from '../components/RouteLoader'
 
 import appCss from '../styles.css?url'
 
-import type { QueryClient } from '@tanstack/react-query'
 import NavBar from '#/components/NavBar'
 import Footer from '#/components/Footer'
+import { Toaster } from 'sonner'
+import NotFound from '#/components/NotFound.tsx'
 
-interface MyRouterContext {
-  queryClient: QueryClient
-}
-
-export const Route = createRootRouteWithContext<MyRouterContext>()({
+export const Route = createRootRouteWithContext()({
   head: () => ({
     meta: [
       {
         charSet: 'utf-8',
       },
+
       {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, viewport-fit=cover',
@@ -59,6 +57,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     ],
   }),
+  notFoundComponent: () => <NotFound />,
   shellComponent: RootDocument,
 })
 
@@ -73,6 +72,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         {children}
         <Footer />
         <RouteLoader />
+        <Toaster richColors={true} />
         <TanStackDevtools
           config={{
             position: 'bottom-right',

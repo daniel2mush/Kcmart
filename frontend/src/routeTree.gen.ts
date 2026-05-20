@@ -10,14 +10,35 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TermsIndexRouteImport } from './routes/terms/index'
 import { Route as TemplatesIndexRouteImport } from './routes/templates/index'
+import { Route as SupportIndexRouteImport } from './routes/support/index'
+import { Route as PrivacyIndexRouteImport } from './routes/privacy/index'
 import { Route as MockupsIndexRouteImport } from './routes/mockups/index'
+import { Route as MagazinesIndexRouteImport } from './routes/magazines/index'
+import { Route as LicenseIndexRouteImport } from './routes/license/index'
 import { Route as GraphicsIndexRouteImport } from './routes/graphics/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as ContactIndexRouteImport } from './routes/contact/index'
+import { Route as AboutIndexRouteImport } from './routes/about/index'
 import { Route as TemplatesItemIdRouteImport } from './routes/templates/$itemId'
+import { Route as MockupsItemIdRouteImport } from './routes/mockups/$itemId'
+import { Route as MagazinesItemIdRouteImport } from './routes/magazines/$itemId'
+import { Route as GraphicsItemIdRouteImport } from './routes/graphics/$itemId'
+import { Route as authSigninIndexRouteImport } from './routes/(auth)/signin/index'
+import { Route as authRegisterIndexRouteImport } from './routes/(auth)/register/index'
+import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
+import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
+import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsIndexRoute = TermsIndexRouteImport.update({
+  id: '/terms/',
+  path: '/terms/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TemplatesIndexRoute = TemplatesIndexRouteImport.update({
@@ -25,9 +46,29 @@ const TemplatesIndexRoute = TemplatesIndexRouteImport.update({
   path: '/templates/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SupportIndexRoute = SupportIndexRouteImport.update({
+  id: '/support/',
+  path: '/support/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyIndexRoute = PrivacyIndexRouteImport.update({
+  id: '/privacy/',
+  path: '/privacy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MockupsIndexRoute = MockupsIndexRouteImport.update({
   id: '/mockups/',
   path: '/mockups/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MagazinesIndexRoute = MagazinesIndexRouteImport.update({
+  id: '/magazines/',
+  path: '/magazines/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LicenseIndexRoute = LicenseIndexRouteImport.update({
+  id: '/license/',
+  path: '/license/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GraphicsIndexRoute = GraphicsIndexRouteImport.update({
@@ -35,59 +76,231 @@ const GraphicsIndexRoute = GraphicsIndexRouteImport.update({
   path: '/graphics/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactIndexRoute = ContactIndexRouteImport.update({
+  id: '/contact/',
+  path: '/contact/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutIndexRoute = AboutIndexRouteImport.update({
+  id: '/about/',
+  path: '/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TemplatesItemIdRoute = TemplatesItemIdRouteImport.update({
   id: '/templates/$itemId',
   path: '/templates/$itemId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MockupsItemIdRoute = MockupsItemIdRouteImport.update({
+  id: '/mockups/$itemId',
+  path: '/mockups/$itemId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MagazinesItemIdRoute = MagazinesItemIdRouteImport.update({
+  id: '/magazines/$itemId',
+  path: '/magazines/$itemId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GraphicsItemIdRoute = GraphicsItemIdRouteImport.update({
+  id: '/graphics/$itemId',
+  path: '/graphics/$itemId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authSigninIndexRoute = authSigninIndexRouteImport.update({
+  id: '/(auth)/signin/',
+  path: '/signin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authRegisterIndexRoute = authRegisterIndexRouteImport.update({
+  id: '/(auth)/register/',
+  path: '/register/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
+  id: '/api/auth/register',
+  path: '/api/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLogoutRoute = ApiAuthLogoutRouteImport.update({
+  id: '/api/auth/logout',
+  path: '/api/auth/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
+  id: '/api/auth/login',
+  path: '/api/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/graphics/$itemId': typeof GraphicsItemIdRoute
+  '/magazines/$itemId': typeof MagazinesItemIdRoute
+  '/mockups/$itemId': typeof MockupsItemIdRoute
   '/templates/$itemId': typeof TemplatesItemIdRoute
+  '/about/': typeof AboutIndexRoute
+  '/contact/': typeof ContactIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/graphics/': typeof GraphicsIndexRoute
+  '/license/': typeof LicenseIndexRoute
+  '/magazines/': typeof MagazinesIndexRoute
   '/mockups/': typeof MockupsIndexRoute
+  '/privacy/': typeof PrivacyIndexRoute
+  '/support/': typeof SupportIndexRoute
   '/templates/': typeof TemplatesIndexRoute
+  '/terms/': typeof TermsIndexRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/register/': typeof authRegisterIndexRoute
+  '/signin/': typeof authSigninIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/graphics/$itemId': typeof GraphicsItemIdRoute
+  '/magazines/$itemId': typeof MagazinesItemIdRoute
+  '/mockups/$itemId': typeof MockupsItemIdRoute
   '/templates/$itemId': typeof TemplatesItemIdRoute
+  '/about': typeof AboutIndexRoute
+  '/contact': typeof ContactIndexRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/graphics': typeof GraphicsIndexRoute
+  '/license': typeof LicenseIndexRoute
+  '/magazines': typeof MagazinesIndexRoute
   '/mockups': typeof MockupsIndexRoute
+  '/privacy': typeof PrivacyIndexRoute
+  '/support': typeof SupportIndexRoute
   '/templates': typeof TemplatesIndexRoute
+  '/terms': typeof TermsIndexRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/register': typeof authRegisterIndexRoute
+  '/signin': typeof authSigninIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/graphics/$itemId': typeof GraphicsItemIdRoute
+  '/magazines/$itemId': typeof MagazinesItemIdRoute
+  '/mockups/$itemId': typeof MockupsItemIdRoute
   '/templates/$itemId': typeof TemplatesItemIdRoute
+  '/about/': typeof AboutIndexRoute
+  '/contact/': typeof ContactIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/graphics/': typeof GraphicsIndexRoute
+  '/license/': typeof LicenseIndexRoute
+  '/magazines/': typeof MagazinesIndexRoute
   '/mockups/': typeof MockupsIndexRoute
+  '/privacy/': typeof PrivacyIndexRoute
+  '/support/': typeof SupportIndexRoute
   '/templates/': typeof TemplatesIndexRoute
+  '/terms/': typeof TermsIndexRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/(auth)/register/': typeof authRegisterIndexRoute
+  '/(auth)/signin/': typeof authSigninIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/graphics/$itemId'
+    | '/magazines/$itemId'
+    | '/mockups/$itemId'
     | '/templates/$itemId'
+    | '/about/'
+    | '/contact/'
+    | '/dashboard/'
     | '/graphics/'
+    | '/license/'
+    | '/magazines/'
     | '/mockups/'
+    | '/privacy/'
+    | '/support/'
     | '/templates/'
+    | '/terms/'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/register'
+    | '/register/'
+    | '/signin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/templates/$itemId' | '/graphics' | '/mockups' | '/templates'
+  to:
+    | '/'
+    | '/graphics/$itemId'
+    | '/magazines/$itemId'
+    | '/mockups/$itemId'
+    | '/templates/$itemId'
+    | '/about'
+    | '/contact'
+    | '/dashboard'
+    | '/graphics'
+    | '/license'
+    | '/magazines'
+    | '/mockups'
+    | '/privacy'
+    | '/support'
+    | '/templates'
+    | '/terms'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/register'
+    | '/register'
+    | '/signin'
   id:
     | '__root__'
     | '/'
+    | '/graphics/$itemId'
+    | '/magazines/$itemId'
+    | '/mockups/$itemId'
     | '/templates/$itemId'
+    | '/about/'
+    | '/contact/'
+    | '/dashboard/'
     | '/graphics/'
+    | '/license/'
+    | '/magazines/'
     | '/mockups/'
+    | '/privacy/'
+    | '/support/'
     | '/templates/'
+    | '/terms/'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/register'
+    | '/(auth)/register/'
+    | '/(auth)/signin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GraphicsItemIdRoute: typeof GraphicsItemIdRoute
+  MagazinesItemIdRoute: typeof MagazinesItemIdRoute
+  MockupsItemIdRoute: typeof MockupsItemIdRoute
   TemplatesItemIdRoute: typeof TemplatesItemIdRoute
+  AboutIndexRoute: typeof AboutIndexRoute
+  ContactIndexRoute: typeof ContactIndexRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
   GraphicsIndexRoute: typeof GraphicsIndexRoute
+  LicenseIndexRoute: typeof LicenseIndexRoute
+  MagazinesIndexRoute: typeof MagazinesIndexRoute
   MockupsIndexRoute: typeof MockupsIndexRoute
+  PrivacyIndexRoute: typeof PrivacyIndexRoute
+  SupportIndexRoute: typeof SupportIndexRoute
   TemplatesIndexRoute: typeof TemplatesIndexRoute
+  TermsIndexRoute: typeof TermsIndexRoute
+  ApiAuthLoginRoute: typeof ApiAuthLoginRoute
+  ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
+  ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
+  authRegisterIndexRoute: typeof authRegisterIndexRoute
+  authSigninIndexRoute: typeof authSigninIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,11 +312,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms/': {
+      id: '/terms/'
+      path: '/terms'
+      fullPath: '/terms/'
+      preLoaderRoute: typeof TermsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/templates/': {
       id: '/templates/'
       path: '/templates'
       fullPath: '/templates/'
       preLoaderRoute: typeof TemplatesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support/': {
+      id: '/support/'
+      path: '/support'
+      fullPath: '/support/'
+      preLoaderRoute: typeof SupportIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy/': {
+      id: '/privacy/'
+      path: '/privacy'
+      fullPath: '/privacy/'
+      preLoaderRoute: typeof PrivacyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mockups/': {
@@ -113,11 +347,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MockupsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/magazines/': {
+      id: '/magazines/'
+      path: '/magazines'
+      fullPath: '/magazines/'
+      preLoaderRoute: typeof MagazinesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/license/': {
+      id: '/license/'
+      path: '/license'
+      fullPath: '/license/'
+      preLoaderRoute: typeof LicenseIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/graphics/': {
       id: '/graphics/'
       path: '/graphics'
       fullPath: '/graphics/'
       preLoaderRoute: typeof GraphicsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact/': {
+      id: '/contact/'
+      path: '/contact'
+      fullPath: '/contact/'
+      preLoaderRoute: typeof ContactIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about/'
+      preLoaderRoute: typeof AboutIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/templates/$itemId': {
@@ -127,25 +396,98 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TemplatesItemIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mockups/$itemId': {
+      id: '/mockups/$itemId'
+      path: '/mockups/$itemId'
+      fullPath: '/mockups/$itemId'
+      preLoaderRoute: typeof MockupsItemIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/magazines/$itemId': {
+      id: '/magazines/$itemId'
+      path: '/magazines/$itemId'
+      fullPath: '/magazines/$itemId'
+      preLoaderRoute: typeof MagazinesItemIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/graphics/$itemId': {
+      id: '/graphics/$itemId'
+      path: '/graphics/$itemId'
+      fullPath: '/graphics/$itemId'
+      preLoaderRoute: typeof GraphicsItemIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/signin/': {
+      id: '/(auth)/signin/'
+      path: '/signin'
+      fullPath: '/signin/'
+      preLoaderRoute: typeof authSigninIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/register/': {
+      id: '/(auth)/register/'
+      path: '/register'
+      fullPath: '/register/'
+      preLoaderRoute: typeof authRegisterIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/register': {
+      id: '/api/auth/register'
+      path: '/api/auth/register'
+      fullPath: '/api/auth/register'
+      preLoaderRoute: typeof ApiAuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/logout': {
+      id: '/api/auth/logout'
+      path: '/api/auth/logout'
+      fullPath: '/api/auth/logout'
+      preLoaderRoute: typeof ApiAuthLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/login': {
+      id: '/api/auth/login'
+      path: '/api/auth/login'
+      fullPath: '/api/auth/login'
+      preLoaderRoute: typeof ApiAuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GraphicsItemIdRoute: GraphicsItemIdRoute,
+  MagazinesItemIdRoute: MagazinesItemIdRoute,
+  MockupsItemIdRoute: MockupsItemIdRoute,
   TemplatesItemIdRoute: TemplatesItemIdRoute,
+  AboutIndexRoute: AboutIndexRoute,
+  ContactIndexRoute: ContactIndexRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
   GraphicsIndexRoute: GraphicsIndexRoute,
+  LicenseIndexRoute: LicenseIndexRoute,
+  MagazinesIndexRoute: MagazinesIndexRoute,
   MockupsIndexRoute: MockupsIndexRoute,
+  PrivacyIndexRoute: PrivacyIndexRoute,
+  SupportIndexRoute: SupportIndexRoute,
   TemplatesIndexRoute: TemplatesIndexRoute,
+  TermsIndexRoute: TermsIndexRoute,
+  ApiAuthLoginRoute: ApiAuthLoginRoute,
+  ApiAuthLogoutRoute: ApiAuthLogoutRoute,
+  ApiAuthRegisterRoute: ApiAuthRegisterRoute,
+  authRegisterIndexRoute: authRegisterIndexRoute,
+  authSigninIndexRoute: authSigninIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }

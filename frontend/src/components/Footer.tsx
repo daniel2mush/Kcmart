@@ -1,13 +1,15 @@
-import React from 'react'
-import { Link } from '@tanstack/react-router'
+import { Link, useLocation } from '@tanstack/react-router'
 import { Facebook, Instagram, Twitter } from 'lucide-react'
 
 const Footer = () => {
+  const pathname = useLocation().pathname
+
+  if (pathname === '/dashboard') return
   return (
-    <footer className="w-full bg-app border-t border-border text-muted">
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8 place-">
+    <footer className="w-full bg-app border-t border-border text-muted ">
+      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
-          <h2 className="text-2xl font-black text-secondary">KCMart</h2>
+          <h2 className="text-2xl font-black text-secondary ">KCMart</h2>
           <p className="mt-3 text-sm text-muted max-w-xs">
             Professional design resources for creators — templates, mockups,
             graphics and magazine layouts to speed up your workflow and polish
