@@ -1,8 +1,8 @@
 import { Facebook, Instagram, MoreHorizontal, Twitter, X } from 'lucide-react'
 import type React from 'react'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useGSAP } from '@gsap/react'
-import { Link, useParams } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { gsap } from 'gsap'
 import {
   Collapsible,
@@ -83,6 +83,9 @@ const NavBar = () => {
   const navRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
 
+  const [isFixed, setIsFixed] = useState(false)
+  const [placeholderHeight, setPlaceholderHeight] = useState<number>(0)
+
   useGSAP(
     () => {
       if (!navRef.current) return
@@ -145,104 +148,123 @@ const NavBar = () => {
     { scope: navRef },
   )
 
+  useEffect(() => {
+    const onScroll = () => setIsFixed(window.scrollY > 20)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    if (!navRef.current) return
+    setPlaceholderHeight(navRef.current.offsetHeight)
+    const ro = new ResizeObserver(() => {
+      if (navRef.current) setPlaceholderHeight(navRef.current.offsetHeight)
+    })
+    ro.observe(navRef.current)
+    return () => ro.disconnect()
+  }, [])
+
   return (
-    <div
-      ref={navRef}
-      id="container"
-      className="sticky top-0 left-0 z-50 h-20 w-full bg-app px-10 py-5 border-b border-border"
-      style={{ transform: 'translateY(-28px)', filter: 'blur(10px)' }}
-    >
-      <nav className="flex justify-between items-center max-w-7xl mx-auto">
-        <Link
-          to="/"
-          className="logo"
-          style={{ opacity: 0, visibility: 'hidden' }}
-        >
-          <h1 className=" font-black text-2xl text-secondary">KCMart</h1>
-        </Link>
-        <ul className=" content flex items-center justify-center gap-6 text-muted">
-          {navList.map((nav, i) => (
-            <div
-              key={i}
-              className="nav-item"
-              style={{ opacity: 0, visibility: 'hidden' }}
-            >
-              <li className="text-[15px] text-muted transition-transform duration-200 hover:-translate-y-0.5">
-                {nav.link ? (
-                  <Link
-                    to={nav.link}
-                    activeOptions={{ exact: true }}
-                    activeProps={{
-                      className:
-                        ' !text-primary w-full bg-surface rounded-md border border-border px-4 py-2',
-                    }}
-                  >
-                    {nav.title}
-                  </Link>
-                ) : null}
-                {nav.icon && (
-                  <Collapsible
-                    open={isOpen}
-                    onOpenChange={setIsOpen}
-                    className="relative"
-                  >
-                    <CollapsibleTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="size-8 cursor-pointer border-0 bg-transparent p-0 shadow-none hover:bg-transparent focus-visible:ring-0"
-                      >
-                        {isOpen ? <X /> : nav.icon}
-                      </Button>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="absolute -right-10 top-12  overflow-hidden rounded-md border border-border bg-app p-2 shadow-[0_18px_60px_rgba(0,0,0,0.28)] data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-2">
-                      <ul className="flex flex-col gap-1">
-                        {moreNav.map((item) => (
-                          <li key={item.title}>
-                            {item.link ? (
-                              <Link
-                                to={item.link}
-                                onClick={() => setIsOpen(false)}
-                                className="block rounded-sm px-3 py-2 text-sm font-medium text-primary transition-colors hover:bg-inset hover:text-primary"
-                              >
-                                {item.title}
-                              </Link>
-                            ) : null}
-                          </li>
-                        ))}
-                      </ul>
-                    </CollapsibleContent>
-                  </Collapsible>
-                )}
-              </li>
-            </div>
-          ))}
-        </ul>
-        <div className=" flex items-center gap-10">
-          <div className=" social flex justify-center items-center gap-6">
-            {iconList.map((icon, i) => (
-              <a
+    <>
+      {isFixed && <div aria-hidden style={{ height: placeholderHeight }} />}
+      <div
+        ref={navRef}
+        id="container"
+        className={`${isFixed ? 'fixed top-0 left-0 right-0 backdrop-blur-md bg-app/80 shadow-md' : 'fixed top-0'} z-1000 h-20 w-full px-10 py-5 border-border transition-all duration-300`}
+      >
+        <nav className="flex justify-between items-center max-w-7xl mx-auto">
+          <Link
+            to="/"
+            className="logo"
+            style={{ opacity: 0, visibility: 'hidden' }}
+          >
+            <h1 className=" font-black text-2xl text-secondary">KCMart</h1>
+          </Link>
+          <ul className=" content flex items-center justify-center gap-6 text-secondary">
+            {navList.map((nav, i) => (
+              <div
                 key={i}
-                href={icon.link}
-                className="social-link transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110"
+                className="nav-item"
                 style={{ opacity: 0, visibility: 'hidden' }}
               >
-                {icon.icon}
-              </a>
+                <li className="text-[15px] text-secondary hover:text-primary  transition-transform duration-200 hover:-translate-y-0.5">
+                  {nav.link ? (
+                    <Link
+                      to={nav.link}
+                      activeOptions={{ exact: true }}
+                      activeProps={{
+                        className:
+                          ' !text-primary w-full bg-surface rounded-md border border-border px-4 py-2',
+                      }}
+                    >
+                      {nav.title}
+                    </Link>
+                  ) : null}
+                  {nav.icon && (
+                    <Collapsible
+                      open={isOpen}
+                      onOpenChange={setIsOpen}
+                      className="relative"
+                    >
+                      <CollapsibleTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="size-8 cursor-pointer border-0 bg-transparent p-0 shadow-none hover:bg-transparent focus-visible:ring-0"
+                        >
+                          {isOpen ? <X /> : nav.icon}
+                        </Button>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="absolute text-secondary -right-10 top-12  overflow-hidden rounded-md border border-border bg-app p-2 shadow-[0_18px_60px_rgba(0,0,0,0.28)] data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-2">
+                        <ul className="flex flex-col gap-1">
+                          {moreNav.map((item) => (
+                            <li key={item.title}>
+                              {item.link ? (
+                                <Link
+                                  to={item.link}
+                                  onClick={() => setIsOpen(false)}
+                                  className="block rounded-sm px-3 py-2 text-sm font-medium  transition-colors hover:bg-inset hover:text-primary"
+                                >
+                                  {item.title}
+                                </Link>
+                              ) : null}
+                            </li>
+                          ))}
+                        </ul>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  )}
+                </li>
+              </div>
             ))}
+          </ul>
+          <div className=" flex items-center gap-10">
+            <div className=" social flex justify-center items-center gap-6 text-secondary">
+              {iconList.map((icon, i) => (
+                <a
+                  key={i}
+                  href={icon.link}
+                  className="social-link transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110"
+                  style={{ opacity: 0, visibility: 'hidden' }}
+                >
+                  {icon.icon}
+                </a>
+              ))}
+            </div>
+            <div>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border border-border text-secondary hover:text-primary cursor-pointer transition-colors hover:bg-app/10"
+              >
+                Sign In
+              </Button>
+            </div>
           </div>
-          <div>
-            <Button
-              variant="outline"
-              size="sm"
-              className="border border-border text-primary transition-colors hover:bg-app/10"
-            >
-              Sign In
-            </Button>
-          </div>
-        </div>
-      </nav>
-    </div>
+        </nav>
+      </div>
+    </>
   )
 }
 

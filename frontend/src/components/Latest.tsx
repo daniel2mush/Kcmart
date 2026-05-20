@@ -1,9 +1,7 @@
 import { useRef } from 'react'
 import { gsap } from 'gsap'
 import { latestDrops } from '../lib/staticResources'
-import { Button } from './ui/button'
 import { useGSAP } from '@gsap/react'
-import { Link } from '@tanstack/react-router'
 import { Card } from './helpers/Card'
 
 const Latest = () => {
@@ -20,14 +18,12 @@ const Latest = () => {
   }, [])
 
   return (
-    <div ref={containerRef} className="  h-[60dvh] bg-surface overflow- ">
-      <div className="max-w-7xl mx-auto w-full p-10 space-y-10">
-        <h1 className="text-3xl font-bold">Latest Drops</h1>
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {latestDrops.map((drop, index) => (
-            <Card drop={drop} index={index} />
-          ))}
-        </div>
+    <div
+      ref={containerRef}
+      className=" max-w-500 mx-auto  min-h-[60dvh] bg-surface overflow-hidden flex items-center justify-center"
+    >
+      <div className="h-full mx-auto w-full flex justify-center items-center ">
+        <Card title="Latest Drops" iterable={latestDrops} viewMoreLink="#" />
       </div>
     </div>
   )

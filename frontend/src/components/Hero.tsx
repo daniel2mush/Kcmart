@@ -86,31 +86,23 @@ const Hero = () => {
   )
 
   return (
-    <div ref={heroRef} className="w-full h-[70dvh] overflow-hidden">
+    <div
+      ref={heroRef}
+      className="w-full h-[clamp(30dvh,50dvw,70dvh)] overflow-hidden"
+    >
       <div className=" flex justify-center items-center h-full relative ">
-        <div className=" opacity-20">
-          <div
-            className="hero-art hero-art-left absolute top-0 left-0"
-            style={{ opacity: 0, visibility: 'hidden' }}
-          >
-            <img src="/hero-side.png" alt="" className="w-[50vw]" />
-          </div>
-          <div
-            className="hero-art hero-art-right absolute bottom-0 right-0 rotate-180"
-            style={{ opacity: 0, visibility: 'hidden' }}
-          >
-            <img src="/hero-side.png" alt="" className="w-[50vw]" />
-          </div>
+        <div className=" opacity-5 absolute top-0 left-0 w-full h-full">
+          <img src="Hero.webp" />
         </div>
-        <div className=" items text-center space-y-10 z-30 max-w-7xl mx-auto w-full">
+        <div className=" items text-center space-y-5 z-30 max-w-500 mx-auto w-full">
           <h1
-            className="hero-title text-6xl font-black"
+            className="hero-title text-secondary font-black text-[clamp(1.5rem,5vw,4rem)] leading-tight"
             style={{ opacity: 0, visibility: 'hidden' }}
           >
             E-commerce power house. {<br />}Made for designers and developers.
           </h1>
           <p
-            className="hero-copy text-secondary text-xl"
+            className="hero-copy text-[clamp(0.875rem,2vw,1.25rem)] text-muted mx-auto"
             style={{ opacity: 0, visibility: 'hidden' }}
           >
             Getting your mockups and your elements to make your designs

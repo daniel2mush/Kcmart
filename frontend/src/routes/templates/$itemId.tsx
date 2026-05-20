@@ -6,5 +6,5 @@ export const Route = createFileRoute('/templates/$itemId')({
 
 function RouteComponent() {
   const { itemId } = Route.useParams()
-  return <div>{itemId}</div>
+  return <div>{itemId} Hellowwwere ord</div>
 }

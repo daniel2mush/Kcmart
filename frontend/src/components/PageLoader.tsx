@@ -8,7 +8,10 @@ const PageLoader = () => {
           <span className="absolute inset-0 animate-spin border border-primary/40" />
           <span className="absolute inset-2 border border-muted/40" />
           <span className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 animate-pulse bg-primary" />
-          <PackageSearch className="relative size-8 text-primary" strokeWidth={1.7} />
+          <PackageSearch
+            className="relative size-8 text-primary"
+            strokeWidth={1.7}
+          />
         </div>
       </div>
       <div className="mb-6 flex items-center gap-4 text-muted">

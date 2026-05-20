@@ -13,6 +13,7 @@ import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
 import NavBar from '#/components/NavBar'
+import Footer from '#/components/Footer'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -70,6 +71,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <NavBar />
         {children}
+        <Footer />
         <RouteLoader />
         <TanStackDevtools
           config={{

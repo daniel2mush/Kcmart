@@ -9,22 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as MockupsRouteImport } from './routes/mockups'
-import { Route as GraphicsRouteImport } from './routes/graphics'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TemplatesIndexRouteImport } from './routes/templates/index'
+import { Route as MockupsIndexRouteImport } from './routes/mockups/index'
+import { Route as GraphicsIndexRouteImport } from './routes/graphics/index'
 import { Route as TemplatesItemIdRouteImport } from './routes/templates/$itemId'
 
-const MockupsRoute = MockupsRouteImport.update({
-  id: '/mockups',
-  path: '/mockups',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GraphicsRoute = GraphicsRouteImport.update({
-  id: '/graphics',
-  path: '/graphics',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -35,6 +25,16 @@ const TemplatesIndexRoute = TemplatesIndexRouteImport.update({
   path: '/templates/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MockupsIndexRoute = MockupsIndexRouteImport.update({
+  id: '/mockups/',
+  path: '/mockups/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GraphicsIndexRoute = GraphicsIndexRouteImport.update({
+  id: '/graphics/',
+  path: '/graphics/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TemplatesItemIdRoute = TemplatesItemIdRouteImport.update({
   id: '/templates/$itemId',
   path: '/templates/$itemId',
@@ -43,69 +43,55 @@ const TemplatesItemIdRoute = TemplatesItemIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/graphics': typeof GraphicsRoute
-  '/mockups': typeof MockupsRoute
   '/templates/$itemId': typeof TemplatesItemIdRoute
+  '/graphics/': typeof GraphicsIndexRoute
+  '/mockups/': typeof MockupsIndexRoute
   '/templates/': typeof TemplatesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/graphics': typeof GraphicsRoute
-  '/mockups': typeof MockupsRoute
   '/templates/$itemId': typeof TemplatesItemIdRoute
+  '/graphics': typeof GraphicsIndexRoute
+  '/mockups': typeof MockupsIndexRoute
   '/templates': typeof TemplatesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/graphics': typeof GraphicsRoute
-  '/mockups': typeof MockupsRoute
   '/templates/$itemId': typeof TemplatesItemIdRoute
+  '/graphics/': typeof GraphicsIndexRoute
+  '/mockups/': typeof MockupsIndexRoute
   '/templates/': typeof TemplatesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/graphics'
-    | '/mockups'
     | '/templates/$itemId'
+    | '/graphics/'
+    | '/mockups/'
     | '/templates/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/graphics' | '/mockups' | '/templates/$itemId' | '/templates'
+  to: '/' | '/templates/$itemId' | '/graphics' | '/mockups' | '/templates'
   id:
     | '__root__'
     | '/'
-    | '/graphics'
-    | '/mockups'
     | '/templates/$itemId'
+    | '/graphics/'
+    | '/mockups/'
     | '/templates/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  GraphicsRoute: typeof GraphicsRoute
-  MockupsRoute: typeof MockupsRoute
   TemplatesItemIdRoute: typeof TemplatesItemIdRoute
+  GraphicsIndexRoute: typeof GraphicsIndexRoute
+  MockupsIndexRoute: typeof MockupsIndexRoute
   TemplatesIndexRoute: typeof TemplatesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/mockups': {
-      id: '/mockups'
-      path: '/mockups'
-      fullPath: '/mockups'
-      preLoaderRoute: typeof MockupsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/graphics': {
-      id: '/graphics'
-      path: '/graphics'
-      fullPath: '/graphics'
-      preLoaderRoute: typeof GraphicsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -120,6 +106,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TemplatesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mockups/': {
+      id: '/mockups/'
+      path: '/mockups'
+      fullPath: '/mockups/'
+      preLoaderRoute: typeof MockupsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/graphics/': {
+      id: '/graphics/'
+      path: '/graphics'
+      fullPath: '/graphics/'
+      preLoaderRoute: typeof GraphicsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/templates/$itemId': {
       id: '/templates/$itemId'
       path: '/templates/$itemId'
@@ -132,9 +132,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  GraphicsRoute: GraphicsRoute,
-  MockupsRoute: MockupsRoute,
   TemplatesItemIdRoute: TemplatesItemIdRoute,
+  GraphicsIndexRoute: GraphicsIndexRoute,
+  MockupsIndexRoute: MockupsIndexRoute,
   TemplatesIndexRoute: TemplatesIndexRoute,
 }
 export const routeTree = rootRouteImport
