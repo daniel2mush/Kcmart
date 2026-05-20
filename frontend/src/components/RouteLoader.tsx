@@ -10,7 +10,9 @@ const MIN_LOADER_TIME = 750
 
 const waitForPageAssets = () => {
   const waitForFonts =
-    'fonts' in document ? document.fonts.ready.then(() => undefined) : Promise.resolve()
+    'fonts' in document
+      ? document.fonts.ready.then(() => undefined)
+      : Promise.resolve()
 
   const waitForImages = Array.from(document.images).map(
     (image) =>

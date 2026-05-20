@@ -29,18 +29,50 @@ export const Card = ({
   const backdropRef = useRef<Array<HTMLDivElement | null>>([])
   const containerRef = useRef<HTMLDivElement>(null)
 
-  useGSAP(() => {
-    if (!containerRef.current) return
+  useGSAP(
+    () => {
+      if (!containerRef.current) return
 
-    const timeline = gsap.timeline({
-      defaults: { ease: 'power3.out', duration: 0.8, delay: 0.6 },
-    })
+      const timeline = gsap.timeline({
+        defaults: { ease: 'power3.out', duration: 0.8 },
+      })
 
-    timeline.from(containerRef.current, {
-      opacity: 0,
-      y: 20,
-    })
-  }, [])
+      timeline
+        .to(containerRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+        })
+        .fromTo(
+          '.header-text > *',
+          {
+            y: 20,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+          },
+          '-=0.3'
+        )
+        .fromTo(
+          '.card-item',
+          {
+            y: 30,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+            duration: 0.6,
+          },
+          '-=0.4'
+        )
+    },
+    { scope: containerRef }
+  )
 
   const handleMouseEnter = (index: number) => {
     const overlay = overlayRefs.current[index]
@@ -104,9 +136,16 @@ export const Card = ({
   }
 
   return (
-    <div ref={containerRef} className=" space-y-6 w-full h-full p-10 ">
-      <div className=" flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-center md:text-start text-secondary flex justify-between items-center">
+    <div
+      ref={containerRef}
+      className=" space-y-6 w-full h-full p-10 "
+      style={{ opacity: 0, transform: 'translateY(-20px)' }}
+    >
+      <div className=" header-text  flex justify-between items-center">
+        <h1
+          className="text-3xl font-bold text-center md:text-start text-secondary flex justify-between items-center"
+          style={{ opacity: 0 }}
+        >
           {title}
         </h1>
 
@@ -114,6 +153,7 @@ export const Card = ({
           <Link
             to={viewMoreLink}
             className=" text-secondary flex justify-center items-center gap-1 text-[12px] font-medium t-2 hover:text-primary/80 transition-colors duration-200"
+            style={{ opacity: 0 }}
           >
             View More
             <ArrowRight size={12} />
@@ -122,15 +162,15 @@ export const Card = ({
       </div>
       <div className=" flex justify-center items-center md:">
         <div
-          ref={containerRef}
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 w-full`}
+          className={` grid-contents grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 w-full`}
         >
           {iterable.slice(0, sliceValue).map((drop, index) => (
             <div
               key={index}
-              className=" relative w-full h-80 bg-app rounded-lg overflow-hidden border border-border group cursor-pointer"
+              className="card-item relative w-full h-80 bg-app rounded-lg overflow-hidden border border-border group cursor-pointer"
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
+              style={{ opacity: 0 }}
             >
               <div
                 onMouseEnter={() => handleMouseEnter(index)}
