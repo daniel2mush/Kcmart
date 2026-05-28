@@ -25,8 +25,15 @@ import { Route as TemplatesItemIdRouteImport } from './routes/templates/$itemId'
 import { Route as MockupsItemIdRouteImport } from './routes/mockups/$itemId'
 import { Route as MagazinesItemIdRouteImport } from './routes/magazines/$itemId'
 import { Route as GraphicsItemIdRouteImport } from './routes/graphics/$itemId'
+import { Route as DashboardSettingsIndexRouteImport } from './routes/dashboard/settings/index'
+import { Route as DashboardPurchase_historyIndexRouteImport } from './routes/dashboard/purchase_history/index'
+import { Route as DashboardProfileIndexRouteImport } from './routes/dashboard/profile/index'
+import { Route as DashboardProductsIndexRouteImport } from './routes/dashboard/products/index'
+import { Route as DashboardFoldersIndexRouteImport } from './routes/dashboard/folders/index'
 import { Route as authSigninIndexRouteImport } from './routes/(auth)/signin/index'
 import { Route as authRegisterIndexRouteImport } from './routes/(auth)/register/index'
+import { Route as ApiProductsGet_user_productsRouteImport } from './routes/api/products/get_user_products'
+import { Route as ApiProductsAdd_productRouteImport } from './routes/api/products/add_product'
 import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
 import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
 import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
@@ -111,6 +118,32 @@ const GraphicsItemIdRoute = GraphicsItemIdRouteImport.update({
   path: '/graphics/$itemId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardSettingsIndexRoute = DashboardSettingsIndexRouteImport.update({
+  id: '/dashboard/settings/',
+  path: '/dashboard/settings/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardPurchase_historyIndexRoute =
+  DashboardPurchase_historyIndexRouteImport.update({
+    id: '/dashboard/purchase_history/',
+    path: '/dashboard/purchase_history/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DashboardProfileIndexRoute = DashboardProfileIndexRouteImport.update({
+  id: '/dashboard/profile/',
+  path: '/dashboard/profile/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardProductsIndexRoute = DashboardProductsIndexRouteImport.update({
+  id: '/dashboard/products/',
+  path: '/dashboard/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardFoldersIndexRoute = DashboardFoldersIndexRouteImport.update({
+  id: '/dashboard/folders/',
+  path: '/dashboard/folders/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const authSigninIndexRoute = authSigninIndexRouteImport.update({
   id: '/(auth)/signin/',
   path: '/signin/',
@@ -119,6 +152,17 @@ const authSigninIndexRoute = authSigninIndexRouteImport.update({
 const authRegisterIndexRoute = authRegisterIndexRouteImport.update({
   id: '/(auth)/register/',
   path: '/register/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiProductsGet_user_productsRoute =
+  ApiProductsGet_user_productsRouteImport.update({
+    id: '/api/products/get_user_products',
+    path: '/api/products/get_user_products',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiProductsAdd_productRoute = ApiProductsAdd_productRouteImport.update({
+  id: '/api/products/add_product',
+  path: '/api/products/add_product',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
@@ -157,8 +201,15 @@ export interface FileRoutesByFullPath {
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/products/add_product': typeof ApiProductsAdd_productRoute
+  '/api/products/get_user_products': typeof ApiProductsGet_user_productsRoute
   '/register/': typeof authRegisterIndexRoute
   '/signin/': typeof authSigninIndexRoute
+  '/dashboard/folders/': typeof DashboardFoldersIndexRoute
+  '/dashboard/products/': typeof DashboardProductsIndexRoute
+  '/dashboard/profile/': typeof DashboardProfileIndexRoute
+  '/dashboard/purchase_history/': typeof DashboardPurchase_historyIndexRoute
+  '/dashboard/settings/': typeof DashboardSettingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -180,8 +231,15 @@ export interface FileRoutesByTo {
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/products/add_product': typeof ApiProductsAdd_productRoute
+  '/api/products/get_user_products': typeof ApiProductsGet_user_productsRoute
   '/register': typeof authRegisterIndexRoute
   '/signin': typeof authSigninIndexRoute
+  '/dashboard/folders': typeof DashboardFoldersIndexRoute
+  '/dashboard/products': typeof DashboardProductsIndexRoute
+  '/dashboard/profile': typeof DashboardProfileIndexRoute
+  '/dashboard/purchase_history': typeof DashboardPurchase_historyIndexRoute
+  '/dashboard/settings': typeof DashboardSettingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -204,8 +262,15 @@ export interface FileRoutesById {
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/products/add_product': typeof ApiProductsAdd_productRoute
+  '/api/products/get_user_products': typeof ApiProductsGet_user_productsRoute
   '/(auth)/register/': typeof authRegisterIndexRoute
   '/(auth)/signin/': typeof authSigninIndexRoute
+  '/dashboard/folders/': typeof DashboardFoldersIndexRoute
+  '/dashboard/products/': typeof DashboardProductsIndexRoute
+  '/dashboard/profile/': typeof DashboardProfileIndexRoute
+  '/dashboard/purchase_history/': typeof DashboardPurchase_historyIndexRoute
+  '/dashboard/settings/': typeof DashboardSettingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -229,8 +294,15 @@ export interface FileRouteTypes {
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
+    | '/api/products/add_product'
+    | '/api/products/get_user_products'
     | '/register/'
     | '/signin/'
+    | '/dashboard/folders/'
+    | '/dashboard/products/'
+    | '/dashboard/profile/'
+    | '/dashboard/purchase_history/'
+    | '/dashboard/settings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -252,8 +324,15 @@ export interface FileRouteTypes {
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
+    | '/api/products/add_product'
+    | '/api/products/get_user_products'
     | '/register'
     | '/signin'
+    | '/dashboard/folders'
+    | '/dashboard/products'
+    | '/dashboard/profile'
+    | '/dashboard/purchase_history'
+    | '/dashboard/settings'
   id:
     | '__root__'
     | '/'
@@ -275,8 +354,15 @@ export interface FileRouteTypes {
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
+    | '/api/products/add_product'
+    | '/api/products/get_user_products'
     | '/(auth)/register/'
     | '/(auth)/signin/'
+    | '/dashboard/folders/'
+    | '/dashboard/products/'
+    | '/dashboard/profile/'
+    | '/dashboard/purchase_history/'
+    | '/dashboard/settings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -299,8 +385,15 @@ export interface RootRouteChildren {
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
   ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
+  ApiProductsAdd_productRoute: typeof ApiProductsAdd_productRoute
+  ApiProductsGet_user_productsRoute: typeof ApiProductsGet_user_productsRoute
   authRegisterIndexRoute: typeof authRegisterIndexRoute
   authSigninIndexRoute: typeof authSigninIndexRoute
+  DashboardFoldersIndexRoute: typeof DashboardFoldersIndexRoute
+  DashboardProductsIndexRoute: typeof DashboardProductsIndexRoute
+  DashboardProfileIndexRoute: typeof DashboardProfileIndexRoute
+  DashboardPurchase_historyIndexRoute: typeof DashboardPurchase_historyIndexRoute
+  DashboardSettingsIndexRoute: typeof DashboardSettingsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -417,6 +510,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GraphicsItemIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/settings/': {
+      id: '/dashboard/settings/'
+      path: '/dashboard/settings'
+      fullPath: '/dashboard/settings/'
+      preLoaderRoute: typeof DashboardSettingsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/purchase_history/': {
+      id: '/dashboard/purchase_history/'
+      path: '/dashboard/purchase_history'
+      fullPath: '/dashboard/purchase_history/'
+      preLoaderRoute: typeof DashboardPurchase_historyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/profile/': {
+      id: '/dashboard/profile/'
+      path: '/dashboard/profile'
+      fullPath: '/dashboard/profile/'
+      preLoaderRoute: typeof DashboardProfileIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/products/': {
+      id: '/dashboard/products/'
+      path: '/dashboard/products'
+      fullPath: '/dashboard/products/'
+      preLoaderRoute: typeof DashboardProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/folders/': {
+      id: '/dashboard/folders/'
+      path: '/dashboard/folders'
+      fullPath: '/dashboard/folders/'
+      preLoaderRoute: typeof DashboardFoldersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(auth)/signin/': {
       id: '/(auth)/signin/'
       path: '/signin'
@@ -429,6 +557,20 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register/'
       preLoaderRoute: typeof authRegisterIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/products/get_user_products': {
+      id: '/api/products/get_user_products'
+      path: '/api/products/get_user_products'
+      fullPath: '/api/products/get_user_products'
+      preLoaderRoute: typeof ApiProductsGet_user_productsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/products/add_product': {
+      id: '/api/products/add_product'
+      path: '/api/products/add_product'
+      fullPath: '/api/products/add_product'
+      preLoaderRoute: typeof ApiProductsAdd_productRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/register': {
@@ -475,8 +617,15 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,
   ApiAuthRegisterRoute: ApiAuthRegisterRoute,
+  ApiProductsAdd_productRoute: ApiProductsAdd_productRoute,
+  ApiProductsGet_user_productsRoute: ApiProductsGet_user_productsRoute,
   authRegisterIndexRoute: authRegisterIndexRoute,
   authSigninIndexRoute: authSigninIndexRoute,
+  DashboardFoldersIndexRoute: DashboardFoldersIndexRoute,
+  DashboardProductsIndexRoute: DashboardProductsIndexRoute,
+  DashboardProfileIndexRoute: DashboardProfileIndexRoute,
+  DashboardPurchase_historyIndexRoute: DashboardPurchase_historyIndexRoute,
+  DashboardSettingsIndexRoute: DashboardSettingsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

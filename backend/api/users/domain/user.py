@@ -7,6 +7,7 @@ from ...users.domain.exceptions import ValidationError, EmailValidationError
 
 @dataclass()
 class User:
+
     first_name: str
     last_name: str
     email: str

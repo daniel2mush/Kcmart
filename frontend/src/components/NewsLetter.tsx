@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   InputGroup,
   InputGroupAddon,
@@ -10,7 +9,7 @@ const NewsLetter = () => {
   return (
     <div className=" relative  w-full  min-h-[clamp(20dvh,30dvw,40dvh)] overflow-hidden p-10  flex justify-center items-center  ">
       <div className=" absolute opacity-5  top-0 left-0 w-full ">
-        <img src="Hero.webp" alt="Background" className=" object-cover" />
+        <img src="/Hero.webp" alt="Background" className=" object-cover" />
       </div>
 
       <div className=" flex justify-center items-center w-full h-full flex-col max-w-sm md:max-w-lg mx-auto">
@@ -22,7 +21,10 @@ const NewsLetter = () => {
         </p>
 
         <InputGroup className=" w-full h-15  border-border border-2 active:border-border focus:border-border ring-0  rounded-2xl mt-6 bg-app">
-          <InputGroupInput placeholder="Your Email" />
+          <InputGroupInput
+            placeholder="Your Email"
+            className="border-0! outline-none ring-0"
+          />
           <InputGroupAddon align={'inline-end'} />
           <InputGroupButton
             variant={'ghost'}

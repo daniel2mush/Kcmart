@@ -1,6 +1,6 @@
-import type { RegistrationTypes } from '#/types/ProductTypes'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
+import type { RegistrationTypes } from '#/lib/types/authTypes.ts'
 
 type LoginPayload = {
   email: string
@@ -15,12 +15,10 @@ type ApiErrorBody = {
 const isHtmlFallback = (value: unknown) =>
   typeof value === 'string' && value.trim().startsWith('<!DOCTYPE html>')
 
-const getErrorMessage = (
-  error: unknown,
-  fallbackMessage: string,
-): string => {
+const getErrorMessage = (error: unknown, fallbackMessage: string): string => {
+
   if (axios.isAxiosError(error)) {
-    const responseData = error.response?.data
+    const responseData = error
 
     if (typeof responseData === 'string' && responseData.trim()) {
       return responseData
@@ -31,14 +29,14 @@ const getErrorMessage = (
       return body.detail || body.message || fallbackMessage
     }
 
-    return fallbackMessage
+    return responseData.detail
   }
 
   if (error instanceof Error) {
     return error.message || fallbackMessage
   }
 
-  return fallbackMessage
+  return error.detail
 }
 
 const requestAuth = async <TResponse, TPayload = unknown>(
@@ -63,9 +61,7 @@ const requestAuth = async <TResponse, TPayload = unknown>(
 
   if (!res.ok) {
     const message =
-      typeof data === 'string'
-        ? data
-        : getErrorMessage(data, fallbackMessage)
+      typeof data === 'string' ? data : getErrorMessage(data, fallbackMessage)
     throw new Error(message)
   }
 
@@ -93,6 +89,10 @@ export const UseRegister = () => {
 export const useLogout = () => {
   return useMutation({
     mutationFn: async () =>
-      requestAuth('/api/auth/logout', undefined, 'An error occurred during logout'),
+      requestAuth(
+        '/api/auth/logout',
+        undefined,
+        'An error occurred during logout',
+      ),
   })
 }

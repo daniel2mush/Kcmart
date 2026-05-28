@@ -22,7 +22,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '#/components/ui/collapsible.tsx'
-import { useUserStore } from '#/store.ts'
+import { useUserStore } from '#/lib/store.ts'
 import { Link, useRouter } from '@tanstack/react-router'
 import { useLogout } from '../queries/auth/AuthQuery.ts'
 import { toast } from 'sonner'
@@ -79,27 +79,27 @@ interface UserNavTypes {
 const UserNavs: UserNavTypes[] = [
   {
     navName: 'Profile',
-    link: '/profile',
+    link: '/dashboard/profile',
     icon: <User size={15} />,
   },
   {
     navName: 'Settings',
-    link: '/settings',
+    link: '/dashboard/settings',
     icon: <Settings size={15} />,
   },
   {
     navName: 'Folders',
-    link: '/folders',
+    link: '/dashboard/folders',
     icon: <Folder size={15} />,
   },
   {
     navName: 'My Products',
-    link: '/dashboard',
+    link: '/dashboard/products',
     icon: <PackageCheck size={15} />,
   },
   {
     navName: 'Purchase History',
-    link: '/dashboard',
+    link: '/dashboard/purchase_history',
     icon: <ReceiptText size={15} />,
   },
 ]

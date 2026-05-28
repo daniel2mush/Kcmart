@@ -1,22 +1,28 @@
-import { createStart, createMiddleware } from '@tanstack/react-start'
+import {
+  createStart,
+  createMiddleware,
+  createCsrfMiddleware,
+} from '@tanstack/react-start'
 import { redirect } from '@tanstack/react-router'
 import { hasAuthCookies } from './lib/authentication/authenticate'
 
-const authMiddleware = createMiddleware().server(async ({ pathname, next }) => {
+const authMiddleware = createMiddleware().server(async ({ request, next }) => {
   const isAuthenticated = hasAuthCookies()
 
-  // .startsWith() cleanly handles both '/dashboard' and nested routes like '/dashboard/settings'
-  const isDashboardRoute = pathname.startsWith('/dashboard')
+  const url = new URL(request.url)
+  const pathname = url.pathname
+
+
+  const isDashboardRoute =
+    pathname === '/dashboard' || pathname.startsWith('/dashboard/')
 
   const isAuthRoute =
     pathname.startsWith('/signin') || pathname.startsWith('/register')
 
-  // Keep signed-in users out of auth pages.
   if (isAuthenticated && isAuthRoute) {
     throw redirect({ to: '/dashboard' })
   }
 
-  // Keep signed-out users out of protected dashboard pages.
   if (!isAuthenticated && isDashboardRoute) {
     throw redirect({ to: '/signin' })
   }
@@ -24,6 +30,9 @@ const authMiddleware = createMiddleware().server(async ({ pathname, next }) => {
   return next()
 })
 
+const csrfMiddleware = createCsrfMiddleware({
+  filter: (ctx) => ctx.handlerType === 'serverFn',
+})
 export const startInstance = createStart(() => ({
-  requestMiddleware: [authMiddleware],
+  requestMiddleware: [authMiddleware, csrfMiddleware],
 }))

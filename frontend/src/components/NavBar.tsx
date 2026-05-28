@@ -6,8 +6,7 @@ import {
   Twitter,
   X,
 } from 'lucide-react'
-import type React from 'react'
-import { useRef, useState, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import { Link, useLocation } from '@tanstack/react-router'
 import { gsap } from 'gsap'
@@ -89,6 +88,8 @@ const NavBar = () => {
   // const { isAuthenticated } = useRouteContext({ from: '__root__' })
   const navRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
+  const wasDashboardRef = useRef(false)
+  const hasPlayedIntroRef = useRef(false)
   const [isOpen, setIsOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isFixed, setIsFixed] = useState(false)
@@ -96,15 +97,22 @@ const NavBar = () => {
 
   const isMobile = useMediaQuery({ maxWidth: 1024 })
   const pathname = useLocation().pathname
+  const invalidPaths = ['/dashboard', '/signin', '/register']
+  const isDashboardRoute =
+    pathname === '/dashboard' || pathname.startsWith('/dashboard/')
+  const isRestoringFromDashboard =
+    wasDashboardRef.current && !invalidPaths.includes(pathname)
+  const shouldShowNav = hasPlayedIntroRef.current || isRestoringFromDashboard
 
   useGSAP(
     () => {
       if (
-        pathname === '/dashboard' ||
-        pathname === '/signin' ||
-        pathname === 'register'
+        invalidPaths.includes(pathname) ||
+        !navRef.current ||
+        hasPlayedIntroRef.current
       )
-        return null
+        return
+
       const timeline = gsap.timeline({
         defaults: { ease: 'power3.out', duration: 0.7 },
       })
@@ -159,9 +167,25 @@ const NavBar = () => {
           },
           '-=0.35',
         )
+
+      timeline.eventCallback('onComplete', () => {
+        hasPlayedIntroRef.current = true
+      })
     },
-    { dependencies: [pathname], scope: navRef },
+    { dependencies: [], scope: navRef },
   )
+
+  useEffect(() => {
+    if (isDashboardRoute || invalidPaths.includes(pathname)) {
+      wasDashboardRef.current = true
+      return
+    }
+
+    if (wasDashboardRef.current) {
+      hasPlayedIntroRef.current = true
+      wasDashboardRef.current = false
+    }
+  }, [invalidPaths.includes(pathname), isDashboardRoute])
 
   useGSAP(
     () => {
@@ -226,13 +250,7 @@ const NavBar = () => {
       setIsMobileMenuOpen(true)
     }
   }
-
-  if (
-    pathname === '/dashboard' ||
-    pathname === '/signin' ||
-    pathname === 'register'
-  )
-    return null
+  if (isDashboardRoute || invalidPaths.includes(pathname)) return
 
   return (
     <>
@@ -246,7 +264,11 @@ const NavBar = () => {
           <Link
             to="/"
             className="logo"
-            style={{ opacity: 0, visibility: 'hidden' }}
+            style={
+              shouldShowNav
+                ? { opacity: 1, visibility: 'visible' }
+                : { opacity: 0, visibility: 'hidden' }
+            }
           >
             <h1 className=" font-black text-2xl text-secondary">KCMart</h1>
           </Link>
@@ -258,7 +280,11 @@ const NavBar = () => {
                   <div
                     key={i}
                     className="nav-item"
-                    style={{ opacity: 0, visibility: 'hidden' }}
+                    style={
+                      shouldShowNav
+                        ? { opacity: 1, visibility: 'visible' }
+                        : { opacity: 0, visibility: 'hidden' }
+                    }
                   >
                     <li className="text-[15px] text-secondary hover:text-primary transition-transform duration-200 hover:-translate-y-0.5">
                       {nav.link ? (
@@ -278,7 +304,11 @@ const NavBar = () => {
                 ))}
                 <div
                   className="nav-item"
-                  style={{ opacity: 0, visibility: 'hidden' }}
+                  style={
+                    shouldShowNav
+                      ? { opacity: 1, visibility: 'visible' }
+                      : { opacity: 0, visibility: 'hidden' }
+                  }
                 >
                   <li className="text-[15px] text-secondary hover:text-primary">
                     <Collapsible
@@ -323,7 +353,11 @@ const NavBar = () => {
                       key={i}
                       href={icon.link}
                       className="social-link transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110"
-                      style={{ opacity: 0, visibility: 'hidden' }}
+                      style={
+                        shouldShowNav
+                          ? { opacity: 1, visibility: 'visible' }
+                          : { opacity: 0, visibility: 'hidden' }
+                      }
                     >
                       {icon.icon}
                     </a>

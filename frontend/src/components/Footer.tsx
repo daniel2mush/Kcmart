@@ -3,8 +3,11 @@ import { Facebook, Instagram, Twitter } from 'lucide-react'
 
 const Footer = () => {
   const pathname = useLocation().pathname
+  const invalidPaths = ['/dashboard', '/signin', '/register', '/dashboard/']
+  const isDashboardRoute =
+    pathname === '/dashboard' || pathname.startsWith('/dashboard/')
 
-  if (pathname === '/dashboard') return
+  if (isDashboardRoute || invalidPaths.includes(pathname)) return
   return (
     <footer className="w-full bg-app border-t border-border text-muted ">
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">

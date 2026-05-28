@@ -1,59 +1,60 @@
+import uuid
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from .product_media import ProductImage
+from .product_assets import ProductAsset
+from .product_license import ProductLicense
 import uuid
-
-from api.users.models import User
-
-# Create your models here.
-
-# export interface ProductTypes {
-#     id: number
-#     name: string
-#     price: number
-#     description: string
-#     tags: string
-#     types: types
-#
-#     image: string[]
-#     included: tag[]
-# }
+from django.contrib.postgres.fields import ArrayField
+from django.db import models
 
 
-# Enums
+class ProductStatus(models.TextChoices):
+    DRAFT = "DRAFT"
+    PUBLISHED = "PUBLISHED"
+    ARCHIVED = "ARCHIVED"
 
 
-# Enums
-class TypesEnums(models.TextChoices):
-    TEMPLATE = "TEMPLATE", "Templates"
-    MOCKUPS = "MOCKUPS", "Mockups"
-    GRAPHICS = "GRAPHICS", "Graphics"
-    ICONS = "ICONS", "Icons"
-    FONTS = "FONTS", "Fonts"
-    MODELS = "3D_MODELS", "3D Models"  # Avoid starting database values with numbers
-    MAGAZINES = "MAGAZINES", "Magazines"
-
-
-class ProductModel(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products")
-
+class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    name = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.TextField()
-
-    images = ArrayField(models.TextField(), size=4, blank=True, default=list)
-
-    includes = ArrayField(models.TextField(), size=4, blank=True, default=list)
-
-    tag = models.CharField(max_length=100, blank=True, default="")
-
-    product_type = models.CharField(
-        max_length=100, choices=TypesEnums, default=TypesEnums.GRAPHICS
+    owner = models.ForeignKey(
+        "users.User", on_delete=models.CASCADE, related_name="products"
     )
+
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
+
+    description = models.TextField()
+    price_cents = models.IntegerField()
+    included = ArrayField(models.TextField(), default=list)
+
+    status = models.CharField(
+        max_length=20, choices=ProductStatus.choices, default=ProductStatus.DRAFT
+    )
+    is_featured = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # M2M relations – now directly defined (cleaner, same DB tables)
+    tags = models.ManyToManyField(
+        "tag.Tag",
+        related_name="products",
+        db_table="product_tags",
+    )
+    categories = models.ManyToManyField(
+        "category.Category",
+        related_name="products",
+        db_table="product_categories",
+    )
+
+    class Meta:
+        db_table = "products"
+        indexes = [
+            models.Index(fields=["owner", "status"]),
+            models.Index(fields=["status", "-created_at"]),
+        ]
 
     def __str__(self):
         return self.name

@@ -9,7 +9,6 @@ export const Route = createFileRoute('/dashboard/')({
     if (!Authenticated) throw redirect({ to: '/signin' })
   },
 })
-
 function RouteComponent() {
   return (
     <div>

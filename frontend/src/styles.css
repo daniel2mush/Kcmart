@@ -3,41 +3,206 @@
 @plugin '@tailwindcss/typography';
 @import 'tw-animate-css';
 
+/* =========================================================
+   BLACK & WHITE THEME
+========================================================= */
 :root {
-  --bg-body: #1c1c1c;          /* The main background */
-  --bg-surface: #161616;       /* Cards, dialogs, dropdowns */
-  --bg-inset: #1a1a1a;         /* Inputs, code blocks, or secondary backgrounds */
-  --bg-hover: #282828;         /* Interactive states */
-  
-  --text-primary: #f2f2f2;  
-    --text-secondary: #b9b9b9;     /* Headings, paragraphs, links */
-   /* Headings, paragraphs, links */
-  --text-muted: #6e7174;       /* Secondary text, inactive states */
-  
-  --border-color: #333333;     /* Dividers, borders, outlines */
+  /* Backgrounds */
+  --bg-body: #1c1c1c;
+  --bg-surface: #161616;
+  --bg-inset: #1a1a1a;
+  --bg-hover: #282828;
+
+
+
+  /* Text */
+  --text-primary: #f2f2f2;
+  --text-secondary: #b9b9b9;
+  --text-muted: #6e7174;
+
+  /* Borders */
+  --border-color: #333333;
+
+  /* Radius */
+  --radius: 0.75rem;
+
+  /* =========================================================
+     SHADCN VARIABLES
+  ========================================================= */
+
+  --background: var(--bg-body);
+  --foreground: var(--text-primary);
+
+  --card: var(--bg-surface);
+  --card-foreground: var(--text-primary);
+
+  --popover: var(--bg-surface);
+  --popover-foreground: var(--text-primary);
+
+  --primary: var(--text-primary);
+  --primary-foreground: var(--bg-body);
+
+  --secondary: var(--bg-hover);
+  --secondary-foreground: var(--text-primary);
+
+  --muted: var(--bg-inset);
+  --muted-foreground: var(--text-muted);
+
+  --accent: var(--bg-hover);
+  --accent-foreground: var(--text-primary);
+
+  --destructive: #ffffff;
+  --destructive-foreground: #000000;
+
+  --border: var(--border-color);
+  --input: var(--bg-inset);
+  --ring: #ffffff;
+
+  /* Charts */
+  --chart-1: #ffffff;
+  --chart-2: #d4d4d4;
+  --chart-3: #a3a3a3;
+  --chart-4: #737373;
+  --chart-5: #525252;
+
+  /* Sidebar */
+  --sidebar: #141414;
+  --sidebar-foreground: var(--text-primary);
+
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #000000;
+
+  --sidebar-accent: var(--bg-hover);
+  --sidebar-accent-foreground: var(--text-primary);
+
+  --sidebar-border: var(--border-color);
+  --sidebar-ring: #ffffff;
 }
 
+/* =========================================================
+   TAILWIND CUSTOM TOKENS
+========================================================= */
 @theme {
   --color-app: var(--bg-body);
   --color-surface: var(--bg-surface);
   --color-inset: var(--bg-inset);
-  
+  --color-hover: var(--bg-hover);
+
   --color-primary: var(--text-primary);
-   --color-secondary: var(--text-secondary);
+  --color-secondary: var(--text-secondary);
   --color-muted: var(--text-muted);
-  
+
   --color-border: var(--border-color);
 }
 
-/* --- 2. Base Document --- */
+/* =========================================================
+   BASE
+========================================================= */
 html,
 body,
 #app {
   min-height: 100%;
-  background-color: var(--bg-body);
-  color: var(--text-primary);
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: 'Roboto', sans-serif;
-  font-weight: 400; /* Regular weight for reading text */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+* {
+  border-color: var(--border);
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  background-color: var(--input);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Buttons */
+button {
+  transition:
+          background-color 0.2s ease,
+          border-color 0.2s ease,
+          color 0.2s ease;
+}
+
+/* =========================================================
+   SHADCN FIXES
+========================================================= */
+
+/* Select Trigger */
+[data-slot='select-trigger'] {
+  background-color: var(--bg-inset);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+/* Select Dropdown */
+[data-slot='select-content'],
+[data-slot='popover-content'],
+[data-radix-popper-content-wrapper] > * {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+/* Select Items */
+[data-slot='select-item'],
+[role='menuitem'] {
+  color: var(--foreground);
+}
+
+[data-slot='select-item']:hover,
+[role='menuitem']:hover {
+  background-color: var(--bg-hover);
+}
+
+/* Dialog */
+[data-slot='dialog-content'] {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+/* Cards */
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-body);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
 }

@@ -1,18 +1,16 @@
-import type { ProductTypes } from '../types/ProductTypes'
+import type { ProductTypes } from '#/lib/types/ProductTypes'
 
 export const latestDrops: ProductTypes[] = [
   {
-    id: 1,
+    id: '1',
     name: 'Ipod Prod mockup',
-
-    price: 100,
+    price: '100',
     description:
-      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup templates. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: 'design',
-    types: 'Mockups',
-    image: [
+      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
+    tags: ['design'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1625864667518-914e1dd17377?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
-
       'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8SXBhZCUyMGFwcGxlJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
       'https://images.unsplash.com/photo-1625864667534-aa5208d45a87?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
     ],
@@ -23,20 +21,22 @@ export const latestDrops: ProductTypes[] = [
       'Customizable background options to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 2,
+    id: '2',
     name: 'Distort Collection mockup',
-    image: [
+    images: [
       'https://plus.unsplash.com/premium_photo-1670793631007-e86c6ddfd812?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fERpc3RvcnR8ZW58MHx8MHx8fDA%3D',
       'https://plus.unsplash.com/premium_photo-1747909587500-caba423f8c51?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       'https://images.unsplash.com/photo-1752606402449-0c14a2d6af70?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fERpc3RvcnR8ZW58MHx8MHx8fDA%3D',
     ],
-    price: 150,
+    price: '150',
     description:
-      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup templates. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: 'marketing',
-    types: 'Templates',
+      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
+    tags: ['marketing'],
+    categories: ['TEMPLATES'],
     included: [
       'PSD file with smart objects for easy customization',
       'High-resolution images for crisp and clear visuals',
@@ -44,20 +44,22 @@ export const latestDrops: ProductTypes[] = [
       'Customizable background options to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 3,
+    id: '3',
     name: 'Mackbook Pro mockup',
-    image: [
+    images: [
       'https://images.unsplash.com/photo-1703002574442-1996d6f59bc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
       'https://images.unsplash.com/photo-1703002574210-faaac4dde3b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
       'https://images.unsplash.com/photo-1606560114363-e60d00c93734?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxhcHRvcCUyMGFwcGxlfGVufDB8fDB8fHww',
     ],
-    price: 120,
+    price: '120',
     description:
-      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup templates. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: 'business',
-    types: 'Graphics',
+      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
+    tags: ['business'],
+    categories: ['GRAPHICS'],
     included: [
       'PSD file with smart objects for easy customization',
       'High-resolution images for crisp and clear visuals',
@@ -65,55 +67,25 @@ export const latestDrops: ProductTypes[] = [
       'Customizable background options to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
-  //   {
-  //     name: 'Ipad Pro mockup',
-  //     image:
-  //       'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
-  //     price: 130,
-  //     description:
-  //       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup templates. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-  //     tags: ['mockup', 'product presentation', 'design', 'marketing', 'business'],
-  //     included: [
-  //       'PSD file with smart objects for easy customization',
-  //       'High-resolution images for crisp and clear visuals',
-  //       'Multiple angles and perspectives to showcase your product',
-  //       'Customizable background options to match your branding',
-  //       'Step-by-step instructions for effortless editing',
-  //     ],
-  //   },
-  //   {
-  //     name: 'Digital Art mockup',
-  //     image:
-  //       'https://images.unsplash.com/photo-1613497645676-ea691063aa19?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmVzJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
-  //     price: 80,
-  //     description:
-  //       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup templates. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-  //     tags: ['mockup', 'product presentation', 'design', 'marketing', 'business'],
-  //     included: [
-  //       'PSD file with smart objects for easy customization',
-  //       'High-resolution images for crisp and clear visuals',
-  //       ' Multiple angles and perspectives to showcase your product',
-  //       'Customizable background options to match your branding',
-  //       'Step-by-step instructions for effortless editing',
-  //     ],
-  //   },
 ]
 
 export const Templates: ProductTypes[] = [
   {
-    id: 1,
-    name: 'Text Template',
-    image: [
+    id: '1',
+    name: 'Text TEMPLATES',
+    images: [
       'https://plus.unsplash.com/premium_photo-1673721701691-f4d8d2e2bedb?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fHw%3D',
       'https://images.unsplash.com/photo-1587449156852-c191c00da9b3?q=80&w=1030&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       'https://images.unsplash.com/photo-1631230863402-1e8fdb5997f4?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D',
     ],
-    price: 50,
+    price: '50',
     description:
-      "A versatile text template designed to enhance your content creation. This template provides a structured layout for your text, making it easier to organize and present information effectively. Whether you're creating a blog post, an article, or any written content, this template will help you maintain a consistent and professional appearance.",
-    tags: 'text',
-    types: 'Templates',
+      "A versatile text TEMPLATES designed to enhance your content creation. This TEMPLATES provides a structured layout for your text, making it easier to organize and present information effectively. Whether you're creating a blog post, an article, or any written content, this TEMPLATES will help you maintain a consistent and professional appearance.",
+    tags: ['text'],
+    categories: ['TEMPLATES'],
     included: [
       'Pre-designed text layout for easy customization',
       'High-quality typography for clear readability',
@@ -121,20 +93,22 @@ export const Templates: ProductTypes[] = [
       'Customizable colors and fonts to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 2,
-    name: 'Flyers Template',
-    image: [
+    id: '2',
+    name: 'Flyers TEMPLATES',
+    images: [
       'https://images.unsplash.com/photo-1695634621644-a1abcdf60bc6?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       'https://images.unsplash.com/photo-1695634621224-656c9906e92b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D',
       'https://images.unsplash.com/photo-1695634281181-b2357af34c61?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEzfHx8ZW58MHx8fHx8',
     ],
-    price: 70,
+    price: '70',
     description:
-      'A dynamic flyer template designed to captivate your audience and promote your events or products effectively. This template offers a visually appealing layout with customizable elements, allowing you to create eye-catching flyers that stand out. Whether you are advertising a sale, an event, or a new product, this flyer template will help you communicate your message with impact.',
-    tags: 'flyers',
-    types: 'Templates',
+      'A dynamic flyer TEMPLATES designed to captivate your audience and promote your events or products effectively. This TEMPLATES offers a visually appealing layout with customizable elements, allowing you to create eye-catching flyers that stand out. Whether you are advertising a sale, an event, or a new product, this flyer TEMPLATES will help you communicate your message with impact.',
+    tags: ['flyers'],
+    categories: ['TEMPLATES'],
     included: [
       'Pre-designed flyer layout for easy customization',
       'High-quality graphics and typography for visual appeal',
@@ -142,20 +116,22 @@ export const Templates: ProductTypes[] = [
       'Customizable colors and fonts to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 3,
-    name: 'Product Catalog Template',
-    image: [
+    id: '3',
+    name: 'Product Catalog TEMPLATES',
+    images: [
       'https://images.unsplash.com/photo-1677530410699-f692c94cf806?q=80&w=1448&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       'https://images.unsplash.com/photo-1676116777245-1cc40079cd38?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D',
       'https://images.unsplash.com/photo-1588610845017-9bead933bdda?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D',
     ],
-    price: 90,
+    price: '90',
     description:
-      'A comprehensive product catalog template designed to showcase your products in a visually appealing and organized manner. This template provides a structured layout for displaying product images, descriptions, and pricing information, making it easier for customers to browse and make informed purchasing decisions. Whether you are creating a catalog for print or digital distribution, this template will help you present your products professionally.',
-    tags: 'catalog',
-    types: 'Templates',
+      'A comprehensive product catalog TEMPLATES designed to showcase your products in a visually appealing and organized manner. This TEMPLATES provides a structured layout for displaying product images, descriptions, and pricing information, making it easier for customers to browse and make informed purchasing decisions. Whether you are creating a catalog for print or digital distribution, this TEMPLATES will help you present your products professionally.',
+    tags: ['catalog'],
+    categories: ['TEMPLATES'],
     included: [
       'Pre-designed product catalog layout for easy customization',
       'High-quality graphics and typography for visual appeal',
@@ -163,41 +139,45 @@ export const Templates: ProductTypes[] = [
       'Customizable colors and fonts to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 4,
-    name: 'Social Media Post Template',
-    image: [
+    id: '4',
+    name: 'Social Media Post TEMPLATES',
+    images: [
       'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
     ],
-    price: 65,
+    price: '65',
     description:
-      'A polished social media post template for consistent branding and fast content creation. Includes ready-to-edit layouts for Instagram, Facebook, and Pinterest stories and posts.',
-    tags: 'social',
-    types: 'Templates',
+      'A polished social media post TEMPLATES for consistent branding and fast content creation. Includes ready-to-edit layouts for Instagram, Facebook, and Pinterest stories and posts.',
+    tags: ['social'],
+    categories: ['TEMPLATES'],
     included: [
-      'Ready-to-use social media templates',
+      'Ready-to-use social media TEMPLATESs',
       'Optimized layouts for feed and story formats',
       'Color and font customization options',
       'Editable photo and text placeholders',
       'Design tips for maximizing engagement',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 5,
-    name: 'Newsletter Template',
-    image: [
+    id: '5',
+    name: 'Newsletter TEMPLATES',
+    images: [
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
     ],
-    price: 75,
+    price: '75',
     description:
-      'A modern newsletter template built for email campaigns and monthly updates. It offers clean sections, clear hierarchies, and flexible content blocks.',
-    tags: 'newsletter',
-    types: 'Templates',
+      'A modern newsletter TEMPLATES built for email campaigns and monthly updates. It offers clean sections, clear hierarchies, and flexible content blocks.',
+    tags: ['newsletter'],
+    categories: ['TEMPLATES'],
     included: [
       'Fully editable newsletter layout',
       'Sections for featured stories, offers, and calls to action',
@@ -205,20 +185,22 @@ export const Templates: ProductTypes[] = [
       'Color and typography presets',
       'Export instructions for email platforms',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 6,
-    name: 'Business Card Template',
-    image: [
+    id: '6',
+    name: 'Business Card TEMPLATES',
+    images: [
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1564869731115-00f04f10c936?w=900&auto=format&fit=crop&q=60',
     ],
-    price: 55,
+    price: '55',
     description:
-      'A stylish business card template perfect for startups, freelancers, and professionals. Includes front and back designs with editable contact and branding areas.',
-    tags: 'branding',
-    types: 'Templates',
+      'A stylish business card TEMPLATES perfect for startups, freelancers, and professionals. Includes front and back designs with editable contact and branding areas.',
+    tags: ['branding'],
+    categories: ['TEMPLATES'],
     included: [
       'Editable business card designs',
       'Front and back card layouts',
@@ -226,20 +208,22 @@ export const Templates: ProductTypes[] = [
       'Printable format guidance',
       'Brand identity integration tips',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 7,
-    name: 'Presentation Deck Template',
-    image: [
+    id: '7',
+    name: 'Presentation Deck TEMPLATES',
+    images: [
       'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=900&auto=format&fit=crop&q=60',
     ],
-    price: 85,
+    price: '85',
     description:
-      'A professional presentation deck template for pitches, reports, and meetings. Features clean slides, charts, and content blocks to tell your story clearly.',
-    tags: 'presentation',
-    types: 'Templates',
+      'A professional presentation deck TEMPLATES for pitches, reports, and meetings. Features clean slides, charts, and content blocks to tell your story clearly.',
+    tags: ['presentation'],
+    categories: ['TEMPLATES'],
     included: [
       'Ready-to-edit slide layouts',
       'Graph and chart placeholders',
@@ -247,20 +231,22 @@ export const Templates: ProductTypes[] = [
       'Typography and color systems',
       'Presentation structure guidance',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 8,
-    name: 'Event Invitation Template',
-    image: [
+    id: '8',
+    name: 'Event Invitation TEMPLATES',
+    images: [
       'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1472653431158-6364773b2a56?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1529691931001-2d8fbaa2b335?w=900&auto=format&fit=crop&q=60',
     ],
-    price: 60,
+    price: '60',
     description:
-      'An elegant invitation template for events, launches, and celebrations. Designed for print or digital use, with flexible text areas and decorative accents.',
-    tags: 'event',
-    types: 'Templates',
+      'An elegant invitation TEMPLATES for events, launches, and celebrations. Designed for print or digital use, with flexible text areas and decorative accents.',
+    tags: ['event'],
+    categories: ['TEMPLATES'],
     included: [
       'Invite layout with RSVP section',
       'Editable headlines and event details',
@@ -268,20 +254,22 @@ export const Templates: ProductTypes[] = [
       'Printable and digital-ready formats',
       'Customization guidance for colors and fonts',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 9,
-    name: 'Brochure Template',
-    image: [
+    id: '9',
+    name: 'Brochure TEMPLATES',
+    images: [
       'https://images.unsplash.com/photo-1486401899868-0e435ed85103?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1485219237549-39c0f5868ecb?w=900&auto=format&fit=crop&q=60',
     ],
-    price: 80,
+    price: '80',
     description:
-      'A versatile brochure template for product stories, company overviews, and services. Balanced text and imagery make it easy to build an engaging print or PDF brochure.',
-    tags: 'brochure',
-    types: 'Templates',
+      'A versatile brochure TEMPLATES for product stories, company overviews, and services. Balanced text and imagery make it easy to build an engaging print or PDF brochure.',
+    tags: ['brochure'],
+    categories: ['TEMPLATES'],
     included: [
       'Tri-fold brochure layout',
       'Service and feature sections',
@@ -289,20 +277,22 @@ export const Templates: ProductTypes[] = [
       'Color theme and typography options',
       'Print-ready design tips',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 10,
-    name: 'Portfolio Template',
-    image: [
+    id: '10',
+    name: 'Portfolio TEMPLATES',
+    images: [
       'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1487014679447-9f8336841d58?w=900&auto=format&fit=crop&q=60',
     ],
-    price: 95,
+    price: '95',
     description:
-      'A polished portfolio template for designers, photographers, and creatives. Includes curated layouts for showcasing work, testimonials, and contact information.',
-    tags: 'portfolio',
-    types: 'Templates',
+      'A polished portfolio TEMPLATES for designers, photographers, and creatives. Includes curated layouts for showcasing work, testimonials, and contact information.',
+    tags: ['portfolio'],
+    categories: ['TEMPLATES'],
     included: [
       'Portfolio showcase layouts',
       'Project and case study sections',
@@ -310,23 +300,23 @@ export const Templates: ProductTypes[] = [
       'Customizable branding and colors',
       'Professional contact page design',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
 ]
 
 export const Mockups: ProductTypes[] = [
   {
-    id: 1,
+    id: '1',
     name: 'Iphone Mockup',
-    price: 100,
+    price: '100',
     description:
-      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup templates. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: 'design',
-    types: 'Mockups',
-    image: [
+      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
+    tags: ['design'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1625864667518-914e1dd17377?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
-
       'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
-
       'https://images.unsplash.com/photo-1625864667534-aa5208d45a87?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
     ],
     included: [
@@ -336,16 +326,18 @@ export const Mockups: ProductTypes[] = [
       'Customizable background options to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 2,
+    id: '2',
     name: 'Laptop Mockup',
-    price: 120,
+    price: '120',
     description:
-      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup templates. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: 'business',
-    types: 'Mockups',
-    image: [
+      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
+    tags: ['business'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1703002574442-1996d6f59bc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
       'https://images.unsplash.com/photo-1703002574210-faaac4dde3b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
       'https://images.unsplash.com/photo-1606560114363-e60d00c93734?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxhcHRvcCUyMGFwcGxlfGVufDB8fDB8fHww',
@@ -357,16 +349,18 @@ export const Mockups: ProductTypes[] = [
       'Customizable background options to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 3,
+    id: '3',
     name: 'Digital Art Mockup',
-    price: 80,
+    price: '80',
     description:
-      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup templates. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: 'art',
-    types: 'Mockups',
-    image: [
+      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
+    tags: ['art'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
     ],
     included: [
@@ -376,16 +370,18 @@ export const Mockups: ProductTypes[] = [
       'Customizable background options to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 4,
+    id: '4',
     name: 'Camera Mockup',
-    price: 90,
+    price: '90',
     description:
-      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup templates. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: 'photography',
-    types: 'Mockups',
-    image: [
+      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
+    tags: ['photography'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1613497645676-ea691063aa19?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmVzJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
     ],
     included: [
@@ -395,16 +391,18 @@ export const Mockups: ProductTypes[] = [
       'Customizable background options to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 5,
+    id: '5',
     name: 'Headphones Mockup',
-    price: 110,
+    price: '110',
     description:
-      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup templates. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: 'audio',
-    types: 'Mockups',
-    image: [
+      'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
+    tags: ['audio'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1613497645676-ea691063aa19?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmVzJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
     ],
     included: [
@@ -414,16 +412,18 @@ export const Mockups: ProductTypes[] = [
       'Customizable background options to match your branding',
       'Step-by-step instructions for effortless editing',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 6,
+    id: '6',
     name: 'Watch Mockup',
-    price: 95,
+    price: '95',
     description:
       'A refined watch mockup that puts your interface and strap design front and center. Ideal for wearable tech presentations and lifestyle branding.',
-    tags: 'accessory',
-    types: 'Mockups',
-    image: [
+    tags: ['accessory'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=900&auto=format&fit=crop&q=60',
     ],
@@ -434,16 +434,18 @@ export const Mockups: ProductTypes[] = [
       'Customizable background and lighting',
       'Clear edit instructions for quick setup',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 7,
+    id: '7',
     name: 'T-Shirt Mockup',
-    price: 85,
+    price: '85',
     description:
       'A lifestyle t-shirt mockup built for apparel brands and merch launches. Showcase prints with realistic fabric folds and customizable apparel colors.',
-    tags: 'fashion',
-    types: 'Mockups',
-    image: [
+    tags: ['fashion'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1520975698517-0ea312a8a7c6?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=900&auto=format&fit=crop&q=60',
     ],
@@ -454,16 +456,18 @@ export const Mockups: ProductTypes[] = [
       'High-resolution export ready file',
       'Simple drag-and-drop design workflow',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 8,
+    id: '8',
     name: 'Poster Mockup',
-    price: 75,
+    price: '75',
     description:
       'A bold poster mockup with realistic wall and frame presentation for advertising, events, and art prints.',
-    tags: 'print',
-    types: 'Mockups',
-    image: [
+    tags: ['print'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1496284045406-d5d2c6f4fb5b?w=900&auto=format&fit=crop&q=60',
     ],
@@ -474,16 +478,18 @@ export const Mockups: ProductTypes[] = [
       'Editable smart objects for poster artwork',
       'Step-by-step editing instructions',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 9,
+    id: '9',
     name: 'Packaging Mockup',
-    price: 105,
+    price: '105',
     description:
       'A premium packaging mockup set for boxes, labels, and product vessels. Perfect for consumer goods and retail design previews.',
-    tags: 'packaging',
-    types: 'Mockups',
-    image: [
+    tags: ['packaging'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&auto=format&fit=crop&q=60',
     ],
@@ -494,16 +500,18 @@ export const Mockups: ProductTypes[] = [
       'Customizable background and shadows',
       'Detailed editing guide',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 10,
+    id: '10',
     name: 'Book Cover Mockup',
-    price: 88,
+    price: '88',
     description:
       'A professional book cover mockup for novels, magazines, and journals. Display your cover design in a polished reading environment.',
-    tags: 'publishing',
-    types: 'Mockups',
-    image: [
+    tags: ['publishing'],
+    categories: ['MOCKUPS'],
+    images: [
       'https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=900&auto=format&fit=crop&q=60',
     ],
@@ -514,19 +522,21 @@ export const Mockups: ProductTypes[] = [
       'Customizable background and lighting',
       'Easy editing workflow',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
 ]
 
 export const Graphics: ProductTypes[] = [
   {
-    id: 1,
+    id: '1',
     name: 'Logo Kit',
-    price: 45,
+    price: '45',
     description:
       'A complete logo kit with multiple brand marks, color variations, and layout options. Ideal for startups and creative businesses.',
-    tags: 'branding',
-    types: 'Graphics',
-    image: [
+    tags: ['branding'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1512325553582-8d7b2ae15147?w=900&auto=format&fit=crop&q=60',
@@ -538,16 +548,18 @@ export const Graphics: ProductTypes[] = [
       'Branding usage examples',
       'Editable source assets',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 2,
+    id: '2',
     name: 'Illustration Pack',
-    price: 60,
+    price: '60',
     description:
       'A set of handcrafted illustrations for web, mobile, and print design. Includes versatile characters, objects, and scenes.',
-    tags: 'illustration',
-    types: 'Graphics',
-    image: [
+    tags: ['illustration'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
     ],
@@ -558,16 +570,18 @@ export const Graphics: ProductTypes[] = [
       'Editable color themes',
       'Usage guidelines for digital projects',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 3,
+    id: '3',
     name: 'Icon Set',
-    price: 30,
+    price: '30',
     description:
       'A modern icon set for apps, dashboards, and websites. Includes 80+ icons in consistent style and format.',
-    tags: 'icons',
-    types: 'Graphics',
-    image: [
+    tags: ['icons'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1522274716079-9239d2c3a5d4?w=900&auto=format&fit=crop&q=60',
     ],
@@ -578,16 +592,18 @@ export const Graphics: ProductTypes[] = [
       'Outlined and filled versions',
       'Editable source files',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 4,
+    id: '4',
     name: 'Pattern Collection',
-    price: 38,
+    price: '38',
     description:
       'A collection of seamless patterns for backgrounds, packaging, and textile projects. Contains geometric, floral, and abstract styles.',
-    tags: 'pattern',
-    types: 'Graphics',
-    image: [
+    tags: ['pattern'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
     ],
@@ -598,16 +614,18 @@ export const Graphics: ProductTypes[] = [
       'Repeat-ready designs',
       'Commercial use license guidance',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 5,
+    id: '5',
     name: 'Social Media Graphics',
-    price: 52,
+    price: '52',
     description:
-      'A set of social media visuals and story templates crafted to drive engagement and reinforce brand voice across platforms.',
-    tags: 'social',
-    types: 'Graphics',
-    image: [
+      'A set of social media visuals and story TEMPLATESs crafted to drive engagement and reinforce brand voice across platforms.',
+    tags: ['social'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&auto=format&fit=crop&q=60',
     ],
@@ -615,39 +633,43 @@ export const Graphics: ProductTypes[] = [
       'Square, story, and landscape graphics',
       'Editable photo and text layers',
       'Color and layout presets',
-      'Campaign-ready templates',
+      'Campaign-ready TEMPLATESs',
       'Brand consistency checklist',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 6,
+    id: '6',
     name: 'Infographic Bundle',
-    price: 48,
+    price: '48',
     description:
-      'A bundle of infographic templates designed for reports, presentations, and data storytelling. Includes charts, timelines, and process diagrams.',
-    tags: 'infographic',
-    types: 'Graphics',
-    image: [
+      'A bundle of infographic TEMPLATESs designed for reports, presentations, and data storytelling. Includes charts, timelines, and process diagrams.',
+    tags: ['infographic'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
     ],
     included: [
-      'Chart and timeline templates',
+      'Chart and timeline TEMPLATESs',
       'Editable vector graphics',
       'Color-coded infographic assets',
       'Data visualization guidelines',
       'Printable and digital-friendly layouts',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 7,
+    id: '7',
     name: 'UI Elements Kit',
-    price: 65,
+    price: '65',
     description:
       'A UI element kit for web and app design, containing buttons, cards, forms, and navigation components in a polished aesthetic.',
-    tags: 'ui',
-    types: 'Graphics',
-    image: [
+    tags: ['ui'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
     ],
@@ -658,16 +680,18 @@ export const Graphics: ProductTypes[] = [
       'Editable symbols and assets',
       'Design system usage documentation',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 8,
+    id: '8',
     name: 'Business Card Graphics',
-    price: 42,
+    price: '42',
     description:
       'A smart business card graphics pack with modern layouts, accent shapes, and brand-first visual styling.',
-    tags: 'business',
-    types: 'Graphics',
-    image: [
+    tags: ['business'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60',
     ],
@@ -678,16 +702,18 @@ export const Graphics: ProductTypes[] = [
       'Color palette suggestions',
       'Print-ready export tips',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 9,
+    id: '9',
     name: 'Sticker Pack',
-    price: 36,
+    price: '36',
     description:
       'A creative sticker pack with icons, hand-drawn labels, and expressive badges for packaging, digital mockups, and campaigns.',
-    tags: 'stickers',
-    types: 'Graphics',
-    image: [
+    tags: ['stickers'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&auto=format&fit=crop&q=60',
     ],
@@ -698,16 +724,18 @@ export const Graphics: ProductTypes[] = [
       'Digital and print-ready file exports',
       'Usage examples for packaging and social posts',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 10,
+    id: '10',
     name: 'Poster Design Set',
-    price: 70,
+    price: '70',
     description:
       'A set of bold poster designs optimized for events, promotions, and brand campaigns. Includes layered artwork and typography styling.',
-    tags: 'poster',
-    types: 'Graphics',
-    image: [
+    tags: ['poster'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900&auto=format&fit=crop&q=60',
     ],
@@ -718,19 +746,21 @@ export const Graphics: ProductTypes[] = [
       'High-resolution export options',
       'Printable poster guidelines',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
 ]
 
 export const Magazines: ProductTypes[] = [
   {
-    id: 1,
-    name: 'Magazine Cover Template',
-    price: 85,
+    id: '1',
+    name: 'Magazine Cover TEMPLATES',
+    price: '85',
     description:
-      'A modern magazine cover template built for lifestyle, fashion, and editorial brands. Includes bold headlines, photo frames, and cover lines.',
-    tags: 'magazine',
-    types: 'Graphics',
-    image: [
+      'A modern magazine cover TEMPLATES built for lifestyle, fashion, and editorial brands. Includes bold headlines, photo frames, and cover lines.',
+    tags: ['magazine'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=900&auto=format&fit=crop&q=60',
     ],
@@ -741,36 +771,40 @@ export const Magazines: ProductTypes[] = [
       'Print-ready formatting',
       'Cover styling suggestions',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 2,
+    id: '2',
     name: 'Editorial Layout Set',
-    price: 95,
+    price: '95',
     description:
       'A versatile editorial layout pack for magazine spreads, features, and long-form articles. Designed for strong readability and visual rhythm.',
-    tags: 'magazine',
-    types: 'Graphics',
-    image: [
+    tags: ['magazine'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
     ],
     included: [
-      'Editorial spread templates',
+      'Editorial spread TEMPLATESs',
       'Text and image grid layouts',
       'Feature story design elements',
       'Typography pairings and guides',
       'Print and digital export recommendations',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 3,
+    id: '3',
     name: 'Fashion Magazine Kit',
-    price: 75,
+    price: '75',
     description:
       'A fashion magazine design kit with polished layout systems, model imagery frames, and editorial styling for lookbooks and features.',
-    tags: 'magazine',
-    types: 'Graphics',
-    image: [
+    tags: ['magazine'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1495121605193-b116b5b9c5d5?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&auto=format&fit=crop&q=60',
     ],
@@ -781,36 +815,40 @@ export const Magazines: ProductTypes[] = [
       'Color and typography presets',
       'Print-ready magazine formatting',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 4,
+    id: '4',
     name: 'Travel Magazine Kit',
-    price: 78,
+    price: '78',
     description:
       'A travel magazine kit with inspiring layouts that highlight destinations, itineraries, and storytelling photography.',
-    tags: 'magazine',
-    types: 'Graphics',
-    image: [
+    tags: ['magazine'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=900&auto=format&fit=crop&q=60',
     ],
     included: [
       'Travel feature layouts',
-      'Destination story templates',
+      'Destination story TEMPLATESs',
       'Photo-rich editorial grids',
       'Customizable callouts and sidebars',
       'Magazine export guidance',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 5,
+    id: '5',
     name: 'Food Magazine Kit',
-    price: 80,
+    price: '80',
     description:
       'A vibrant food magazine kit designed for recipes, restaurant reviews, and culinary storytelling with strong editorial visuals.',
-    tags: 'magazine',
-    types: 'Graphics',
-    image: [
+    tags: ['magazine'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&auto=format&fit=crop&q=60',
     ],
@@ -821,16 +859,18 @@ export const Magazines: ProductTypes[] = [
       'Editorial typography system',
       'Print-ready magazine pages',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 6,
+    id: '6',
     name: 'Tech Magazine Kit',
-    price: 82,
+    price: '82',
     description:
       'A technology magazine kit with sleek, futuristic layouts for product launches, reviews, and trend coverage.',
-    tags: 'magazine',
-    types: 'Graphics',
-    image: [
+    tags: ['magazine'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=900&auto=format&fit=crop&q=60',
     ],
@@ -841,16 +881,18 @@ export const Magazines: ProductTypes[] = [
       'Modern typography and icon styles',
       'Digital and print-ready formatting',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 7,
+    id: '7',
     name: 'Beauty Magazine Kit',
-    price: 76,
+    price: '76',
     description:
       'A beauty magazine kit for cosmetics, skincare, and wellness stories. Includes elegant visuals and editorial layout options.',
-    tags: 'magazine',
-    types: 'Graphics',
-    image: [
+    tags: ['magazine'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=900&auto=format&fit=crop&q=60',
     ],
@@ -861,65 +903,73 @@ export const Magazines: ProductTypes[] = [
       'Photography-focused design areas',
       'Magazine page assembly guide',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 8,
+    id: '8',
     name: 'Lifestyle Magazine Kit',
-    price: 79,
+    price: '79',
     description:
       'A lifestyle magazine kit with curated editorial layouts for homes, wellness, and personal stories.',
-    tags: 'magazine',
-    types: 'Graphics',
-    image: [
+    tags: ['magazine'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=60',
     ],
     included: [
-      'Lifestyle editorial templates',
+      'Lifestyle editorial TEMPLATESs',
       'Feature story artboards',
       'Decor and photography styling',
       'Readable column layouts',
       'Design customization tips',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 9,
+    id: '9',
     name: 'Sports Magazine Kit',
-    price: 74,
+    price: '74',
     description:
       'A dynamic sports magazine kit for athlete profiles, match previews, and highlight spreads with bold editorial layouts.',
-    tags: 'magazine',
-    types: 'Graphics',
-    image: [
+    tags: ['magazine'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
     ],
     included: [
       'Sports editorial pages',
-      'Player profile templates',
+      'Player profile TEMPLATESs',
       'Scorecard and timeline layouts',
       'Bold headline styling',
       'Editorial print-ready files',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
   {
-    id: 10,
+    id: '10',
     name: 'Business Magazine Kit',
-    price: 92,
+    price: '92',
     description:
       'A business magazine kit with smart page layouts for industry reports, executive profiles, and corporate storytelling.',
-    tags: 'magazine',
-    types: 'Graphics',
-    image: [
+    tags: ['magazine'],
+    categories: ['GRAPHICS'],
+    images: [
       'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
       'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&auto=format&fit=crop&q=60',
     ],
     included: [
-      'Business editorial templates',
+      'Business editorial TEMPLATESs',
       'Report-style layouts',
       'Chart and insight sections',
       'Professional typography systems',
       'Print and PDF-ready magazine pages',
     ],
+    asset_urls: [],
+    isPublished: true,
   },
 ]

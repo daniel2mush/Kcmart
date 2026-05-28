@@ -1,17 +1,24 @@
+from api.products.domain.product import Product
+
+
 class ProductResponseMapper:
 
     @staticmethod
-    def to_dto(product):
+    def to_dto(domain: Product):
         return {
-            "id": product.id,
-            "user_id": product.user_id,
-            "name": product.name,
-            "price": product.price,
-            "description": product.description,
-            "images": product.images,
-            "includes": product.includes,
-            "tag": product.tag,
-            "product_type": product.product_type,
+            "id": str(domain.id),
+            "owner_id": str(domain.owner_id),
+            "name": domain.name,
+            "slug": domain.slug,
+            "description": domain.description,
+            "price_cents": domain.price_cents,
+            "status": domain.status,
+            "is_featured": domain.is_featured,
+            "included": domain.included,
+            "tags": [str(t) for t in domain.tag_ids],
+            "categories": [str(c) for c in domain.category_ids],
+            "images": [str(i) for i in domain.image_ids],
+            "assets": [str(a) for a in domain.asset_ids],
         }
 
     @staticmethod

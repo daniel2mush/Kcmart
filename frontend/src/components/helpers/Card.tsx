@@ -1,239 +1,297 @@
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { gsap } from 'gsap'
 import { Link } from '@tanstack/react-router'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, FolderOpen, Tag } from 'lucide-react'
 import { useGSAP } from '@gsap/react'
 
+import type { ProductTypes } from '#/lib/types/ProductTypes.ts'
+
 interface CardProps {
-  id: number
-  name: string
-  price: number
-  types: string
-  tags: string
-  image: string[]
-}
-interface ValidCardProps {
   title?: string
   viewMoreLink?: string
-  iterable: CardProps[]
+  iterable: ProductTypes[]
   sliceValue?: number
 }
+
 export const Card = ({
   iterable,
   title,
   viewMoreLink,
   sliceValue,
-}: ValidCardProps) => {
-  const overlayRefs = useRef<Array<HTMLDivElement | null>>([])
-  const actionRefs = useRef<Array<HTMLDivElement | null>>([])
-  const backdropRef = useRef<Array<HTMLDivElement | null>>([])
+}: CardProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
+  const displayItems = useMemo(
+    () => (sliceValue ? iterable.slice(0, sliceValue) : iterable),
+    [iterable, sliceValue],
+  )
+
+  /**
+   * Container entrance animation
+   */
   useGSAP(
     () => {
       if (!containerRef.current) return
 
-      const timeline = gsap.timeline({
-        defaults: { ease: 'power3.out', duration: 0.8 },
+      gsap.to(containerRef.current, {
+        y: 0,
+        duration: 0.8,
+        delay: 0.2,
+        ease: 'power3.out',
       })
-
-      timeline
-        .to(containerRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-        })
-        .fromTo(
-          '.header-text > *',
-          {
-            y: 20,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.1,
-          },
-          '-=0.3',
-        )
-        .fromTo(
-          '.card-item',
-          {
-            y: 30,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.1,
-            duration: 0.6,
-          },
-          '-=0.4',
-        )
     },
     { scope: containerRef },
   )
 
-  const handleMouseEnter = (index: number) => {
-    const overlay = overlayRefs.current[index]
-    const action = actionRefs.current[index]
-    const backdrop = backdropRef.current[index]
+  /**
+   * Cards stagger animation
+   */
+  useGSAP(
+    () => {
+      if (!containerRef.current || displayItems.length === 0) return
 
-    if (overlay) {
-      gsap.to(overlay, {
-        y: -40,
-        duration: 0.3,
-        ease: 'power3.out',
-        overwrite: 'auto',
-      })
-    }
+      const cards = gsap.utils.toArray('.card-item', containerRef.current)
 
-    if (action) {
-      gsap.to(action, {
-        opacity: 1,
-        y: -10,
-        duration: 0.3,
-        ease: 'power3.out',
-        overwrite: 'auto',
-      })
-    }
+      gsap.killTweensOf(cards)
 
-    if (backdrop) {
-      gsap.to(backdrop, {
-        opacity: 1,
-        duration: 0.3,
-        ease: 'power3.out',
-        overwrite: 'auto',
-      })
-    }
-  }
-
-  const handleMouseLeave = (index: number) => {
-    const overlay = overlayRefs.current[index]
-    const action = actionRefs.current[index]
-    const backdrop = backdropRef.current[index]
-
-    if (overlay) {
-      gsap.to(overlay, {
-        y: 0,
-        duration: 0.3,
-        ease: 'power3.out',
-        overwrite: 'auto',
-      })
-    }
-
-    if (action) {
-      gsap.to(action, {
-        opacity: 0,
-        y: 0,
-        duration: 0.3,
-        ease: 'power3.out',
-        overwrite: 'auto',
-      })
-    }
-
-    if (backdrop) {
-      gsap.to(backdrop, {
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power3.out',
-        overwrite: 'auto',
-      })
-    }
-  }
+      gsap.fromTo(
+        cards,
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          stagger: 0.1,
+          ease: 'power3.out',
+        },
+      )
+    },
+    {
+      dependencies: [displayItems],
+      scope: containerRef,
+    },
+  )
 
   return (
-    <div
+    <section
       ref={containerRef}
-      className=" space-y-6 w-full h-full p-10 "
-      style={{ opacity: 0, transform: 'translateY(-20px)' }}
+      style={{ transform: 'translateY(100px)' }}
+      className="w-full space-y-8 p-8 lg:p-10"
     >
-      <div className=" header-text  flex justify-between items-center">
-        <h1
-          className="text-3xl font-bold text-center md:text-start text-secondary flex justify-between items-center"
-          style={{ opacity: 0 }}
-        >
-          {title}
-        </h1>
+      {/* Header */}
+      <header className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          {title && (
+            <>
+              <div className="h-8 w-1 rounded-full bg-linear-to-b from-primary to-primary/20" />
+
+              <h2 className="text-3xl font-bold tracking-tight text-secondary lg:text-4xl">
+                {title}
+              </h2>
+            </>
+          )}
+        </div>
 
         {viewMoreLink && (
           <Link
             to={viewMoreLink}
-            className=" text-secondary flex justify-center items-center gap-1 text-[12px] font-medium t-2 hover:text-primary/80 transition-colors duration-200"
-            style={{ opacity: 0 }}
+            className="group/view flex items-center gap-2 text-secondary/70 transition-colors duration-300 hover:text-secondary"
           >
-            View More
-            <ArrowRight size={12} />
+            <span className="text-sm font-medium">View All</span>
+
+            <div className="relative">
+              <div className="absolute inset-0 scale-0 rounded-full bg-primary/20 transition-transform duration-300 group-hover/view:scale-150" />
+
+              <ArrowRight
+                size={16}
+                className="relative transition-transform duration-300 group-hover/view:translate-x-1"
+              />
+            </div>
           </Link>
         )}
-      </div>
-      <div className=" flex justify-center items-center md:">
-        <div
-          className={` grid-contents grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 w-full`}
-        >
-          {iterable.slice(0, sliceValue).map((drop, index) => {
-            const link = `/${drop.types.toLowerCase()}/${drop.id.toString()}`
+      </header>
 
-            return (
+      {/* Grid */}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {displayItems.map((drop, index) => {
+          const category = drop.categories[0]
+          const tags = drop.tags.slice(0, 3)
+
+          const link = `/${category.toLowerCase()}/${drop.id}`
+
+          return (
+            <article
+              key={drop.id || index}
+              style={{
+                opacity: 0,
+                transform: 'translateY(30px)',
+              }}
+              className="
+                card-item
+                group
+                relative
+                h-85
+                overflow-hidden
+                rounded-2xl
+                border border-border/50
+                bg-surface
+                shadow-sm
+                transition-all duration-500
+                hover:border-primary/20
+                hover:shadow-2xl
+              "
+            >
+              {/* Gradient Overlay */}
               <div
-                key={index}
-                className="card-item relative w-full h-80 bg-app rounded-lg overflow-hidden border border-border group cursor-pointer"
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={() => handleMouseLeave(index)}
-                style={{ opacity: 0 }}
-              >
-                <div
-                  id="backdrop"
-                  ref={(el) => {
-                    backdropRef.current[index] = el
-                  }}
-                  className="absolute top-0 right-0 opacity-0 z-50 w-full backdrop-blur-sm bg-black/5 h-full pointer-events-none"
+                className="
+                  pointer-events-none
+                  absolute inset-0 z-10
+                  bg-linear-to-t
+                  from-black/80
+                  via-black/30
+                  to-transparent
+                  opacity-0
+                  transition-opacity duration-500
+                  group-hover:opacity-100
+                "
+              />
+
+              {/* Image */}
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={drop.images[0]}
+                  alt={drop.name}
+                  loading="lazy"
+                  className="
+                    h-full w-full object-cover
+                    transition-transform duration-700
+                    group-hover:scale-105
+                  "
                 />
-                <div>
-                  <img
-                    src={drop.image[0]}
-                    alt={drop.name}
-                    className="w-full h-56 object-cover rounded-t-lg object-center"
-                  />
+
+                {/* Category Badge */}
+                <div className="absolute top-3 left-3 z-20">
+                  <span
+                    className="
+                      inline-flex items-center gap-1.5
+                      rounded-full
+                      bg-black/50
+                      px-3 py-1.5
+                      text-xs font-medium text-white
+                      backdrop-blur-md
+                    "
+                  >
+                    <FolderOpen size={12} />
+                    {category}
+                  </span>
                 </div>
-                <div
-                  ref={(el) => {
-                    overlayRefs.current[index] = el
-                  }}
-                  className="absolute z-50 left-0 bg-surface w-full h-full px-4"
-                >
-                  <div className=" flex justify-between items-center">
-                    <div>
-                      <h2 className="text-lg font-semibold mt-4 text-secondary">
-                        {drop.name}
-                      </h2>
-                      <p className="text-sm text-muted mt-2 line-clamp-3">
-                        <span className="text-md text-muted mr-4">
-                          {drop.types} - {drop.tags}
-                        </span>
-                      </p>
-                    </div>
-                    <p className="text-sm font-bold mt-4">${drop.price}</p>
+              </div>
+
+              {/* Content */}
+              <div
+                className="
+                  absolute bottom-0 left-0 right-0 z-20
+                  border-t border-border/50
+                  bg-surface/95
+                  p-5
+                  backdrop-blur-md
+                  translate-y-20
+                  transition-transform duration-500 ease-out
+                  group-hover:translate-y-0
+                "
+              >
+                <div className="space-y-4">
+                  {/* Title + Price */}
+                  <div className="flex items-start justify-between gap-4">
+                    <h3
+                      className="
+                        line-clamp-2
+                        text-lg font-semibold
+                        leading-tight text-secondary
+                        transition-colors
+                        group-hover:text-primary
+                      "
+                    >
+                      {drop.name}
+                    </h3>
+
+                    <span className="whitespace-nowrap text-lg font-bold text-primary">
+                      ${drop.price}
+                    </span>
                   </div>
+
+                  {/* Tags */}
+                  {tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5">
+                      {tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="
+                            inline-flex items-center gap-1
+                            rounded-full
+                            bg-primary/5
+                            px-2.5 py-1
+                            text-xs font-medium text-primary
+                          "
+                        >
+                          <Tag size={10} />
+                          {tag}
+                        </span>
+                      ))}
+
+                      {drop.tags.length > 3 && (
+                        <span className="self-center text-xs text-muted">
+                          +{drop.tags.length - 3} more
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Footer Action */}
                   <div
-                    ref={(el) => {
-                      actionRefs.current[index] = el
-                    }}
-                    className="opacity-0"
+                    className="
+                      pt-2
+                      opacity-0
+                      transition-opacity duration-700 delay-100
+                      group-hover:opacity-100
+                    "
                   >
                     <Link
                       to={link}
-                      className=" mt-4  py-2.5 px-3 rounded-md bg-app w-full block text-center text-sm font-medium text-primary transition-colors duration-200 hover:bg-app/10 border border-border  "
+                      className="
+                        group/btn
+                        inline-flex w-full items-center justify-center gap-2
+                        overflow-hidden
+                        rounded-xl
+                        border border-border
+                        px-4 py-3
+                        text-sm font-medium text-primary
+                        transition-all duration-300
+                        hover:border-primary/30
+                        hover:bg-primary/5
+                      "
                     >
-                      View Product
+                      <span className="relative z-10">View Product</span>
+
+                      <ArrowRight
+                        size={16}
+                        className="
+                          relative z-10
+                          transition-transform
+                          group-hover/btn:translate-x-1
+                        "
+                      />
                     </Link>
                   </div>
                 </div>
               </div>
-            )
-          })}
-        </div>
+            </article>
+          )
+        })}
       </div>
-    </div>
+    </section>
   )
 }

@@ -15,7 +15,7 @@ function RouteComponent() {
   const { itemId } = Route.useParams()
 
   const validProduct = Mockups.filter(
-    (product) => product.id === Number(itemId),
+    (product) => product.id === itemId,
   )
 
   return (

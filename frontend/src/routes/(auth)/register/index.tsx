@@ -1,8 +1,8 @@
 import { UseRegister } from '#/components/queries/auth/AuthQuery'
 import { Button } from '#/components/ui/button'
 import { Input } from '#/components/ui/input'
-import type { RegistrationTypes } from '#/types/ProductTypes'
-import { RegistrationSchema } from '#/validation/auth'
+import type { RegistrationTypes } from '#/lib/types/ProductTypes'
+import { RegistrationSchema } from '#/lib/validation/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   createFileRoute,
@@ -17,10 +17,7 @@ import { getIsAuthenticated } from '#/lib/authentication/authenticate.ts'
 
 export const Route = createFileRoute('/(auth)/register/')({
   component: RouteComponent,
-  beforeLoad: async () => {
-    const Authenticated = await getIsAuthenticated()
-    if (Authenticated) throw redirect({ to: '/dashboard' })
-  },
+
 })
 
 function RouteComponent() {
@@ -42,7 +39,6 @@ function RouteComponent() {
   const handleSubmitForm = (value: RegistrationTypes) => {
     mutate(value, {
       onSuccess: (data) => {
-        console.log(data, 'Data ')
 
         toast.success('Registration successful, Login to continue')
         route.navigate({ to: '/signin' })
@@ -166,13 +162,13 @@ function RouteComponent() {
           </div>
 
           <Button type="submit" className="w-full text-app cursor-pointer mt-2">
-            Login
+            Register
           </Button>
         </form>
         <p className=" text-sm text-secondary">
           Already have an account ?{' '}
           <Link to="/signin" className=" text-primary">
-            Register
+            Login
           </Link>{' '}
         </p>
       </div>

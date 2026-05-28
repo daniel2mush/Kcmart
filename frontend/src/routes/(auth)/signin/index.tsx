@@ -1,39 +1,24 @@
 import { Button } from '#/components/ui/button'
-import {
-  createFileRoute,
-  Link,
-  redirect,
-  useRouter,
-} from '@tanstack/react-router'
-import { z } from 'zod'
+import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '#/components/ui/input'
 import { ArrowLeft } from 'lucide-react'
 import { useLogin } from '#/components/queries/auth/AuthQuery'
 import { toast } from 'sonner'
-import { getIsAuthenticated } from '#/lib/authentication/authenticate.ts'
-import { useUserStore } from '#/store.ts'
+import { useUserStore } from '#/lib/store.ts'
+import { LoginSchema } from '#/lib/validation/auth.ts'
+import type { LoginTypes } from '#/lib/types/authTypes.ts'
 
 export const Route = createFileRoute('/(auth)/signin/')({
   component: RouteComponent,
-  beforeLoad: async () => {
-    const Authenticated = await getIsAuthenticated()
-    if (Authenticated) throw redirect({ to: '/dashboard' })
-  },
 })
 
 function RouteComponent() {
   const { setUser } = useUserStore()
-  const LoginSchema = z.object({
-    email: z.email({ error: 'Email is required' }),
-    password: z.string().min(3, { error: 'Password must not be empty' }),
-  })
 
   const { mutate, isPending } = useLogin()
   const route = useRouter()
-
-  type LoginTypes = z.infer<typeof LoginSchema>
 
   const {
     register,
@@ -52,10 +37,19 @@ function RouteComponent() {
       { ...value },
       {
         onSuccess: async (data) => {
+          const dataValue = data as {
+            user: {
+              id: string
+              email: string
+              first_name: string
+              last_name: string
+            }
+          }
           setUser({
-            first_name: data.user.first_name,
-            last_name: data.user.last_name,
-            email: data.user.email,
+            id: dataValue.user.id,
+            first_name: dataValue.user.first_name,
+            last_name: dataValue.user.last_name,
+            email: dataValue.user.email,
           })
           toast.success('Login successful')
 
@@ -73,7 +67,7 @@ function RouteComponent() {
     <div className="relative flex min-h-screen justify-center items-center overflow-hidden">
       <div className=" z-0 absolute top-0 left-0 opacity-5">
         <img
-          src="Hero.webp"
+          src="/Hero.webp"
           alt="Background"
           className=" object-cover object-center"
         />

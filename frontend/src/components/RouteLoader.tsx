@@ -27,7 +27,10 @@ const waitForPageAssets = () => {
       }),
   )
 
-  return Promise.all([waitForFonts, ...waitForImages]).then(() => undefined)
+  const assetsPromise = Promise.all([waitForFonts, ...waitForImages]).then(() => undefined)
+  const timeoutPromise = new Promise<void>((resolve) => window.setTimeout(resolve, 500))
+
+  return Promise.race([assetsPromise, timeoutPromise])
 }
 
 const RouteLoader = () => {
