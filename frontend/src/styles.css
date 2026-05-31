@@ -206,3 +206,26 @@ button {
 ::-webkit-scrollbar-thumb:hover {
   background: #4a4a4a;
 }
+
+
+/* Checkbox root – white border by default */
+[data-slot='checkbox'] {
+  background-color: transparent;
+  border: 2px solid var(--primary);  /* white border */
+  border-radius: 0.25rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Checked state: white background, black checkmark */
+[data-slot='checkbox'][data-state='checked'] {
+  background-color: var(--primary);  /* white background */
+  border-color: var(--primary);
+}
+
+/* The checkmark icon (SVG) inside checkbox – force black */
+[data-slot='checkbox'] svg {
+  stroke: #000000 !important;
+  stroke-width: 2px;
+  color: #000000 !important;
+}

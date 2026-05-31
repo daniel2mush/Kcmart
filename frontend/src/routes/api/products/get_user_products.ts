@@ -1,12 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import axiosClient from '#/components/client/axiosClient.ts'
+import { isAxiosError } from 'axios'
 
 export const Route = createFileRoute('/api/products/get_user_products')({
   server: {
     handlers: {
-      GET: async ({ request: req }) => {
-        console.log('I was called')
+      GET: async () => {
         try {
           const res = await axiosClient.get('products/user/', {
             withCredentials: true,

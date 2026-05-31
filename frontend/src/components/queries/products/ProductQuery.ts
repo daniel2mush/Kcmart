@@ -1,5 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import type { ProductTypes } from '#/lib/types/ProductTypes.ts'
+import type {
+  CategoryTypes,
+  ProductResponseTypes,
+  ProductTypes,
+} from '#/lib/types/ProductTypes.ts'
 import { toast } from 'sonner'
 
 export const useGetAllProducts = () => {
@@ -13,7 +17,6 @@ export const useGetUserProducts = () => {
   return useQuery({
     queryKey: ['products', 'user'],
     queryFn: async () => {
-      console.log('I was called, query ')
       const res = await fetch('/api/products/get_user_products', {
         method: 'GET',
         headers: {
@@ -24,7 +27,7 @@ export const useGetUserProducts = () => {
       if (!res.ok) {
         throw new Error(data.detail)
       }
-      return data
+      return data as ProductResponseTypes[]
     },
   })
 }
@@ -69,6 +72,8 @@ export const useAddProduct = () => {
 }
 
 export const useUpdateProduct = () => {
+  const queryClient = useQueryClient()
+
   return useMutation({
     mutationKey: ['products', 'updateProduct'],
     mutationFn: async () => {},
@@ -81,6 +86,8 @@ export const useUpdateProduct = () => {
 }
 
 export const useDeleteProduct = () => {
+  const queryClient = useQueryClient()
+
   return useMutation({
     mutationKey: ['products', 'deleteProduct'],
     mutationFn: async () => {},
@@ -88,6 +95,38 @@ export const useDeleteProduct = () => {
       await queryClient.invalidateQueries({
         queryKey: ['products'],
       })
+    },
+  })
+}
+
+export const useGetCategories = () => {
+  return useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const res = await fetch('/api/products/categories', {
+        method: 'GET',
+      })
+      const resData = await res.json()
+      if (!res.ok) {
+        throw new Error(resData?.detail || 'Failed to get categories')
+      }
+      return resData as CategoryTypes[]
+    },
+  })
+}
+
+export const useGetTags = () => {
+  return useQuery({
+    queryKey: ['tags'],
+    queryFn: async () => {
+      const res = await fetch('/api/products/tags', {
+        method: 'GET',
+      })
+      const resData = await res.json()
+      if (!res.ok) {
+        throw new Error(resData?.detail || 'Failed to get product tags')
+      }
+      return resData as CategoryTypes[]
     },
   })
 }

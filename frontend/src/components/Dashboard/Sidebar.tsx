@@ -109,11 +109,18 @@ const Sidebar = () => {
   const { mutateAsync, isPending } = useLogout()
   const router = useRouter()
 
-  const { email, first_name, last_name } = useUserStore().user as {
-    email: string
-    first_name: string
-    last_name: string
-  }
+  // const { email, first_name, last_name } = useUserStore().user as {
+  //   email: string
+  //   first_name: string
+  //   last_name: string
+  // }
+
+  const user = useUserStore().user
+
+  if (!user || user.email === '') return
+
+  const { email, last_name, first_name } = user
+
   const initials = `${first_name[0] || 'K'}${last_name[0] || 'C'}`
 
   return (

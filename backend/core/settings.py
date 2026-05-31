@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -174,6 +175,92 @@ REST_FRAMEWORK = {
 }
 
 STATIC_URL = "static/"
+
+UNFOLD = {
+    "SITE_TITLE": "Shopping Admin",
+    "SITE_HEADER": "Shopping Admin",
+    "SITE_SUBHEADER": "Commerce operations",
+    "SITE_SYMBOL": "shopping_bag",
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": False,
+    "COLORS": {
+        "primary": {
+            "50": "240 249 255",
+            "100": "224 242 254",
+            "200": "186 230 253",
+            "300": "125 211 252",
+            "400": "56 189 248",
+            "500": "14 165 233",
+            "600": "2 132 199",
+            "700": "3 105 161",
+            "800": "7 89 133",
+            "900": "12 74 110",
+            "950": "8 47 73",
+        },
+    },
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": True,
+        "navigation": [
+            {
+                "title": "Catalog",
+                "separator": True,
+                "collapsible": False,
+                "items": [
+                    {
+                        "title": "Products",
+                        "icon": "inventory_2",
+                        "link": reverse_lazy("admin:products_product_changelist"),
+                    },
+                    {
+                        "title": "Categories",
+                        "icon": "category",
+                        "link": reverse_lazy("admin:category_category_changelist"),
+                    },
+                    {
+                        "title": "Tags",
+                        "icon": "sell",
+                        "link": reverse_lazy("admin:tag_tag_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "Sales",
+                "separator": True,
+                "collapsible": False,
+                "items": [
+                    {
+                        "title": "Orders",
+                        "icon": "receipt_long",
+                        "link": reverse_lazy("admin:orders_order_changelist"),
+                    },
+                    {
+                        "title": "Payments",
+                        "icon": "payments",
+                        "link": reverse_lazy("admin:payments_payment_changelist"),
+                    },
+                    {
+                        "title": "Purchases",
+                        "icon": "shopping_cart",
+                        "link": reverse_lazy("admin:purchases_purchase_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "Customers",
+                "separator": True,
+                "collapsible": False,
+                "items": [
+                    {
+                        "title": "Users",
+                        "icon": "group",
+                        "link": reverse_lazy("admin:users_user_changelist"),
+                    },
+                ],
+            },
+        ],
+    },
+}
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",

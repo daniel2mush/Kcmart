@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import update_last_login
 from rest_framework_simplejwt.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -18,6 +19,8 @@ class AuthService:
 
         if not user.is_active:
             raise AuthenticationFailed("User account is disabled")
+
+        update_last_login(None, user)
 
         refresh = RefreshToken.for_user(user)
 

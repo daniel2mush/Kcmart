@@ -7,7 +7,7 @@ export const Route = createFileRoute('/support/')({
 
 function RouteComponent() {
   return (
-    <div>
+    <div className={''}>
       <HeaderHelper />
     </div>
   )

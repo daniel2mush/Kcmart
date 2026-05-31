@@ -16,14 +16,6 @@ import { Button } from '#/components/ui/button.tsx'
 import { Field, FieldGroup } from '#/components/ui/field.tsx'
 import { Label } from '#/components/ui/label.tsx'
 import { Input } from '#/components/ui/input.tsx'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '#/components/ui/select.tsx'
 
 import {
   Empty,
@@ -36,16 +28,17 @@ import {
 import { Textarea } from '#/components/ui/textarea.tsx'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-
+import { Checkbox } from '#/components/ui/checkbox.tsx' // adjust import path as needed
 import type {
   ProductFormTypes,
   ProductTypes,
 } from '#/lib/types/ProductTypes.ts'
 import { ProductSchema } from '#/lib/types/ProductTypes.ts'
-
 import { supabase } from '#/lib/supabase.ts'
 import {
   useAddProduct,
+  useGetCategories,
+  useGetTags,
   useGetUserProducts,
 } from '#/components/queries/products/ProductQuery.ts'
 import AdminCard from '#/components/Dashboard/AdminCard.tsx'
@@ -58,6 +51,9 @@ function RouteComponent() {
   const { data } = useGetUserProducts()
   const [isOpen, setIsOpen] = useState(false)
   const { mutate } = useAddProduct()
+  const { data: categoryData } = useGetCategories()
+  const { data: tagsData } = useGetTags()
+
   const {
     register,
     handleSubmit,
@@ -67,11 +63,10 @@ function RouteComponent() {
     reset,
   } = useForm<ProductFormTypes>({
     resolver: zodResolver(ProductSchema),
-
     defaultValues: {
       name: '',
       description: '',
-      price: '',
+      price_cents: '',
       tags: [],
       included: [],
       categories: [],
@@ -80,6 +75,8 @@ function RouteComponent() {
     },
   })
 
+  // Watch current values to control checkbox states
+  const selectedTags = watch('tags')
   const selectedCategories = watch('categories')
 
   /**
@@ -89,73 +86,76 @@ function RouteComponent() {
     return await Promise.all(
       files.map(async (file) => {
         const filePath = `${folder}/${crypto.randomUUID()}-${file.name}`
-
         const { error } = await supabase.storage
           .from('KCMart')
           .upload(filePath, file)
-
-        if (error) {
-          throw error
-        }
-
+        if (error) throw error
         const {
           data: { publicUrl },
         } = supabase.storage.from('KCMart').getPublicUrl(filePath)
-
         return publicUrl
       }),
     )
   }
 
-  async function onSubmit(validData: ProductFormTypes) {
-    console.log(data)
-    try {
-      /**
-       * Upload preview images
-       */
-      const imageUrls = await handleUploads(validData.images, 'images')
+  /**
+   * Toggle a tag ID in the selected tags array
+   */
+  const toggleTag = (tagId: string) => {
+    const current = selectedTags || []
+    const updated = current.includes(tagId)
+      ? current.filter((id) => id !== tagId)
+      : [...current, tagId]
+    setValue('tags', updated, { shouldValidate: true })
+  }
 
-      /**
-       * Upload downloadable assets
-       */
+  /**
+   * Toggle a category ID in the selected categories array
+   */
+  const toggleCategory = (categoryId: string) => {
+    const current = selectedCategories || []
+    const updated = current.includes(categoryId)
+      ? current.filter((id) => id !== categoryId)
+      : [...current, categoryId]
+    setValue('categories', updated, { shouldValidate: true })
+  }
+
+  async function onSubmit(validData: ProductFormTypes) {
+    try {
+      // Upload images and assets
+      const imageUrls = await handleUploads(validData.images, 'images')
       const assetUrls = await handleUploads(validData.assets, 'assets')
 
-      /**
-       * Final product object
-       */
+      // Convert price from dollar string to cents integer
+      const priceCents = Math.round(parseFloat(validData.price_cents) * 100)
+
       const product: ProductTypes = {
         name: validData.name,
         description: validData.description,
-        price: validData.price,
-
-        tags: validData.tags,
+        price_cents: priceCents,
+        tags: validData.tags, // already UUID strings
         categories: validData.categories,
-
         included: validData.included,
-
         images: imageUrls,
         asset_urls: assetUrls,
-        isPublished: false,
       }
 
       mutate(product)
-
-      /**
-       * Save to DB here
-       */
-
       setIsOpen(false)
       reset()
     } catch (error) {
       console.error(error)
     }
   }
+
+  console.log(data, 'product data')
+
   return (
     <div>
       <DashboardHeader />
 
       <div className={'p-10'}>
-        {!data && (
+        {data && data.length <= 0 ? (
           <div>
             <Empty>
               <EmptyHeader>
@@ -178,10 +178,11 @@ function RouteComponent() {
               </EmptyContent>
             </Empty>
           </div>
+        ) : (
+          <div className={'w-full'}>
+            {data && <AdminCard iterable={data} title={'My products'} />}
+          </div>
         )}
-        <div className={'w-full'}>
-          {data && <AdminCard iterable={data} title={'My products'} />}
-        </div>
 
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild className={'fixed bottom-20 right-10 w-full'}>
@@ -196,11 +197,7 @@ function RouteComponent() {
           </DialogTrigger>
 
           <DialogContent className={'max-h-[90vh] overflow-y-auto '}>
-            <form
-              onSubmit={handleSubmit(onSubmit, (formErrors) =>
-                console.log(formErrors),
-              )}
-            >
+            <form onSubmit={handleSubmit(onSubmit)}>
               <DialogHeader>
                 <DialogTitle>Add new product</DialogTitle>
                 <DialogDescription />
@@ -210,13 +207,11 @@ function RouteComponent() {
                 {/* NAME */}
                 <Field>
                   <Label htmlFor={'name'}>Name</Label>
-
                   <Input
                     id={'name'}
                     placeholder={'Enter product name'}
                     {...register('name')}
                   />
-
                   {errors.name && (
                     <p className={'text-sm text-red-500 mt-1'}>
                       {errors.name.message}
@@ -226,17 +221,15 @@ function RouteComponent() {
 
                 {/* PRICE */}
                 <Field>
-                  <Label htmlFor={'price'}>Price</Label>
-
+                  <Label htmlFor={'price_cents'}>Price (USD)</Label>
                   <Input
-                    id={'price'}
+                    id={'price_cents'}
                     placeholder={'20.00'}
-                    {...register('price')}
+                    {...register('price_cents')}
                   />
-
-                  {errors.price && (
+                  {errors.price_cents && (
                     <p className={'text-sm text-red-500 mt-1'}>
-                      {errors.price.message}
+                      {errors.price_cents.message}
                     </p>
                   )}
                 </Field>
@@ -244,13 +237,11 @@ function RouteComponent() {
                 {/* DESCRIPTION */}
                 <Field>
                   <Label htmlFor={'description'}>Description</Label>
-
                   <Textarea
                     id={'description'}
                     placeholder={'Enter product description'}
                     {...register('description')}
                   />
-
                   {errors.description && (
                     <p className={'text-sm text-red-500 mt-1'}>
                       {errors.description.message}
@@ -258,82 +249,57 @@ function RouteComponent() {
                   )}
                 </Field>
 
-                {/* TYPE + TAG */}
-                <div className={'grid grid-cols-1 md:grid-cols-2 gap-3'}>
-                  {/* TYPE */}
-                  <Field>
-                    <Label htmlFor={'type'}>Category</Label>
+                {/* CATEGORIES - Multi-select with checkboxes */}
+                <Field>
+                  <Label>Categories</Label>
+                  <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto border rounded p-2">
+                    {categoryData?.map((cat) => (
+                      <label
+                        key={cat.id}
+                        className="flex items-center space-x-2 text-sm"
+                      >
+                        <Checkbox
+                          checked={selectedCategories?.includes(cat.id)}
+                          onCheckedChange={() => toggleCategory(cat.id)}
+                        />
+                        <span>{cat.name}</span>
+                      </label>
+                    ))}
+                  </div>
+                  {errors.categories && (
+                    <p className={'text-sm text-red-500 mt-1'}>
+                      {errors.categories.message}
+                    </p>
+                  )}
+                </Field>
 
-                    <Select
-                      onValueChange={(value) =>
-                        setValue('categories', [
-                          value as ProductFormTypes['categories'][0],
-                        ])
-                      }
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select product type" />
-                      </SelectTrigger>
-
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="TEMPLATES">Templates</SelectItem>
-
-                          <SelectItem value="MOCKUPS">Mockups</SelectItem>
-
-                          <SelectItem value="GRAPHICS">Graphics</SelectItem>
-
-                          <SelectItem value="ICONS">Icons</SelectItem>
-
-                          <SelectItem value="FONTS">Fonts</SelectItem>
-
-                          <SelectItem value="3D_MODELS">3D Models</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-
-                    {selectedCategories.length > 0 && (
-                      <p className={'text-sm text-muted-foreground mt-1'}>
-                        Selected: {selectedCategories.join(', ')}
-                      </p>
-                    )}
-
-                    {errors.categories && (
-                      <p className={'text-sm text-red-500 mt-1'}>
-                        {errors.categories.message}
-                      </p>
-                    )}
-                  </Field>
-
-                  {/* TAGS */}
-                  <Field>
-                    <Label htmlFor={'tags'}>Tags</Label>
-
-                    <Input
-                      id={'tags'}
-                      placeholder={'Photoshop, UI, Template'}
-                      onChange={(e) => {
-                        const tags = e.target.value
-                          .split(',')
-                          .map((tag) => tag.trim())
-                          .filter(Boolean)
-
-                        setValue('tags', tags)
-                      }}
-                    />
-
-                    {errors.tags && (
-                      <p className={'text-sm text-red-500 mt-1'}>
-                        {errors.tags.message}
-                      </p>
-                    )}
-                  </Field>
-                </div>
+                {/* TAGS - Multi-select with checkboxes */}
+                <Field>
+                  <Label>Tags</Label>
+                  <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto border rounded p-2">
+                    {tagsData?.map((tag) => (
+                      <label
+                        key={tag.id}
+                        className="flex items-center space-x-2 text-sm"
+                      >
+                        <Checkbox
+                          checked={selectedTags?.includes(tag.id)}
+                          onCheckedChange={() => toggleTag(tag.id)}
+                        />
+                        <span>{tag.name}</span>
+                      </label>
+                    ))}
+                  </div>
+                  {errors.tags && (
+                    <p className={'text-sm text-red-500 mt-1'}>
+                      {errors.tags.message}
+                    </p>
+                  )}
+                </Field>
 
                 {/* INCLUDES */}
                 <Field>
                   <Label htmlFor={'includes'}>Includes</Label>
-
                   <Textarea
                     id={'includes'}
                     placeholder={
@@ -344,11 +310,9 @@ function RouteComponent() {
                         .split('\n')
                         .map((item) => item.trim())
                         .filter(Boolean)
-
                       setValue('included', includes)
                     }}
                   />
-
                   {errors.included && (
                     <p className={'text-sm text-red-500 mt-1'}>
                       {errors.included.message}
@@ -359,7 +323,6 @@ function RouteComponent() {
                 {/* IMAGES */}
                 <Field>
                   <Label htmlFor={'images'}>Product Images</Label>
-
                   <Input
                     id={'images'}
                     type={'file'}
@@ -367,11 +330,9 @@ function RouteComponent() {
                     accept={'image/*'}
                     onChange={(e) => {
                       const files = Array.from(e.target.files ?? [])
-
                       setValue('images', files)
                     }}
                   />
-
                   {errors.images && (
                     <p className={'text-sm text-red-500 mt-1'}>
                       {errors.images.message as string}
@@ -382,18 +343,15 @@ function RouteComponent() {
                 {/* ASSETS */}
                 <Field>
                   <Label htmlFor={'assets'}>Product Assets</Label>
-
                   <Input
                     id={'assets'}
                     type={'file'}
                     multiple
                     onChange={(e) => {
                       const files = Array.from(e.target.files ?? [])
-
                       setValue('assets', files)
                     }}
                   />
-
                   {errors.assets && (
                     <p className={'text-sm text-red-500 mt-1'}>
                       {errors.assets.message as string}

@@ -10,12 +10,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '#/components/ui/dropdown-menu.tsx'
-import type { ProductTypes } from '#/lib/types/ProductTypes.ts'
+import type { ProductResponseTypes } from '#/lib/types/ProductTypes.ts'
 
 interface CardProps {
   title?: string
   viewMoreLink?: string
-  iterable: ProductTypes[]
+  iterable: ProductResponseTypes[]
   sliceValue?: number
 }
 
@@ -123,7 +123,7 @@ const AdminCard = ({
       {/* Grid */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {displayItems.map((drop, index) => {
-          const category = drop.categories[0]
+          const category = drop.category[0]
           const tags = drop.tags.slice(0, 3)
 
           const link = `/${category.toLowerCase()}/${drop.id}`
@@ -200,12 +200,12 @@ const AdminCard = ({
                   {/* Status */}
                   <Badge
                     className={
-                      drop.isPublished
+                      drop.is_featured
                         ? 'border-none bg-green-600 text-white'
                         : 'border-none bg-red-600 text-white'
                     }
                   >
-                    {drop.isPublished ? 'Published' : 'Not Published'}
+                    {drop.is_featured ? 'Published' : 'Not Published'}
                   </Badge>
 
                   {/* Menu */}
@@ -250,9 +250,9 @@ const AdminCard = ({
                       </DropdownMenuItem>
 
                       <DropdownMenuItem
-                        className={`cursor-pointer rounded-xl px-3 py-2.5 ${drop.isPublished ? ' ' : 'text-green-600!'}`}
+                        className={`cursor-pointer rounded-xl px-3 py-2.5 ${drop.is_featured ? ' ' : 'text-green-600!'}`}
                       >
-                        {drop.isPublished ? 'Unpublish' : 'Publish'}
+                        {drop.is_featured ? 'Unpublish' : 'Publish'}
                       </DropdownMenuItem>
 
                       <div className="my-1 h-px bg-border/50" />

@@ -32,7 +32,9 @@ import { Route as DashboardProductsIndexRouteImport } from './routes/dashboard/p
 import { Route as DashboardFoldersIndexRouteImport } from './routes/dashboard/folders/index'
 import { Route as authSigninIndexRouteImport } from './routes/(auth)/signin/index'
 import { Route as authRegisterIndexRouteImport } from './routes/(auth)/register/index'
+import { Route as ApiProductsTagsRouteImport } from './routes/api/products/tags'
 import { Route as ApiProductsGet_user_productsRouteImport } from './routes/api/products/get_user_products'
+import { Route as ApiProductsCategoriesRouteImport } from './routes/api/products/categories'
 import { Route as ApiProductsAdd_productRouteImport } from './routes/api/products/add_product'
 import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
 import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
@@ -154,12 +156,22 @@ const authRegisterIndexRoute = authRegisterIndexRouteImport.update({
   path: '/register/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiProductsTagsRoute = ApiProductsTagsRouteImport.update({
+  id: '/api/products/tags',
+  path: '/api/products/tags',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiProductsGet_user_productsRoute =
   ApiProductsGet_user_productsRouteImport.update({
     id: '/api/products/get_user_products',
     path: '/api/products/get_user_products',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiProductsCategoriesRoute = ApiProductsCategoriesRouteImport.update({
+  id: '/api/products/categories',
+  path: '/api/products/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiProductsAdd_productRoute = ApiProductsAdd_productRouteImport.update({
   id: '/api/products/add_product',
   path: '/api/products/add_product',
@@ -202,7 +214,9 @@ export interface FileRoutesByFullPath {
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/products/add_product': typeof ApiProductsAdd_productRoute
+  '/api/products/categories': typeof ApiProductsCategoriesRoute
   '/api/products/get_user_products': typeof ApiProductsGet_user_productsRoute
+  '/api/products/tags': typeof ApiProductsTagsRoute
   '/register/': typeof authRegisterIndexRoute
   '/signin/': typeof authSigninIndexRoute
   '/dashboard/folders/': typeof DashboardFoldersIndexRoute
@@ -232,7 +246,9 @@ export interface FileRoutesByTo {
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/products/add_product': typeof ApiProductsAdd_productRoute
+  '/api/products/categories': typeof ApiProductsCategoriesRoute
   '/api/products/get_user_products': typeof ApiProductsGet_user_productsRoute
+  '/api/products/tags': typeof ApiProductsTagsRoute
   '/register': typeof authRegisterIndexRoute
   '/signin': typeof authSigninIndexRoute
   '/dashboard/folders': typeof DashboardFoldersIndexRoute
@@ -263,7 +279,9 @@ export interface FileRoutesById {
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/products/add_product': typeof ApiProductsAdd_productRoute
+  '/api/products/categories': typeof ApiProductsCategoriesRoute
   '/api/products/get_user_products': typeof ApiProductsGet_user_productsRoute
+  '/api/products/tags': typeof ApiProductsTagsRoute
   '/(auth)/register/': typeof authRegisterIndexRoute
   '/(auth)/signin/': typeof authSigninIndexRoute
   '/dashboard/folders/': typeof DashboardFoldersIndexRoute
@@ -295,7 +313,9 @@ export interface FileRouteTypes {
     | '/api/auth/logout'
     | '/api/auth/register'
     | '/api/products/add_product'
+    | '/api/products/categories'
     | '/api/products/get_user_products'
+    | '/api/products/tags'
     | '/register/'
     | '/signin/'
     | '/dashboard/folders/'
@@ -325,7 +345,9 @@ export interface FileRouteTypes {
     | '/api/auth/logout'
     | '/api/auth/register'
     | '/api/products/add_product'
+    | '/api/products/categories'
     | '/api/products/get_user_products'
+    | '/api/products/tags'
     | '/register'
     | '/signin'
     | '/dashboard/folders'
@@ -355,7 +377,9 @@ export interface FileRouteTypes {
     | '/api/auth/logout'
     | '/api/auth/register'
     | '/api/products/add_product'
+    | '/api/products/categories'
     | '/api/products/get_user_products'
+    | '/api/products/tags'
     | '/(auth)/register/'
     | '/(auth)/signin/'
     | '/dashboard/folders/'
@@ -386,7 +410,9 @@ export interface RootRouteChildren {
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
   ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
   ApiProductsAdd_productRoute: typeof ApiProductsAdd_productRoute
+  ApiProductsCategoriesRoute: typeof ApiProductsCategoriesRoute
   ApiProductsGet_user_productsRoute: typeof ApiProductsGet_user_productsRoute
+  ApiProductsTagsRoute: typeof ApiProductsTagsRoute
   authRegisterIndexRoute: typeof authRegisterIndexRoute
   authSigninIndexRoute: typeof authSigninIndexRoute
   DashboardFoldersIndexRoute: typeof DashboardFoldersIndexRoute
@@ -559,11 +585,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authRegisterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/products/tags': {
+      id: '/api/products/tags'
+      path: '/api/products/tags'
+      fullPath: '/api/products/tags'
+      preLoaderRoute: typeof ApiProductsTagsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/products/get_user_products': {
       id: '/api/products/get_user_products'
       path: '/api/products/get_user_products'
       fullPath: '/api/products/get_user_products'
       preLoaderRoute: typeof ApiProductsGet_user_productsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/products/categories': {
+      id: '/api/products/categories'
+      path: '/api/products/categories'
+      fullPath: '/api/products/categories'
+      preLoaderRoute: typeof ApiProductsCategoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/products/add_product': {
@@ -618,7 +658,9 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,
   ApiAuthRegisterRoute: ApiAuthRegisterRoute,
   ApiProductsAdd_productRoute: ApiProductsAdd_productRoute,
+  ApiProductsCategoriesRoute: ApiProductsCategoriesRoute,
   ApiProductsGet_user_productsRoute: ApiProductsGet_user_productsRoute,
+  ApiProductsTagsRoute: ApiProductsTagsRoute,
   authRegisterIndexRoute: authRegisterIndexRoute,
   authSigninIndexRoute: authSigninIndexRoute,
   DashboardFoldersIndexRoute: DashboardFoldersIndexRoute,
