@@ -1,13 +1,6 @@
 import { create } from 'zustand/react'
 import { persist } from 'zustand/middleware'
 
-interface User {
-  id: string
-  first_name: string
-  last_name: string
-  email: string
-}
-
 interface UserStore {
   user: User | null
   setUser: (user: User) => void

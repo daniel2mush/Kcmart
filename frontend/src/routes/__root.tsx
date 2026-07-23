@@ -7,7 +7,6 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
-import RouteLoader from '../components/RouteLoader'
 
 import appCss from '../styles.css?url'
 
@@ -59,6 +58,18 @@ export const Route = createRootRouteWithContext()({
   }),
   notFoundComponent: () => <NotFound />,
   shellComponent: RootDocument,
+  errorComponent: ({ error }) => {
+    return (
+      <div
+        className={
+          'w-full h-screen flex justify-center items-center text-center'
+        }
+      >
+        <h2>Something went wrong</h2> <br />
+        <p>{error.message}</p>
+      </div>
+    )
+  },
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -71,7 +82,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <NavBar />
         {children}
         <Footer />
-        <RouteLoader />
         <Toaster richColors={true} />
         <TanStackDevtools
           config={{

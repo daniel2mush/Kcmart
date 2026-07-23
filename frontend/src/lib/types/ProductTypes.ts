@@ -6,7 +6,7 @@ export interface ProductResponseTypes {
   name: string
   slug: string
   description: string
-  price: number
+  price_cents: number
   status: string
   is_featured: boolean
   included: string[]
@@ -69,3 +69,19 @@ export const ProductSchema = z.object({
 })
 
 export type ProductFormTypes = z.infer<typeof ProductSchema>
+//
+// export interface ProductResponseTypes {
+//   id: string // required, e.g., "18b77502-b151-490f-9e06-b89fa430ddd9"
+//   owner_id: string // required, e.g., "66d35dff-3750-49f9-8fc1-f947f45d0940"
+//   name: string
+//   slug: string
+//   description: string
+//   price_cents: number // e.g., 9540 → $95.40
+//   status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED' // adjust as needed
+//   is_featured: boolean
+//   included: string[]
+//   tags: string[]
+//   categories: string[] // e.g., "MOCKUPS", "PLUGINS", etc.
+//   images: string[] // URLs
+//   assets: string[] // URLs or file paths
+// }

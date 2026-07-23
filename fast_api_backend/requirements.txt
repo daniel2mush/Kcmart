@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+sqlalchemy
+asyncpg
+pydantic
+python-dotenv
+greenlet
+alembic
+pydantic[email]
+pyjwt
+#passlib[bcrypt]
+python-multipart
+pwdlib[bcrypt]
+pytest
+fastapi-users[sqlalchemy]
+

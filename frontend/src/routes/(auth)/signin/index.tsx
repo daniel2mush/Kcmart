@@ -1,21 +1,32 @@
 import { Button } from '#/components/ui/button'
-import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
+import {
+  createFileRoute,
+  Link,
+  redirect,
+  useRouter,
+} from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '#/components/ui/input'
 import { ArrowLeft } from 'lucide-react'
 import { useLogin } from '#/components/queries/auth/AuthQuery'
 import { toast } from 'sonner'
-import { useUserStore } from '#/lib/store.ts'
 import { LoginSchema } from '#/lib/validation/auth.ts'
 import type { LoginTypes } from '#/lib/types/authTypes.ts'
+import { getIsAuthenticated } from '#/lib/authentication/authenticate.ts'
 
 export const Route = createFileRoute('/(auth)/signin/')({
   component: RouteComponent,
+  beforeLoad: async () => {
+    const user = await getIsAuthenticated()
+    if (user) {
+      throw redirect({ to: '/dashboard' })
+    }
+  },
 })
 
 function RouteComponent() {
-  const { setUser } = useUserStore()
+  // const { setUser } = useUserStore()
 
   const { mutate, isPending } = useLogin()
   const route = useRouter()
@@ -36,26 +47,9 @@ function RouteComponent() {
     mutate(
       { ...value },
       {
-        onSuccess: async (data) => {
-          const dataValue = data as {
-            user: {
-              id: string
-              email: string
-              first_name: string
-              last_name: string
-            }
-          }
-          setUser({
-            id: dataValue.user.id,
-            first_name: dataValue.user.first_name,
-            last_name: dataValue.user.last_name,
-            email: dataValue.user.email,
-          })
+        onSuccess: async () => {
           toast.success('Login successful')
-
           await route.invalidate()
-
-          await route.navigate({ to: '/dashboard', replace: true })
         },
         onError: (data) => {
           toast.error(data.message || 'An error occurred while logging in')

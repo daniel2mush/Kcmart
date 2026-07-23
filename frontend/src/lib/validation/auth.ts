@@ -3,6 +3,10 @@ import z from 'zod'
 export const RegistrationSchema = z
   .object({
     email: z.email({ error: 'Email is required' }),
+    username: z
+      .string({ error: 'Username is required' })
+      .min(3, { error: 'Username cannot be less than 3 letters' })
+      .max(255, { error: 'Username cannot be more than 255 letters' }),
     password: z.string().min(3, { error: 'Password must not be empty' }),
     first_name: z
       .string()

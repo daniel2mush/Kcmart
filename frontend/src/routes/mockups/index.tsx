@@ -7,8 +7,8 @@ import { getIsAuthenticated } from '#/lib/authentication/authenticate.ts'
 export const Route = createFileRoute('/mockups/')({
   component: RouteComponent,
   beforeLoad: async () => {
-    const Authenticated = await getIsAuthenticated()
-    if (Authenticated) throw redirect({ to: '/dashboard' })
+    // const Authenticated = await getIsAuthenticated()
+    // if (Authenticated) throw redirect({ to: '/dashboard' })
   },
 })
 

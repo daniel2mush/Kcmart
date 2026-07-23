@@ -1,40 +1,40 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { isAxiosError } from 'axios'
-import { deleteCookie, getCookie } from '@tanstack/react-start/server'
-import { axiosClient } from '../../../components/client/axiosClient'
+import axios, { isAxiosError } from 'axios'
+import { deleteCookie, getRequestHeaders } from '@tanstack/react-start/server'
 
 export const Route = createFileRoute('/api/auth/logout')({
   server: {
     handlers: {
       POST: async () => {
         try {
-          const accessToken = getCookie('access_token')
+          const headers = getRequestHeaders()
+          const cookie = headers.get('cookie') || ''
 
-          const res = await axiosClient.post(
-            'user/logout/',
+          const res = await axios.post(
+            `${process.env.VITE_PUBLIC_API}auth/jwt/logout`,
             {},
             {
-              skipAuthRefresh: true,
-              withCredentials: true,
-              headers: accessToken
-                ? {
-                    Authorization: `Bearer ${accessToken}`,
-                  }
-                : undefined,
+              headers: {
+                Cookie: cookie,
+              },
             },
           )
 
-          deleteCookie('refresh_token')
-          deleteCookie('access_token')
+          const cookie_name = cookie.split('=')[0]
+          deleteCookie(cookie_name)
 
+          if (res.status === 204) {
+            return new Response(null, {
+              status: 204,
+            })
+          }
+
+          // 2. Handle any other successful responses (200, 201)
           return new Response(JSON.stringify(res.data), {
             status: res.status,
             headers: { 'Content-Type': 'application/json' },
           })
         } catch (error) {
-          deleteCookie('refresh_token')
-          deleteCookie('access_token')
-
           if (isAxiosError(error)) {
             console.log(error.response?.data.detail)
 

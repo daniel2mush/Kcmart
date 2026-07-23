@@ -126,6 +126,8 @@ axiosClient.interceptors.response.use(
         return axiosClient(originalRequest)
       } catch (refreshError) {
         console.error('Token rotation failed:', refreshError)
+        localStorage.clear()
+
         return Promise.reject(error)
       }
     }

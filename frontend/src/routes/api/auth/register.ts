@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { isAxiosError } from 'axios'
-import { axiosClient } from '../../../components/client/axiosClient'
+import axios, { isAxiosError } from 'axios'
 
 const jsonResponse = (body: unknown, status: number) =>
   new Response(JSON.stringify(body), {
@@ -14,18 +13,17 @@ export const Route = createFileRoute('/api/auth/register')({
       POST: async ({ request: req }) => {
         const data = await req.json()
 
-        if (!data || Object.keys(data as Record<string, unknown>).length === 0) {
-          return jsonResponse({ detail: 'No data found, please try again' }, 400)
+        if (!data) {
+          return jsonResponse(
+            { detail: 'No data found, please try again' },
+            400,
+          )
         }
 
         try {
-          const res = await axiosClient.post(
-            'user/register/',
+          const res = await axios.post(
+            `${process.env.VITE_PUBLIC_API}auth/register`,
             data,
-            {
-              skipAuth: true,
-              skipAuthRefresh: true,
-            },
           )
 
           return jsonResponse(res.data, res.status)
@@ -37,7 +35,10 @@ export const Route = createFileRoute('/api/auth/register')({
             )
           }
 
-          return jsonResponse({ detail: 'Error occurred, please try again' }, 500)
+          return jsonResponse(
+            { detail: 'Error occurred, please try again' },
+            500,
+          )
         }
       },
     },

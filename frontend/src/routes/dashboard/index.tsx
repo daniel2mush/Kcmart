@@ -5,8 +5,8 @@ import { getIsAuthenticated } from '#/lib/authentication/authenticate.ts'
 export const Route = createFileRoute('/dashboard/')({
   component: RouteComponent,
   beforeLoad: async () => {
-    const Authenticated = await getIsAuthenticated()
-    if (!Authenticated) throw redirect({ to: '/signin' })
+    const user = await getIsAuthenticated()
+    if (!user) throw redirect({ to: '/signin' })
   },
 })
 function RouteComponent() {

@@ -1,9 +1,9 @@
 import { UseRegister } from '#/components/queries/auth/AuthQuery'
 import { Button } from '#/components/ui/button'
 import { Input } from '#/components/ui/input'
-import type { RegistrationTypes } from '#/lib/types/ProductTypes'
 import { RegistrationSchema } from '#/lib/validation/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+
 import {
   createFileRoute,
   Link,
@@ -13,11 +13,10 @@ import {
 import { ArrowLeft } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { getIsAuthenticated } from '#/lib/authentication/authenticate.ts'
+import type { RegistrationTypes } from '#/lib/types/authTypes.ts'
 
 export const Route = createFileRoute('/(auth)/register/')({
   component: RouteComponent,
-
 })
 
 function RouteComponent() {
@@ -39,7 +38,6 @@ function RouteComponent() {
   const handleSubmitForm = (value: RegistrationTypes) => {
     mutate(value, {
       onSuccess: (data) => {
-
         toast.success('Registration successful, Login to continue')
         route.navigate({ to: '/signin' })
       },
@@ -85,6 +83,35 @@ function RouteComponent() {
           className=" w-full space-y-4"
         >
           <div>
+            <label htmlFor="email" className=" text-sm text-secondary">
+              Email
+            </label>
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              {...register('email')}
+            />
+            {errors.email && (
+              <p className=" text-[12px] text-red-500 mt-3">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="first-name" className=" text-sm text-secondary">
+              Username
+            </label>
+            <Input
+              placeholder="Enter your first name"
+              {...register('username')}
+            />
+            {errors.username && (
+              <p className=" text-[12px] text-red-500 mt-3">
+                {errors.username.message}
+              </p>
+            )}
+          </div>
+          <div>
             <label htmlFor="first-name" className=" text-sm text-secondary">
               First name
             </label>
@@ -109,21 +136,6 @@ function RouteComponent() {
             {errors.last_name && (
               <p className=" text-[12px] text-red-500 mt-3">
                 {errors.last_name.message}
-              </p>
-            )}
-          </div>
-          <div>
-            <label htmlFor="email" className=" text-sm text-secondary">
-              Email
-            </label>
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              {...register('email')}
-            />
-            {errors.email && (
-              <p className=" text-[12px] text-red-500 mt-3">
-                {errors.email.message}
               </p>
             )}
           </div>

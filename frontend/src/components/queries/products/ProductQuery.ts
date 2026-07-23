@@ -27,6 +27,7 @@ export const useGetUserProducts = () => {
       if (!res.ok) {
         throw new Error(data.detail)
       }
+
       return data as ProductResponseTypes[]
     },
   })

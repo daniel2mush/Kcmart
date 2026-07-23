@@ -22,9 +22,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '#/components/ui/collapsible.tsx'
-import { useUserStore } from '#/lib/store.ts'
 import { Link, useRouter } from '@tanstack/react-router'
-import { useLogout } from '../queries/auth/AuthQuery.ts'
+import { useGetUser, useLogout } from '../queries/auth/AuthQuery.ts'
 import { toast } from 'sonner'
 
 type NavsTypes = {
@@ -103,25 +102,15 @@ const UserNavs: UserNavTypes[] = [
     icon: <ReceiptText size={15} />,
   },
 ]
-const Sidebar = () => {
+
+export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const { mutateAsync, isPending } = useLogout()
   const router = useRouter()
+  const { data } = useGetUser()
 
-  // const { email, first_name, last_name } = useUserStore().user as {
-  //   email: string
-  //   first_name: string
-  //   last_name: string
-  // }
-
-  const user = useUserStore().user
-
-  if (!user || user.email === '') return
-
-  const { email, last_name, first_name } = user
-
-  const initials = `${first_name[0] || 'K'}${last_name[0] || 'C'}`
+  const user = data as User | null
 
   return (
     <div
@@ -158,8 +147,8 @@ const Sidebar = () => {
         </div>
 
         {/*
-        Sidebar Section
-        */}
+          Sidebar Section
+          */}
 
         <div className="w-full flex-1 px-3">
           {NavLisits.map((nav, i) => {
@@ -192,92 +181,92 @@ const Sidebar = () => {
         </div>
         {/*  Prodfile section*/}
 
-        <Collapsible
-          open={isOpen}
-          onOpenChange={setIsOpen}
-          className="relative w-full overflow-visible px-3 pb-5"
-        >
-          <CollapsibleTrigger className="w-full cursor-pointer rounded-xl border border-border bg-app p-2 text-left text-secondary transition-colors hover:text-primary">
-            <div className="flex w-full items-center gap-3">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold uppercase text-app">
-                {initials}
+        {user ? (
+          <Collapsible
+            open={isOpen}
+            onOpenChange={setIsOpen}
+            className="relative w-full overflow-visible px-3 pb-5"
+          >
+            <CollapsibleTrigger className="w-full cursor-pointer rounded-xl border border-border bg-app p-2 text-left text-secondary transition-colors hover:text-primary">
+              <div className="flex w-full items-center gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold uppercase text-app">
+                  {user.first_name[0]} {user.last_name[0]}
+                </div>
+                <div
+                  className={`${isCollapsed ? 'w-0' : 'max-w-44'} overflow-hidden transition-all duration-500 ease-in-out`}
+                >
+                  <p
+                    className={`truncate text-xs font-semibold ${
+                      isCollapsed
+                        ? 'opacity-0 -translate-x-2'
+                        : 'translate-x-0 opacity-100'
+                    } transition-all duration-500 ease-in-out`}
+                  >
+                    {user.first_name} {user.last_name}
+                  </p>
+                  <p
+                    className={`truncate text-[11px] text-muted ${
+                      isCollapsed
+                        ? 'opacity-0 -translate-x-2'
+                        : 'translate-x-0 opacity-100'
+                    } transition-all duration-500 ease-in-out`}
+                  >
+                    {user.email}
+                  </p>
+                </div>
               </div>
-              <div
-                className={`${isCollapsed ? 'w-0' : 'max-w-44'} overflow-hidden transition-all duration-500 ease-in-out`}
-              >
-                <p
-                  className={`truncate text-xs font-semibold ${
-                    isCollapsed
-                      ? 'opacity-0 -translate-x-2'
-                      : 'translate-x-0 opacity-100'
-                  } transition-all duration-500 ease-in-out`}
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <div className="absolute bottom-24 left-3 right-3 flex flex-col gap-1 rounded-xl border border-border bg-app p-2 shadow-[0_18px_60px_rgba(0,0,0,0.28)]">
+                {UserNavs.map((navs, i) => (
+                  <Link
+                    to={navs.link}
+                    key={i}
+                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-secondary transition-colors hover:bg-surface hover:text-primary"
+                    title={isCollapsed ? navs.navName : undefined}
+                  >
+                    <span className="shrink-0">{navs.icon}</span>
+                    <p
+                      className={`overflow-hidden whitespace-nowrap transition-all duration-500 ${
+                        isCollapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'
+                      }`}
+                    >
+                      {navs.navName}
+                    </p>
+                  </Link>
+                ))}
+                <button
+                  onClick={() => {
+                    mutateAsync()
+                      .then(() => {
+                        toast.success('Logged out successfully')
+                        router.invalidate()
+                        router.navigate({ to: '/' })
+                      })
+                      .catch((data) => {
+                        console.log(data.message, 'Error data')
+                        toast.error(data.message)
+                      })
+                  }}
+                  type="button"
+                  disabled={isPending}
+                  className="flex items-center gap-3 rounded-lg cursor-pointer bg-red-600 px-3 py-2 text-sm text-primary transition-colors hover:bg-red-500"
+                  title={isCollapsed ? 'Logout' : undefined}
                 >
-                  {first_name} {last_name}
-                </p>
-                <p
-                  className={`truncate text-[11px] text-muted ${
-                    isCollapsed
-                      ? 'opacity-0 -translate-x-2'
-                      : 'translate-x-0 opacity-100'
-                  } transition-all duration-500 ease-in-out`}
-                >
-                  {email}
-                </p>
-              </div>
-            </div>
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <div className="absolute bottom-24 left-3 right-3 flex flex-col gap-1 rounded-xl border border-border bg-app p-2 shadow-[0_18px_60px_rgba(0,0,0,0.28)]">
-              {UserNavs.map((navs, i) => (
-                <Link
-                  to={navs.link}
-                  key={i}
-                  className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-secondary transition-colors hover:bg-surface hover:text-primary"
-                  title={isCollapsed ? navs.navName : undefined}
-                >
-                  <span className="shrink-0">{navs.icon}</span>
+                  <LogOut size={15} className="shrink-0" />
                   <p
                     className={`overflow-hidden whitespace-nowrap transition-all duration-500 ${
                       isCollapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'
                     }`}
                   >
-                    {navs.navName}
+                    Logout
                   </p>
-                </Link>
-              ))}
-              <button
-                onClick={() => {
-                  mutateAsync()
-                    .then(() => {
-                      toast.success('Logged out successfully')
-                      router.navigate({ to: '/' })
-                      router.invalidate()
-                    })
-                    .catch((data) => {
-                      console.log(data.message, 'Error data')
-                      toast.error(data.message)
-                    })
-                }}
-                type="button"
-                disabled={isPending}
-                className="flex items-center gap-3 rounded-lg cursor-pointer bg-red-600 px-3 py-2 text-sm text-primary transition-colors hover:bg-red-500"
-                title={isCollapsed ? 'Logout' : undefined}
-              >
-                <LogOut size={15} className="shrink-0" />
-                <p
-                  className={`overflow-hidden whitespace-nowrap transition-all duration-500 ${
-                    isCollapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'
-                  }`}
-                >
-                  Logout
-                </p>
-              </button>
-            </div>
-          </CollapsibleContent>
-        </Collapsible>
+                </button>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        ) : null}
       </div>
     </div>
   )
 }
-
-export default Sidebar
