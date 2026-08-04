@@ -1,28 +1,74 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import type {
   CategoryTypes,
+  GetProductsParams,
   ProductResponseTypes,
   ProductTypes,
 } from '#/lib/types/ProductTypes.ts'
 import { toast } from 'sonner'
 
-export const useGetAllProducts = () => {
+export const useGetAllProducts = ({
+  page = 1,
+  limit = 10,
+}: GetProductsParams = {}) => {
   return useQuery({
-    queryKey: ['products', 'all'],
-    queryFn: async () => {},
+    // 1. Include params in queryKey so React Query refetches when page/limit changes
+    queryKey: ['products', 'user', { page, limit }],
+
+    // 2. Query function receives parameters
+    queryFn: async () => {
+      // Build search params dynamically
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: limit.toString(),
+      })
+
+      const res = await fetch(
+        `/api/products/get_all_published_products?${params.toString()}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data.detail)
+      }
+
+      return data as ProductResponseTypes[]
+    },
   })
 }
 
-export const useGetUserProducts = () => {
+export const useGetUserProducts = ({
+  page = 1,
+  limit = 10,
+}: GetProductsParams = {}) => {
   return useQuery({
-    queryKey: ['products', 'user'],
+    // 1. Include params in queryKey so React Query refetches when page/limit changes
+    queryKey: ['products', 'user', { page, limit }],
+
+    // 2. Query function receives parameters
     queryFn: async () => {
-      const res = await fetch('/api/products/get_user_products', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      // Build search params dynamically
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: limit.toString(),
       })
+
+      const res = await fetch(
+        `/api/products/get_user_products?${params.toString()}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+
       const data = await res.json()
       if (!res.ok) {
         throw new Error(data.detail)

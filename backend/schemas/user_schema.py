@@ -3,7 +3,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, EmailStr, ConfigDict
 
-from schemas.product_schema import ProductResponse
+from schemas.product import ProductResponse
 from fastapi_users import schemas
 
 

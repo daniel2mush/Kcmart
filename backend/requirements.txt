@@ -13,4 +13,8 @@ python-multipart
 pwdlib[bcrypt]
 pytest
 fastapi-users[sqlalchemy]
+python-slugify
+aiosql
+redis
+strawberry-graphql
 

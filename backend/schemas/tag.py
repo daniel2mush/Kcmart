@@ -11,3 +11,7 @@ class TagResponse(BaseModel):
     id: uuid.UUID
     name: str
     model_config = ConfigDict(from_attributes=True)
+
+
+class TagUpdate(TagCreate):
+    pass

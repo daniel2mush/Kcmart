@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import type { RegistrationTypes } from '#/lib/types/authTypes.ts'
-import { getIsAuthenticated } from '#/lib/authentication/authenticate.ts'
+import { getIsAuthenticated } from '#/lib/helpers/authentication/authenticate.ts'
 
 type LoginPayload = {
   email: string

@@ -4,12 +4,12 @@ import { Link } from '@tanstack/react-router'
 import { ArrowRight, FolderOpen, Tag } from 'lucide-react'
 import { useGSAP } from '@gsap/react'
 
-import type { ProductTypes } from '#/lib/types/ProductTypes.ts'
+import type { ProductResponseTypes } from '#/lib/types/ProductTypes.ts'
 
 interface CardProps {
   title?: string
   viewMoreLink?: string
-  iterable: ProductTypes[]
+  iterable: ProductResponseTypes[]
   sliceValue?: number
 }
 
@@ -120,7 +120,7 @@ export const Card = ({
           const category = drop.categories[0]
           const tags = drop.tags.slice(0, 3)
 
-          const link = `/${category.toLowerCase()}/${drop.id}`
+          const link = `/${category.toLowerCase()}/${drop.slug}`
 
           return (
             <article
@@ -219,7 +219,7 @@ export const Card = ({
                     </h3>
 
                     <span className="whitespace-nowrap text-lg font-bold text-primary">
-                      ${drop.price}
+                      ${drop.price_cent}
                     </span>
                   </div>
 

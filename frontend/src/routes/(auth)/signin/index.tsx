@@ -13,7 +13,7 @@ import { useLogin } from '#/components/queries/auth/AuthQuery'
 import { toast } from 'sonner'
 import { LoginSchema } from '#/lib/validation/auth.ts'
 import type { LoginTypes } from '#/lib/types/authTypes.ts'
-import { getIsAuthenticated } from '#/lib/authentication/authenticate.ts'
+import { getIsAuthenticated } from '#/lib/helpers/authentication/authenticate.ts'
 
 export const Route = createFileRoute('/(auth)/signin/')({
   component: RouteComponent,

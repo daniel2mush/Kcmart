@@ -1,0 +1,32 @@
+from typing import List
+
+import strawberry
+from sqlalchemy.sql.functions import current_user
+
+from gql.types import Product
+from repository.product_repo import get_products, get_user_products
+
+
+@strawberry.type
+class ProductQuery:
+    @strawberry.field(name="products")
+    async def products(
+        self, info: strawberry.Info, page: int = 1, limit: int = 10
+    ) -> List[Product]:
+        db = info.context.db
+        products = await get_products(db=db, page=page, limit=limit)
+        return [Product(**product) for product in products]
+
+    @strawberry.field(name="user_products")
+    async def user_product(
+        self, info: strawberry.Info, page: int = 1, limit: int = 10
+    ) -> List[Product]:
+
+        db = info.context.db
+        user = info.context.current_user
+
+        products = await get_user_products(
+            db=db, user_id=user.id, limit=limit, page=page
+        )
+
+        return [Product(**p) for p in products]

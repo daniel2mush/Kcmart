@@ -7,14 +7,23 @@ from fastapi_users import FastAPIUsers
 from authentication.auth import auth_backend
 from authentication.manager import get_user_manager
 from exceptions.base import AppException
+from gql.dependency import graphql_context
 from models import User
-from routes import user
 from fastapi.responses import JSONResponse
 from fastapi.requests import Request
 
+from repository.user_repo import fastapi_users
+from routes import tag, category, product
+
 from schemas.user_schema import UserRead, UserCreate, UserUpdate
+from strawberry.fastapi import GraphQLRouter
+from gql.schema import schema
 
 app = FastAPI()
+
+graphql_app = GraphQLRouter(schema, context_getter=graphql_context)
+
+app.include_router(graphql_app, prefix="/graphql")
 
 
 @app.exception_handler(AppException)
@@ -33,13 +42,15 @@ app.add_middleware(
     allow_credentials=True,
 )
 
-app.include_router(user.router)
+# app.include_router(tag.router)
+# app.include_router(category.router)
+# app.include_router(product.router)
 # Exceptions
 
-fastapi_users = FastAPIUsers[User, uuid.UUID](
-    get_user_manager,
-    [auth_backend],
-)
+# fastapi_users = FastAPIUsers[User, uuid.UUID](
+#     get_user_manager,
+#     [auth_backend],
+# )
 
 # Routes
 # 1. Login / Logout routes

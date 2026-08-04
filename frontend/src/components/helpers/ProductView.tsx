@@ -1,11 +1,15 @@
-import type { ProductTypes } from '#/lib/types/ProductTypes'
+import type { ProductResponseTypes } from '#/lib/types/ProductTypes'
 import { Link } from '@tanstack/react-router'
 import { ArrowLeft, ShoppingBag } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Graphics, Magazines, Mockups, Templates } from '#/lib/staticResources'
 import { Card } from './Card'
 
-const ProductView = ({ validProduct }: { validProduct: ProductTypes }) => {
+const ProductView = ({
+  validProduct,
+}: {
+  validProduct: ProductResponseTypes
+}) => {
   function GetProductCategory(params: string) {
     switch (params) {
       case 'Templates':
@@ -36,7 +40,6 @@ const ProductView = ({ validProduct }: { validProduct: ProductTypes }) => {
 
   const productCategory = GetProductCategory(derivedType)
   const link = `/${derivedType.toLowerCase()}`
-
   return (
     <div className=" max-w-500 min-h-screen flex justify-center items-center mx-auto">
       {/* This is where the grid starts */}
@@ -109,7 +112,10 @@ const ProductView = ({ validProduct }: { validProduct: ProductTypes }) => {
           <h2 className=" text-secondary font-bold text-2xl mt-20 mb-10">
             You might also like some {derivedType}
           </h2>
-          <Card iterable={productCategory as ProductTypes[]} sliceValue={6} />
+          <Card
+            iterable={productCategory as ProductResponseTypes[]}
+            sliceValue={6}
+          />
         </div>
       </div>
     </div>

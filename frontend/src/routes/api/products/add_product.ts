@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import axiosClient from '#/components/client/axiosClient.ts'
 import { isAxiosError } from 'axios'
-import { getCookie } from '@tanstack/react-start/server'
 
 const jsonResponse = (body: unknown, status: number) =>
   new Response(JSON.stringify(body), {
@@ -16,12 +15,6 @@ export const Route = createFileRoute('/api/products/add_product')({
     handlers: {
       POST: async ({ request }) => {
         try {
-          const access_token = getCookie('access_token')
-
-          if (!access_token) {
-            return jsonResponse({ detail: 'Unauthorized' }, 401)
-          }
-
           const data = await request.json()
 
           if (!data) {
@@ -31,7 +24,6 @@ export const Route = createFileRoute('/api/products/add_product')({
           const res = await axiosClient.post('/product/create/', data, {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${access_token}`,
             },
           })
 

@@ -2,7 +2,7 @@ import { Card } from '#/components/helpers/Card'
 import HeaderHelper from '#/components/helpers/HeaderHelper'
 import { Graphics } from '#/lib/staticResources'
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import { getIsAuthenticated } from '#/lib/authentication/authenticate.ts'
+import { getIsAuthenticated } from '#/lib/helpers/authentication/authenticate.ts'
 
 export const Route = createFileRoute('/graphics/')({
   component: RouteComponent,

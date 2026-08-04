@@ -39,5 +39,14 @@ class Product(Base):
     description: Mapped[str] = mapped_column(Text())
     price_cent: Mapped[int] = mapped_column(Integer())
     included: Mapped[list[str]] = mapped_column(ARRAY(String), default=list)
-    status: Mapped[StatusEnum] = mapped_column(default=StatusEnum.DRAFT)
-    is_featured: Mapped[bool] = mapped_column(Boolean(), default=False)
+    status: Mapped[StatusEnum] = mapped_column(server_default=text("'DRAFT'"))
+    is_featured: Mapped[bool] = mapped_column(Boolean(), server_default=text("false"))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(), default=func.now(), server_default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(),
+        default=func.now(),
+        server_default=func.now(),
+        server_onupdate=func.now(),
+    )

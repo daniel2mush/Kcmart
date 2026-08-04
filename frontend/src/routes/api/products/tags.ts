@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import AxiosClient from '#/components/client/axiosClient.ts'
-import { jsonResponse } from '#/lib/productResponse.ts'
+import { jsonResponse } from '#/lib/json_response_helper.ts'
 import { AxiosError, isAxiosError } from 'axios'
 
 export const Route = createFileRoute('/api/products/tags')({
@@ -8,7 +8,7 @@ export const Route = createFileRoute('/api/products/tags')({
     handlers: {
       GET: async () => {
         try {
-          const res = await AxiosClient.get('/product/tags', {
+          const res = await AxiosClient.get(`tag/all`, {
             withCredentials: true,
           })
 

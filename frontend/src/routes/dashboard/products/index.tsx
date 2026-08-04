@@ -28,7 +28,7 @@ import {
 import { Textarea } from '#/components/ui/textarea.tsx'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Checkbox } from '#/components/ui/checkbox.tsx' // adjust import path as needed
+import { Checkbox } from '#/components/ui/checkbox.tsx'
 import type {
   ProductFormTypes,
   ProductTypes,
@@ -48,9 +48,9 @@ export const Route = createFileRoute('/dashboard/products/')({
 })
 
 function RouteComponent() {
-  const { data } = useGetUserProducts()
+  const { data, isLoading } = useGetUserProducts()
   const [isOpen, setIsOpen] = useState(false)
-  const { mutate } = useAddProduct()
+  const { mutateAsync } = useAddProduct()
   const { data: categoryData } = useGetCategories()
   const { data: tagsData } = useGetTags()
 
@@ -71,9 +71,13 @@ function RouteComponent() {
       included: [],
       categories: [],
       images: [],
-      assets: [],
     },
   })
+
+  // Register hidden/custom managed fields with react-hook-form
+  register('included')
+  register('images')
+  register('asset_url')
 
   // Watch current values to control checkbox states
   const selectedTags = watch('tags')
@@ -82,17 +86,30 @@ function RouteComponent() {
   /**
    * Upload files to Supabase bucket
    */
-  async function handleUploads(files: File[], folder: 'images' | 'assets') {
+  async function handleUploads(
+    files: File[] | File | null | undefined,
+    folder: 'images' | 'assets',
+  ): Promise<string[]> {
+    // 1. Normalize input to a single array type
+    const fileArray = Array.isArray(files) ? files : files ? [files] : []
+
+    // 2. Return early if empty
+    if (fileArray.length === 0) return []
+
+    // 3. Process all files safely
     return await Promise.all(
-      files.map(async (file) => {
+      fileArray.map(async (file) => {
         const filePath = `${folder}/${crypto.randomUUID()}-${file.name}`
         const { error } = await supabase.storage
           .from('KCMart')
           .upload(filePath, file)
+
         if (error) throw error
+
         const {
           data: { publicUrl },
         } = supabase.storage.from('KCMart').getPublicUrl(filePath)
+
         return publicUrl
       }),
     )
@@ -102,10 +119,9 @@ function RouteComponent() {
    * Toggle a tag ID in the selected tags array
    */
   const toggleTag = (tagId: string) => {
-    const current = selectedTags || []
-    const updated = current.includes(tagId)
-      ? current.filter((id) => id !== tagId)
-      : [...current, tagId]
+    const updated = selectedTags.includes(tagId)
+      ? selectedTags.filter((id) => id !== tagId)
+      : [...selectedTags, tagId]
     setValue('tags', updated, { shouldValidate: true })
   }
 
@@ -113,10 +129,9 @@ function RouteComponent() {
    * Toggle a category ID in the selected categories array
    */
   const toggleCategory = (categoryId: string) => {
-    const current = selectedCategories || []
-    const updated = current.includes(categoryId)
-      ? current.filter((id) => id !== categoryId)
-      : [...current, categoryId]
+    const updated = selectedCategories.includes(categoryId)
+      ? selectedCategories.filter((id) => id !== categoryId)
+      : [...selectedCategories, categoryId]
     setValue('categories', updated, { shouldValidate: true })
   }
 
@@ -124,7 +139,7 @@ function RouteComponent() {
     try {
       // Upload images and assets
       const imageUrls = await handleUploads(validData.images, 'images')
-      const assetUrls = await handleUploads(validData.assets, 'assets')
+      const assetUrls = await handleUploads(validData.asset_url, 'assets')
 
       // Convert price from dollar string to cents integer
       const priceCents = Math.round(parseFloat(validData.price_cents) * 100)
@@ -132,30 +147,29 @@ function RouteComponent() {
       const product: ProductTypes = {
         name: validData.name,
         description: validData.description,
-        price_cents: priceCents,
-        tags: validData.tags, // already UUID strings
-        categories: validData.categories,
+        price_cent: priceCents,
+        tag_ids: validData.tags,
+        categories_ids: validData.categories,
         included: validData.included,
         images: imageUrls,
-        asset_urls: assetUrls,
+        asset_url: assetUrls[0],
       }
 
-      mutate(product)
+      await mutateAsync(product)
       setIsOpen(false)
       reset()
     } catch (error) {
-      console.error(error)
+      console.error('Error adding product:', error)
     }
   }
 
-  console.log(data, 'product data')
+  const hasNoProducts = !isLoading && (!data || data.length === 0)
 
   return (
     <div>
       <DashboardHeader />
-
       <div className={'p-10'}>
-        {data && data.length <= 0 ? (
+        {hasNoProducts ? (
           <div>
             <Empty>
               <EmptyHeader>
@@ -185,18 +199,18 @@ function RouteComponent() {
         )}
 
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild className={'fixed bottom-20 right-10 w-full'}>
+          <DialogTrigger asChild className={'fixed bottom-20 right-10'}>
             <Button
               variant={'ghost'}
               className={
                 'bg-secondary text-bg border border-border rounded-full h-20 w-20 cursor-pointer hover:bg-secondary/80'
               }
             >
-              <Plus size={40} className={'text-black font-bold size-1/2 '} />
+              <Plus size={40} className={'text-black font-bold size-1/2'} />
             </Button>
           </DialogTrigger>
 
-          <DialogContent className={'max-h-[90vh] overflow-y-auto '}>
+          <DialogContent className={'max-h-[90vh] overflow-y-auto'}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <DialogHeader>
                 <DialogTitle>Add new product</DialogTitle>
@@ -249,17 +263,17 @@ function RouteComponent() {
                   )}
                 </Field>
 
-                {/* CATEGORIES - Multi-select with checkboxes */}
+                {/* CATEGORIES */}
                 <Field>
                   <Label>Categories</Label>
                   <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto border rounded p-2">
                     {categoryData?.map((cat) => (
                       <label
                         key={cat.id}
-                        className="flex items-center space-x-2 text-sm"
+                        className="flex items-center space-x-2 text-sm cursor-pointer"
                       >
                         <Checkbox
-                          checked={selectedCategories?.includes(cat.id)}
+                          checked={selectedCategories.includes(cat.id)}
                           onCheckedChange={() => toggleCategory(cat.id)}
                         />
                         <span>{cat.name}</span>
@@ -273,17 +287,17 @@ function RouteComponent() {
                   )}
                 </Field>
 
-                {/* TAGS - Multi-select with checkboxes */}
+                {/* TAGS */}
                 <Field>
                   <Label>Tags</Label>
                   <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto border rounded p-2">
                     {tagsData?.map((tag) => (
                       <label
                         key={tag.id}
-                        className="flex items-center space-x-2 text-sm"
+                        className="flex items-center space-x-2 text-sm cursor-pointer"
                       >
                         <Checkbox
-                          checked={selectedTags?.includes(tag.id)}
+                          checked={selectedTags.includes(tag.id)}
                           onCheckedChange={() => toggleTag(tag.id)}
                         />
                         <span>{tag.name}</span>
@@ -310,7 +324,7 @@ function RouteComponent() {
                         .split('\n')
                         .map((item) => item.trim())
                         .filter(Boolean)
-                      setValue('included', includes)
+                      setValue('included', includes, { shouldValidate: true })
                     }}
                   />
                   {errors.included && (
@@ -330,7 +344,7 @@ function RouteComponent() {
                     accept={'image/*'}
                     onChange={(e) => {
                       const files = Array.from(e.target.files ?? [])
-                      setValue('images', files)
+                      setValue('images', files, { shouldValidate: true })
                     }}
                   />
                   {errors.images && (
@@ -342,19 +356,25 @@ function RouteComponent() {
 
                 {/* ASSETS */}
                 <Field>
-                  <Label htmlFor={'assets'}>Product Assets</Label>
+                  <Label htmlFor={'asset_url'}>Product Asset</Label>
                   <Input
-                    id={'assets'}
+                    id={'asset_url'}
                     type={'file'}
-                    multiple
                     onChange={(e) => {
-                      const files = Array.from(e.target.files ?? [])
-                      setValue('assets', files)
+                      const file = e.target.files?.[0]
+                      if (file) {
+                        setValue('asset_url', file, { shouldValidate: true })
+                      } else {
+                        // Reset or clear field state if user cancelled
+                        setValue('asset_url', undefined as unknown as File, {
+                          shouldValidate: true,
+                        })
+                      }
                     }}
                   />
-                  {errors.assets && (
+                  {errors.asset_url && (
                     <p className={'text-sm text-red-500 mt-1'}>
-                      {errors.assets.message as string}
+                      {errors.asset_url.message as string}
                     </p>
                   )}
                 </Field>

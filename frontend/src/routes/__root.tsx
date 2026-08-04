@@ -1,5 +1,6 @@
 import {
   HeadContent,
+  Outlet, // 👈 Import Outlet
   Scripts,
   createRootRouteWithContext,
 } from '@tanstack/react-router'
@@ -21,7 +22,6 @@ export const Route = createRootRouteWithContext()({
       {
         charSet: 'utf-8',
       },
-
       {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, viewport-fit=cover',
@@ -33,13 +33,11 @@ export const Route = createRootRouteWithContext()({
         name: 'theme-color',
         content: '#0a0a0a',
       },
-      /* 2. Force Dark Mode Theme Color (Fixes some Chrome/Arc bugs) */
       {
         name: 'theme-color',
         media: '(prefers-color-scheme: dark)',
         content: '#0a0a0a',
       },
-      /* 3. Apple/iOS Specific Tags */
       {
         name: 'apple-mobile-web-app-capable',
         content: 'yes',
@@ -56,6 +54,10 @@ export const Route = createRootRouteWithContext()({
       },
     ],
   }),
+  // 1. Render active child routes inside root
+  component: () => <Outlet />,
+
+  // 2. Fallback when thrown at the root route level
   notFoundComponent: () => <NotFound />,
   shellComponent: RootDocument,
   errorComponent: ({ error }) => {
@@ -74,7 +76,7 @@ export const Route = createRootRouteWithContext()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
