@@ -22,10 +22,10 @@ import { Route as GraphicsIndexRouteImport } from './routes/graphics/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as ContactIndexRouteImport } from './routes/contact/index'
 import { Route as AboutIndexRouteImport } from './routes/about/index'
-import { Route as TemplatesItemIdRouteImport } from './routes/templates/$itemId'
-import { Route as MockupsItemIdRouteImport } from './routes/mockups/$itemId'
-import { Route as MagazinesItemIdRouteImport } from './routes/magazines/$itemId'
-import { Route as GraphicsItemIdRouteImport } from './routes/graphics/$itemId'
+import { Route as TemplatesSlugRouteImport } from './routes/templates/$slug'
+import { Route as MockupsSlugRouteImport } from './routes/mockups/$slug'
+import { Route as MagazinesSlugRouteImport } from './routes/magazines/$slug'
+import { Route as GraphicsSlugRouteImport } from './routes/graphics/$slug'
 import { Route as DashboardSettingsIndexRouteImport } from './routes/dashboard/settings/index'
 import { Route as DashboardPurchase_historyIndexRouteImport } from './routes/dashboard/purchase_history/index'
 import { Route as DashboardProfileIndexRouteImport } from './routes/dashboard/profile/index'
@@ -33,11 +33,6 @@ import { Route as DashboardProductsIndexRouteImport } from './routes/dashboard/p
 import { Route as DashboardFoldersIndexRouteImport } from './routes/dashboard/folders/index'
 import { Route as authSigninIndexRouteImport } from './routes/(auth)/signin/index'
 import { Route as authRegisterIndexRouteImport } from './routes/(auth)/register/index'
-import { Route as ApiProductsTagsRouteImport } from './routes/api/products/tags'
-import { Route as ApiProductsGet_user_productsRouteImport } from './routes/api/products/get_user_products'
-import { Route as ApiProductsGet_all_published_productsRouteImport } from './routes/api/products/get_all_published_products'
-import { Route as ApiProductsCategoriesRouteImport } from './routes/api/products/categories'
-import { Route as ApiProductsAdd_productRouteImport } from './routes/api/products/add_product'
 import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
 import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
 import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
@@ -107,24 +102,24 @@ const AboutIndexRoute = AboutIndexRouteImport.update({
   path: '/about/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TemplatesItemIdRoute = TemplatesItemIdRouteImport.update({
-  id: '/templates/$itemId',
-  path: '/templates/$itemId',
+const TemplatesSlugRoute = TemplatesSlugRouteImport.update({
+  id: '/templates/$slug',
+  path: '/templates/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MockupsItemIdRoute = MockupsItemIdRouteImport.update({
-  id: '/mockups/$itemId',
-  path: '/mockups/$itemId',
+const MockupsSlugRoute = MockupsSlugRouteImport.update({
+  id: '/mockups/$slug',
+  path: '/mockups/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MagazinesItemIdRoute = MagazinesItemIdRouteImport.update({
-  id: '/magazines/$itemId',
-  path: '/magazines/$itemId',
+const MagazinesSlugRoute = MagazinesSlugRouteImport.update({
+  id: '/magazines/$slug',
+  path: '/magazines/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GraphicsItemIdRoute = GraphicsItemIdRouteImport.update({
-  id: '/graphics/$itemId',
-  path: '/graphics/$itemId',
+const GraphicsSlugRoute = GraphicsSlugRouteImport.update({
+  id: '/graphics/$slug',
+  path: '/graphics/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardSettingsIndexRoute = DashboardSettingsIndexRouteImport.update({
@@ -163,33 +158,6 @@ const authRegisterIndexRoute = authRegisterIndexRouteImport.update({
   path: '/register/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiProductsTagsRoute = ApiProductsTagsRouteImport.update({
-  id: '/api/products/tags',
-  path: '/api/products/tags',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiProductsGet_user_productsRoute =
-  ApiProductsGet_user_productsRouteImport.update({
-    id: '/api/products/get_user_products',
-    path: '/api/products/get_user_products',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiProductsGet_all_published_productsRoute =
-  ApiProductsGet_all_published_productsRouteImport.update({
-    id: '/api/products/get_all_published_products',
-    path: '/api/products/get_all_published_products',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiProductsCategoriesRoute = ApiProductsCategoriesRouteImport.update({
-  id: '/api/products/categories',
-  path: '/api/products/categories',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiProductsAdd_productRoute = ApiProductsAdd_productRouteImport.update({
-  id: '/api/products/add_product',
-  path: '/api/products/add_product',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
   id: '/api/auth/register',
   path: '/api/auth/register',
@@ -209,10 +177,10 @@ const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
-  '/graphics/$itemId': typeof GraphicsItemIdRoute
-  '/magazines/$itemId': typeof MagazinesItemIdRoute
-  '/mockups/$itemId': typeof MockupsItemIdRoute
-  '/templates/$itemId': typeof TemplatesItemIdRoute
+  '/graphics/$slug': typeof GraphicsSlugRoute
+  '/magazines/$slug': typeof MagazinesSlugRoute
+  '/mockups/$slug': typeof MockupsSlugRoute
+  '/templates/$slug': typeof TemplatesSlugRoute
   '/about/': typeof AboutIndexRoute
   '/contact/': typeof ContactIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -227,11 +195,6 @@ export interface FileRoutesByFullPath {
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/products/add_product': typeof ApiProductsAdd_productRoute
-  '/api/products/categories': typeof ApiProductsCategoriesRoute
-  '/api/products/get_all_published_products': typeof ApiProductsGet_all_published_productsRoute
-  '/api/products/get_user_products': typeof ApiProductsGet_user_productsRoute
-  '/api/products/tags': typeof ApiProductsTagsRoute
   '/register/': typeof authRegisterIndexRoute
   '/signin/': typeof authSigninIndexRoute
   '/dashboard/folders/': typeof DashboardFoldersIndexRoute
@@ -242,10 +205,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/graphics/$itemId': typeof GraphicsItemIdRoute
-  '/magazines/$itemId': typeof MagazinesItemIdRoute
-  '/mockups/$itemId': typeof MockupsItemIdRoute
-  '/templates/$itemId': typeof TemplatesItemIdRoute
+  '/graphics/$slug': typeof GraphicsSlugRoute
+  '/magazines/$slug': typeof MagazinesSlugRoute
+  '/mockups/$slug': typeof MockupsSlugRoute
+  '/templates/$slug': typeof TemplatesSlugRoute
   '/about': typeof AboutIndexRoute
   '/contact': typeof ContactIndexRoute
   '/dashboard': typeof DashboardIndexRoute
@@ -260,11 +223,6 @@ export interface FileRoutesByTo {
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/products/add_product': typeof ApiProductsAdd_productRoute
-  '/api/products/categories': typeof ApiProductsCategoriesRoute
-  '/api/products/get_all_published_products': typeof ApiProductsGet_all_published_productsRoute
-  '/api/products/get_user_products': typeof ApiProductsGet_user_productsRoute
-  '/api/products/tags': typeof ApiProductsTagsRoute
   '/register': typeof authRegisterIndexRoute
   '/signin': typeof authSigninIndexRoute
   '/dashboard/folders': typeof DashboardFoldersIndexRoute
@@ -277,10 +235,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
-  '/graphics/$itemId': typeof GraphicsItemIdRoute
-  '/magazines/$itemId': typeof MagazinesItemIdRoute
-  '/mockups/$itemId': typeof MockupsItemIdRoute
-  '/templates/$itemId': typeof TemplatesItemIdRoute
+  '/graphics/$slug': typeof GraphicsSlugRoute
+  '/magazines/$slug': typeof MagazinesSlugRoute
+  '/mockups/$slug': typeof MockupsSlugRoute
+  '/templates/$slug': typeof TemplatesSlugRoute
   '/about/': typeof AboutIndexRoute
   '/contact/': typeof ContactIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -295,11 +253,6 @@ export interface FileRoutesById {
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/products/add_product': typeof ApiProductsAdd_productRoute
-  '/api/products/categories': typeof ApiProductsCategoriesRoute
-  '/api/products/get_all_published_products': typeof ApiProductsGet_all_published_productsRoute
-  '/api/products/get_user_products': typeof ApiProductsGet_user_productsRoute
-  '/api/products/tags': typeof ApiProductsTagsRoute
   '/(auth)/register/': typeof authRegisterIndexRoute
   '/(auth)/signin/': typeof authSigninIndexRoute
   '/dashboard/folders/': typeof DashboardFoldersIndexRoute
@@ -313,10 +266,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
-    | '/graphics/$itemId'
-    | '/magazines/$itemId'
-    | '/mockups/$itemId'
-    | '/templates/$itemId'
+    | '/graphics/$slug'
+    | '/magazines/$slug'
+    | '/mockups/$slug'
+    | '/templates/$slug'
     | '/about/'
     | '/contact/'
     | '/dashboard/'
@@ -331,11 +284,6 @@ export interface FileRouteTypes {
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
-    | '/api/products/add_product'
-    | '/api/products/categories'
-    | '/api/products/get_all_published_products'
-    | '/api/products/get_user_products'
-    | '/api/products/tags'
     | '/register/'
     | '/signin/'
     | '/dashboard/folders/'
@@ -346,10 +294,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/graphics/$itemId'
-    | '/magazines/$itemId'
-    | '/mockups/$itemId'
-    | '/templates/$itemId'
+    | '/graphics/$slug'
+    | '/magazines/$slug'
+    | '/mockups/$slug'
+    | '/templates/$slug'
     | '/about'
     | '/contact'
     | '/dashboard'
@@ -364,11 +312,6 @@ export interface FileRouteTypes {
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
-    | '/api/products/add_product'
-    | '/api/products/categories'
-    | '/api/products/get_all_published_products'
-    | '/api/products/get_user_products'
-    | '/api/products/tags'
     | '/register'
     | '/signin'
     | '/dashboard/folders'
@@ -380,10 +323,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/dashboard'
-    | '/graphics/$itemId'
-    | '/magazines/$itemId'
-    | '/mockups/$itemId'
-    | '/templates/$itemId'
+    | '/graphics/$slug'
+    | '/magazines/$slug'
+    | '/mockups/$slug'
+    | '/templates/$slug'
     | '/about/'
     | '/contact/'
     | '/dashboard/'
@@ -398,11 +341,6 @@ export interface FileRouteTypes {
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
-    | '/api/products/add_product'
-    | '/api/products/categories'
-    | '/api/products/get_all_published_products'
-    | '/api/products/get_user_products'
-    | '/api/products/tags'
     | '/(auth)/register/'
     | '/(auth)/signin/'
     | '/dashboard/folders/'
@@ -415,10 +353,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
-  GraphicsItemIdRoute: typeof GraphicsItemIdRoute
-  MagazinesItemIdRoute: typeof MagazinesItemIdRoute
-  MockupsItemIdRoute: typeof MockupsItemIdRoute
-  TemplatesItemIdRoute: typeof TemplatesItemIdRoute
+  GraphicsSlugRoute: typeof GraphicsSlugRoute
+  MagazinesSlugRoute: typeof MagazinesSlugRoute
+  MockupsSlugRoute: typeof MockupsSlugRoute
+  TemplatesSlugRoute: typeof TemplatesSlugRoute
   AboutIndexRoute: typeof AboutIndexRoute
   ContactIndexRoute: typeof ContactIndexRoute
   GraphicsIndexRoute: typeof GraphicsIndexRoute
@@ -432,11 +370,6 @@ export interface RootRouteChildren {
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
   ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
-  ApiProductsAdd_productRoute: typeof ApiProductsAdd_productRoute
-  ApiProductsCategoriesRoute: typeof ApiProductsCategoriesRoute
-  ApiProductsGet_all_published_productsRoute: typeof ApiProductsGet_all_published_productsRoute
-  ApiProductsGet_user_productsRoute: typeof ApiProductsGet_user_productsRoute
-  ApiProductsTagsRoute: typeof ApiProductsTagsRoute
   authRegisterIndexRoute: typeof authRegisterIndexRoute
   authSigninIndexRoute: typeof authSigninIndexRoute
 }
@@ -534,32 +467,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/templates/$itemId': {
-      id: '/templates/$itemId'
-      path: '/templates/$itemId'
-      fullPath: '/templates/$itemId'
-      preLoaderRoute: typeof TemplatesItemIdRouteImport
+    '/templates/$slug': {
+      id: '/templates/$slug'
+      path: '/templates/$slug'
+      fullPath: '/templates/$slug'
+      preLoaderRoute: typeof TemplatesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/mockups/$itemId': {
-      id: '/mockups/$itemId'
-      path: '/mockups/$itemId'
-      fullPath: '/mockups/$itemId'
-      preLoaderRoute: typeof MockupsItemIdRouteImport
+    '/mockups/$slug': {
+      id: '/mockups/$slug'
+      path: '/mockups/$slug'
+      fullPath: '/mockups/$slug'
+      preLoaderRoute: typeof MockupsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/magazines/$itemId': {
-      id: '/magazines/$itemId'
-      path: '/magazines/$itemId'
-      fullPath: '/magazines/$itemId'
-      preLoaderRoute: typeof MagazinesItemIdRouteImport
+    '/magazines/$slug': {
+      id: '/magazines/$slug'
+      path: '/magazines/$slug'
+      fullPath: '/magazines/$slug'
+      preLoaderRoute: typeof MagazinesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/graphics/$itemId': {
-      id: '/graphics/$itemId'
-      path: '/graphics/$itemId'
-      fullPath: '/graphics/$itemId'
-      preLoaderRoute: typeof GraphicsItemIdRouteImport
+    '/graphics/$slug': {
+      id: '/graphics/$slug'
+      path: '/graphics/$slug'
+      fullPath: '/graphics/$slug'
+      preLoaderRoute: typeof GraphicsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/settings/': {
@@ -611,41 +544,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authRegisterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/products/tags': {
-      id: '/api/products/tags'
-      path: '/api/products/tags'
-      fullPath: '/api/products/tags'
-      preLoaderRoute: typeof ApiProductsTagsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/products/get_user_products': {
-      id: '/api/products/get_user_products'
-      path: '/api/products/get_user_products'
-      fullPath: '/api/products/get_user_products'
-      preLoaderRoute: typeof ApiProductsGet_user_productsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/products/get_all_published_products': {
-      id: '/api/products/get_all_published_products'
-      path: '/api/products/get_all_published_products'
-      fullPath: '/api/products/get_all_published_products'
-      preLoaderRoute: typeof ApiProductsGet_all_published_productsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/products/categories': {
-      id: '/api/products/categories'
-      path: '/api/products/categories'
-      fullPath: '/api/products/categories'
-      preLoaderRoute: typeof ApiProductsCategoriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/products/add_product': {
-      id: '/api/products/add_product'
-      path: '/api/products/add_product'
-      fullPath: '/api/products/add_product'
-      preLoaderRoute: typeof ApiProductsAdd_productRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/auth/register': {
       id: '/api/auth/register'
       path: '/api/auth/register'
@@ -695,10 +593,10 @@ const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
-  GraphicsItemIdRoute: GraphicsItemIdRoute,
-  MagazinesItemIdRoute: MagazinesItemIdRoute,
-  MockupsItemIdRoute: MockupsItemIdRoute,
-  TemplatesItemIdRoute: TemplatesItemIdRoute,
+  GraphicsSlugRoute: GraphicsSlugRoute,
+  MagazinesSlugRoute: MagazinesSlugRoute,
+  MockupsSlugRoute: MockupsSlugRoute,
+  TemplatesSlugRoute: TemplatesSlugRoute,
   AboutIndexRoute: AboutIndexRoute,
   ContactIndexRoute: ContactIndexRoute,
   GraphicsIndexRoute: GraphicsIndexRoute,
@@ -712,12 +610,6 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,
   ApiAuthRegisterRoute: ApiAuthRegisterRoute,
-  ApiProductsAdd_productRoute: ApiProductsAdd_productRoute,
-  ApiProductsCategoriesRoute: ApiProductsCategoriesRoute,
-  ApiProductsGet_all_published_productsRoute:
-    ApiProductsGet_all_published_productsRoute,
-  ApiProductsGet_user_productsRoute: ApiProductsGet_user_productsRoute,
-  ApiProductsTagsRoute: ApiProductsTagsRoute,
   authRegisterIndexRoute: authRegisterIndexRoute,
   authSigninIndexRoute: authSigninIndexRoute,
 }

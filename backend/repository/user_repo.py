@@ -17,3 +17,4 @@ fastapi_users = FastAPIUsers[User, uuid.UUID](
 # 2. Export your dependencies from here
 current_active_user = fastapi_users.current_user(active=True)
 current_superuser = fastapi_users.current_user(active=True, superuser=True)
+optional_current_user = fastapi_users.current_user(active=True, optional=True)

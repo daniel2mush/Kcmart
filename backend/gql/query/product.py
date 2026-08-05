@@ -1,7 +1,6 @@
 from typing import List
 
 import strawberry
-from sqlalchemy.sql.functions import current_user
 
 from gql.types import Product
 from repository.product_repo import (
@@ -17,6 +16,12 @@ class ProductQuery:
     async def products(
         self, info: strawberry.Info, page: int = 1, limit: int = 10
     ) -> List[Product]:
+
+        user = info.context.current_user
+
+        if not user:
+            raise Exception("Authentication required")
+
         db = info.context.db
         products = await get_products(db=db, page=page, limit=limit)
         return [Product(**product) for product in products]
@@ -25,6 +30,11 @@ class ProductQuery:
     async def user_product(
         self, info: strawberry.Info, page: int = 1, limit: int = 10
     ) -> List[Product]:
+
+        user = info.context.current_user
+
+        if not user:
+            raise Exception("Authentication required")
 
         db = info.context.db
         user = info.context.current_user
@@ -37,6 +47,12 @@ class ProductQuery:
 
     @strawberry.field(description="Product with slugs")
     async def product_with_slug(self, info: strawberry.Info, slug: str) -> Product:
+
+        user = info.context.current_user
+
+        if not user:
+            raise Exception("Authentication required")
+
         db = info.context.db
         product = await get_product_with_slug(db, slug)
         return Product(**product)

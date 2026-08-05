@@ -124,10 +124,10 @@ const AdminCard = ({
       {/* Grid */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {displayItems.map((product, index) => {
-          const category = product.categories[0]
-          const tags = product.tags
+          const category = product.categories.map((c) => c.name)
+          const tags = product.tags.slice(0, 3)
 
-          const link = `/${category.toLowerCase()}/${product.slug}`
+          const link = `/${category[0].toLowerCase()}/${product.slug}`
 
           return (
             <article
@@ -169,7 +169,7 @@ const AdminCard = ({
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
                 <img
-                  src={product.images[0]}
+                  src={product.images[0].url}
                   alt={product.name}
                   loading="lazy"
                   className="
@@ -253,9 +253,9 @@ const AdminCard = ({
                       </DropdownMenuItem>
 
                       <DropdownMenuItem
-                        className={`cursor-pointer rounded-xl px-3 py-2.5 ${product.is_featured ? ' ' : 'text-green-600!'}`}
+                        className={`cursor-pointer rounded-xl px-3 py-2.5 ${product.isFeatured ? ' ' : 'text-green-600!'}`}
                       >
-                        {product.is_featured ? 'Unpublish' : 'Publish'}
+                        {product.isFeatured ? 'Unpublish' : 'Publish'}
                       </DropdownMenuItem>
 
                       <div className="my-1 h-px bg-border/50" />
@@ -305,7 +305,7 @@ const AdminCard = ({
                     </h3>
 
                     <span className="whitespace-nowrap text-lg font-bold text-primary">
-                      ${(product.price_cent / 100).toFixed(2)}
+                      ${(product.priceCent / 100).toFixed(2)}
                     </span>
                   </div>
 
@@ -314,7 +314,7 @@ const AdminCard = ({
                     <div className="flex flex-wrap gap-1.5">
                       {tags.map((tag) => (
                         <span
-                          key={tag}
+                          key={tag.name}
                           className="
                             inline-flex items-center gap-1
                             rounded-full
@@ -324,7 +324,7 @@ const AdminCard = ({
                           "
                         >
                           <Tag size={10} />
-                          {tag}
+                          {tag.name}
                         </span>
                       ))}
 

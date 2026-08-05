@@ -25,13 +25,16 @@ const ProductView = ({
     }
   }
 
+  const categories = validProduct.categories.map((category) => category.name)
+  const tags = validProduct.tags.map((tag) => tag.name)
+
   let derivedType = 'Templates'
-  if (validProduct.categories.includes('MOCKUPS')) {
+  if (categories.includes('MOCKUPS')) {
     derivedType = 'Mockups'
-  } else if (validProduct.categories.includes('TEMPLATE')) {
+  } else if (categories.includes('TEMPLATE')) {
     derivedType = 'Templates'
-  } else if (validProduct.categories.includes('GRAPHICS')) {
-    if (validProduct.tags.includes('magazine')) {
+  } else if (categories.includes('GRAPHICS')) {
+    if (tags.includes('magazine')) {
       derivedType = 'Magazines'
     } else {
       derivedType = 'Graphics'
@@ -50,7 +53,7 @@ const ProductView = ({
               {validProduct.images.map((image, index) => (
                 <img
                   key={index}
-                  src={image}
+                  src={image.url}
                   alt={`Product Image ${index + 1}`}
                   className="w-full h-auto mb-4 rounded"
                 />
@@ -71,13 +74,13 @@ const ProductView = ({
             <p className=" space-x-4 text-sm text-muted">
               {validProduct.categories.map((cat, i) => (
                 <span key={i} className=" bg-muted/10 px-3 py-2 rounded-lg">
-                  {cat}
+                  {cat.name}
                 </span>
               ))}
 
               {validProduct.tags.map((tag, i) => (
                 <span key={i} className=" bg-muted/10 px-3 py-2 rounded-lg">
-                  {tag}
+                  {tag.name}
                 </span>
               ))}
             </p>

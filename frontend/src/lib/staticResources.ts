@@ -3,20 +3,25 @@ import type { ProductResponseTypes } from '#/lib/types/ProductTypes'
 export const latestDrops: ProductResponseTypes[] = [
   {
     id: 'xK9v_m4B8fP2zR1vL5T3w',
-    user_id: 'user_1',
     slug: 'ipod-prod-mockup',
     name: 'Ipod Prod mockup',
-    price_cent: 100,
+    priceCent: 100,
     status: 'published',
-    is_featured: true,
+    isFeatured: true,
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['design'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'design' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1625864667518-914e1dd17377?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
-      'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8SXBhZCUyMGFwcGxlJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
-      'https://images.unsplash.com/photo-1625864667534-aa5208d45a87?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      {
+        url: 'https://images.unsplash.com/photo-1625864667518-914e1dd17377?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8SXBhZCUyMGFwcGxlJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1625864667534-aa5208d45a87?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      },
     ],
     included: [
       'PSD file with smart objects for easy customization',
@@ -28,21 +33,26 @@ export const latestDrops: ProductResponseTypes[] = [
   },
   {
     id: 'Q78nJ-Xy9_P2M4zR1vL5c',
-    user_id: 'user_1',
     slug: 'distort-collection-mockup',
     name: 'Distort Collection mockup',
-    price_cent: 150,
+    priceCent: 150,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://plus.unsplash.com/premium_photo-1670793631007-e86c6ddfd812?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fERpc3RvcnR8ZW58MHx8MHx8fDA%3D',
-      'https://plus.unsplash.com/premium_photo-1747909587500-caba423f8c51?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1752606402449-0c14a2d6af70?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fERpc3RvcnR8ZW58MHx8MHx8fDA%3D',
+      {
+        url: 'https://plus.unsplash.com/premium_photo-1670793631007-e86c6ddfd812?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fERpc3RvcnR8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        url: 'https://plus.unsplash.com/premium_photo-1747909587500-caba423f8c51?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1752606402449-0c14a2d6af70?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fERpc3RvcnR8ZW58MHx8MHx8fDA%3D',
+      },
     ],
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['marketing'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'marketing' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'PSD file with smart objects for easy customization',
       'High-resolution images for crisp and clear visuals',
@@ -53,21 +63,26 @@ export const latestDrops: ProductResponseTypes[] = [
   },
   {
     id: 'c5b8_F3mX9fP2zR1vL5T3',
-    user_id: 'user_1',
     slug: 'mackbook-pro-mockup',
     name: 'Mackbook Pro mockup',
-    price_cent: 120,
+    priceCent: 120,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1703002574442-1996d6f59bc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
-      'https://images.unsplash.com/photo-1703002574210-faaac4dde3b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
-      'https://images.unsplash.com/photo-1606560114363-e60d00c93734?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxhcHRvcCUyMGFwcGxlfGVufDB8fDB8fHww',
+      {
+        url: 'https://images.unsplash.com/photo-1703002574442-1996d6f59bc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1703002574210-faaac4dde3b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1606560114363-e60d00c93734?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxhcHRvcCUyMGFwcGxlfGVufDB8fDB8fHww',
+      },
     ],
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['business'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'business' }],
+    categories: [{ name: 'GRAPHICS' }],
     included: [
       'PSD file with smart objects for easy customization',
       'High-resolution images for crisp and clear visuals',
@@ -81,21 +96,26 @@ export const latestDrops: ProductResponseTypes[] = [
 export const Templates: ProductResponseTypes[] = [
   {
     id: 'a2C4_e6G8i0K2m4O6q8S0',
-    user_id: 'user_1',
     slug: 'text-templates',
     name: 'Text TEMPLATES',
-    price_cent: 50,
+    priceCent: 50,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://plus.unsplash.com/premium_photo-1673721701691-f4d8d2e2bedb?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fHw%3D',
-      'https://images.unsplash.com/photo-1587449156852-c191c00da9b3?q=80&w=1030&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1631230863402-1e8fdb5997f4?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D',
+      {
+        url: 'https://plus.unsplash.com/premium_photo-1673721701691-f4d8d2e2bedb?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fHw%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1587449156852-c191c00da9b3?q=80&w=1030&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1631230863402-1e8fdb5997f4?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D',
+      },
     ],
     description:
       "A versatile text TEMPLATES designed to enhance your content creation. This TEMPLATES provides a structured layout for your text, making it easier to organize and present information effectively. Whether you're creating a blog post, an article, or any written content, this TEMPLATES will help you maintain a consistent and professional appearance.",
-    tags: ['text'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'text' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'Pre-designed text layout for easy customization',
       'High-quality typography for clear readability',
@@ -106,21 +126,26 @@ export const Templates: ProductResponseTypes[] = [
   },
   {
     id: 'b3D5_f7H9j1L3n5P7r9T1',
-    user_id: 'user_1',
     slug: 'flyers-templates',
     name: 'Flyers TEMPLATES',
-    price_cent: 70,
+    priceCent: 70,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1695634621644-a1abcdf60bc6?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1695634621224-656c9906e92b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D',
-      'https://images.unsplash.com/photo-1695634281181-b2357af34c61?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEzfHx8ZW58MHx8fHx8',
+      {
+        url: 'https://images.unsplash.com/photo-1695634621644-a1abcdf60bc6?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1695634621224-656c9906e92b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1695634281181-b2357af34c61?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEzfHx8ZW58MHx8fHx8',
+      },
     ],
     description:
       'A dynamic flyer TEMPLATES designed to captivate your audience and promote your events or products effectively. This TEMPLATES offers a visually appealing layout with customizable elements, allowing you to create eye-catching flyers that stand out. Whether you are advertising a sale, an event, or a new product, this flyer TEMPLATES will help you communicate your message with impact.',
-    tags: ['flyers'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'flyers' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'Pre-designed flyer layout for easy customization',
       'High-quality graphics and typography for visual appeal',
@@ -131,21 +156,26 @@ export const Templates: ProductResponseTypes[] = [
   },
   {
     id: 'c4E6_g8I0k2M4o6Q8s0U2',
-    user_id: 'user_1',
     slug: 'product-catalog-templates',
     name: 'Product Catalog TEMPLATES',
-    price_cent: 90,
+    priceCent: 90,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1677530410699-f692c94cf806?q=80&w=1448&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1676116777245-1cc40079cd38?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D',
-      'https://images.unsplash.com/photo-1588610845017-9bead933bdda?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D',
+      {
+        url: 'https://images.unsplash.com/photo-1677530410699-f692c94cf806?q=80&w=1448&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1676116777245-1cc40079cd38?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1588610845017-9bead933bdda?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D',
+      },
     ],
     description:
       'A comprehensive product catalog TEMPLATES designed to showcase your products in a visually appealing and organized manner. This TEMPLATES provides a structured layout for displaying product images, descriptions, and pricing information, making it easier for customers to browse and make informed purchasing decisions. Whether you are creating a catalog for print or digital distribution, this TEMPLATES will help you present your products professionally.',
-    tags: ['catalog'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'catalog' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'Pre-designed product catalog layout for easy customization',
       'High-quality graphics and typography for visual appeal',
@@ -156,21 +186,26 @@ export const Templates: ProductResponseTypes[] = [
   },
   {
     id: 'd5F7_h9J1l3N5p7R9t1V3',
-    user_id: 'user_1',
     slug: 'social-media-post-templates',
     name: 'Social Media Post TEMPLATES',
-    price_cent: 65,
+    priceCent: 65,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     description:
       'A polished social media post TEMPLATES for consistent branding and fast content creation. Includes ready-to-edit layouts for Instagram, Facebook, and Pinterest stories and posts.',
-    tags: ['social'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'social' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'Ready-to-use social media TEMPLATESs',
       'Optimized layouts for feed and story formats',
@@ -181,21 +216,26 @@ export const Templates: ProductResponseTypes[] = [
   },
   {
     id: 'e6G8_i0K2m4O6q8S0u2W4',
-    user_id: 'user_1',
     slug: 'newsletter-templates',
     name: 'Newsletter TEMPLATES',
-    price_cent: 75,
+    priceCent: 75,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     description:
       'A modern newsletter TEMPLATES built for email campaigns and monthly updates. It offers clean sections, clear hierarchies, and flexible content blocks.',
-    tags: ['newsletter'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'newsletter' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'Fully editable newsletter layout',
       'Sections for featured stories, offers, and calls to action',
@@ -206,21 +246,26 @@ export const Templates: ProductResponseTypes[] = [
   },
   {
     id: 'f7H9_j1L3n5P7r9T1v3X5',
-    user_id: 'user_1',
     slug: 'business-card-templates',
     name: 'Business Card TEMPLATES',
-    price_cent: 55,
+    priceCent: 55,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1564869731115-00f04f10c936?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1564869731115-00f04f10c936?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     description:
       'A stylish business card TEMPLATES perfect for startups, freelancers, and professionals. Includes front and back designs with editable contact and branding areas.',
-    tags: ['branding'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'branding' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'Editable business card designs',
       'Front and back card layouts',
@@ -231,21 +276,26 @@ export const Templates: ProductResponseTypes[] = [
   },
   {
     id: 'g8I0_k2M4o6Q8s0U2w4Y6',
-    user_id: 'user_1',
     slug: 'presentation-deck-templates',
     name: 'Presentation Deck TEMPLATES',
-    price_cent: 85,
+    priceCent: 85,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     description:
       'A professional presentation deck TEMPLATES for pitches, reports, and meetings. Features clean slides, charts, and content blocks to tell your story clearly.',
-    tags: ['presentation'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'presentation' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'Ready-to-edit slide layouts',
       'Graph and chart placeholders',
@@ -256,21 +306,26 @@ export const Templates: ProductResponseTypes[] = [
   },
   {
     id: 'h9J1_l3N5p7R9t1V3x5Z7',
-    user_id: 'user_1',
     slug: 'event-invitation-templates',
     name: 'Event Invitation TEMPLATES',
-    price_cent: 60,
+    priceCent: 60,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1472653431158-6364773b2a56?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1529691931001-2d8fbaa2b335?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1472653431158-6364773b2a56?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1529691931001-2d8fbaa2b335?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     description:
       'An elegant invitation TEMPLATES for events, launches, and celebrations. Designed for print or digital use, with flexible text areas and decorative accents.',
-    tags: ['event'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'event' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'Invite layout with RSVP section',
       'Editable headlines and event details',
@@ -281,21 +336,26 @@ export const Templates: ProductResponseTypes[] = [
   },
   {
     id: 'i0K2_m4O6q8S0u2W4y6A8',
-    user_id: 'user_1',
     slug: 'brochure-templates',
     name: 'Brochure TEMPLATES',
-    price_cent: 80,
+    priceCent: 80,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1486401899868-0e435ed85103?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1485219237549-39c0f5868ecb?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1486401899868-0e435ed85103?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1485219237549-39c0f5868ecb?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     description:
       'A versatile brochure TEMPLATES for product stories, company overviews, and services. Balanced text and imagery make it easy to build an engaging print or PDF brochure.',
-    tags: ['brochure'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'brochure' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'Tri-fold brochure layout',
       'Service and feature sections',
@@ -306,21 +366,26 @@ export const Templates: ProductResponseTypes[] = [
   },
   {
     id: 'j1L3_n5P7r9T1v3X5z7B9',
-    user_id: 'user_1',
     slug: 'portfolio-templates',
     name: 'Portfolio TEMPLATES',
-    price_cent: 95,
+    priceCent: 95,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1487014679447-9f8336841d58?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     description:
       'A polished portfolio TEMPLATES for designers, photographers, and creatives. Includes curated layouts for showcasing work, testimonials, and contact information.',
-    tags: ['portfolio'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'portfolio' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'Portfolio showcase layouts',
       'Project and case study sections',
@@ -331,21 +396,26 @@ export const Templates: ProductResponseTypes[] = [
   },
   {
     id: 'k2M4_o6Q8s0U2w4Y6a8C0',
-    user_id: 'user_1',
     slug: 'distort-collection-mockup',
     name: 'Distort Collection mockup',
-    price_cent: 150,
+    priceCent: 150,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://plus.unsplash.com/premium_photo-1670793631007-e86c6ddfd812?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fERpc3RvcnR8ZW58MHx8MHx8fDA%3D',
-      'https://plus.unsplash.com/premium_photo-1747909587500-caba423f8c51?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1752606402449-0c14a2d6af70?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fERpc3RvcnR8ZW58MHx8MHx8fDA%3D',
+      {
+        url: 'https://plus.unsplash.com/premium_photo-1670793631007-e86c6ddfd812?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fERpc3RvcnR8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        url: 'https://plus.unsplash.com/premium_photo-1747909587500-caba423f8c51?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1752606402449-0c14a2d6af70?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fERpc3RvcnR8ZW58MHx8MHx8fDA%3D',
+      },
     ],
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['marketing'],
-    categories: ['TEMPLATES'],
+    tags: [{ name: 'marketing' }],
+    categories: [{ name: 'TEMPLATES' }],
     included: [
       'PSD file with smart objects for easy customization',
       'High-resolution images for crisp and clear visuals',
@@ -359,20 +429,25 @@ export const Templates: ProductResponseTypes[] = [
 export const Mockups: ProductResponseTypes[] = [
   {
     id: 'l3N5_p7R9t1V3x5Z7b9D1',
-    user_id: 'user_1',
     slug: 'iphone-mockup',
     name: 'Iphone Mockup',
-    price_cent: 100,
+    priceCent: 100,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['design'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'design' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1625864667518-914e1dd17377?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
-      'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
-      'https://images.unsplash.com/photo-1625864667534-aa5208d45a87?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      {
+        url: 'https://images.unsplash.com/photo-1625864667518-914e1dd17377?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1625864667534-aa5208d45a87?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      },
     ],
     included: [
       'PSD file with smart objects for easy customization',
@@ -384,20 +459,25 @@ export const Mockups: ProductResponseTypes[] = [
   },
   {
     id: 'm4O6_q8S0u2W4y6A8c0E2',
-    user_id: 'user_1',
     slug: 'laptop-mockup',
     name: 'Laptop Mockup',
-    price_cent: 120,
+    priceCent: 120,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['business'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'business' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1703002574442-1996d6f59bc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
-      'https://images.unsplash.com/photo-1703002574210-faaac4dde3b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
-      'https://images.unsplash.com/photo-1606560114363-e60d00c93734?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxhcHRvcCUyMGFwcGxlfGVufDB8fDB8fHww',
+      {
+        url: 'https://images.unsplash.com/photo-1703002574442-1996d6f59bc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1703002574210-faaac4dde3b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1606560114363-e60d00c93734?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxhcHRvcCUyMGFwcGxlfGVufDB8fDB8fHww',
+      },
     ],
     included: [
       'PSD file with smart objects for easy customization',
@@ -409,18 +489,19 @@ export const Mockups: ProductResponseTypes[] = [
   },
   {
     id: 'n5P7_r9T1v3X5z7B9d1F3',
-    user_id: 'user_1',
     slug: 'digital-art-mockup',
     name: 'Digital Art Mockup',
-    price_cent: 80,
+    priceCent: 80,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['art'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'art' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      {
+        url: 'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      },
     ],
     included: [
       'PSD file with smart objects for easy customization',
@@ -432,18 +513,19 @@ export const Mockups: ProductResponseTypes[] = [
   },
   {
     id: 'o6Q8_s0U2w4Y6a8C0e2G4',
-    user_id: 'user_1',
     slug: 'camera-mockup',
     name: 'Camera Mockup',
-    price_cent: 90,
+    priceCent: 90,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['photography'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'photography' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1613497645676-ea691063aa19?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmVzJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
+      {
+        url: 'https://images.unsplash.com/photo-1613497645676-ea691063aa19?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmVzJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
+      },
     ],
     included: [
       'PSD file with smart objects for easy customization',
@@ -455,18 +537,19 @@ export const Mockups: ProductResponseTypes[] = [
   },
   {
     id: 'p7R9_t1V3x5Z7b9D1f3H5',
-    user_id: 'user_1',
     slug: 'headphones-mockup',
     name: 'Headphones Mockup',
-    price_cent: 110,
+    priceCent: 110,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['audio'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'audio' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1613497645676-ea691063aa19?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmVzJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
+      {
+        url: 'https://images.unsplash.com/photo-1613497645676-ea691063aa19?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGhvbmVzJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
+      },
     ],
     included: [
       'PSD file with smart objects for easy customization',
@@ -478,19 +561,22 @@ export const Mockups: ProductResponseTypes[] = [
   },
   {
     id: 'q8S0_u2W4y6A8c0E2g4I6',
-    user_id: 'user_1',
     slug: 'watch-mockup',
     name: 'Watch Mockup',
-    price_cent: 95,
+    priceCent: 95,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A refined watch mockup that puts your interface and strap design front and center. Ideal for wearable tech presentations and lifestyle branding.',
-    tags: ['accessory'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'accessory' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Layered PSD file with smart object integration',
@@ -502,19 +588,22 @@ export const Mockups: ProductResponseTypes[] = [
   },
   {
     id: 'r9T1_v3X5z7B9d1F3h5J7',
-    user_id: 'user_1',
     slug: 't-shirt-mockup',
     name: 'T-Shirt Mockup',
-    price_cent: 85,
+    priceCent: 85,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A lifestyle t-shirt mockup built for apparel brands and merch launches. Showcase prints with realistic fabric folds and customizable apparel colors.',
-    tags: ['fashion'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'fashion' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1520975698517-0ea312a8a7c6?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1520975698517-0ea312a8a7c6?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Smart-object t-shirt mockup PSD',
@@ -526,19 +615,22 @@ export const Mockups: ProductResponseTypes[] = [
   },
   {
     id: 's0U2_w4Y6a8C0e2G4i6K8',
-    user_id: 'user_1',
     slug: 'poster-mockup',
     name: 'Poster Mockup',
-    price_cent: 75,
+    priceCent: 75,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A bold poster mockup with realistic wall and frame presentation for advertising, events, and art prints.',
-    tags: ['print'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'print' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1496284045406-d5d2c6f4fb5b?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1496284045406-d5d2c6f4fb5b?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Poster frame mockup PSD',
@@ -550,19 +642,22 @@ export const Mockups: ProductResponseTypes[] = [
   },
   {
     id: 't1V3_x5Z7b9D1f3H5j7L9',
-    user_id: 'user_1',
     slug: 'packaging-mockup',
     name: 'Packaging Mockup',
-    price_cent: 105,
+    priceCent: 105,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A premium packaging mockup set for boxes, labels, and product vessels. Perfect for consumer goods and retail design previews.',
-    tags: ['packaging'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'packaging' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Smart-object packaging mockup PSD',
@@ -574,19 +669,22 @@ export const Mockups: ProductResponseTypes[] = [
   },
   {
     id: 'u2W4_y6A8c0E2g4I6k8M0',
-    user_id: 'user_1',
     slug: 'book-cover-mockup',
     name: 'Book Cover Mockup',
-    price_cent: 88,
+    priceCent: 88,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A professional book cover mockup for novels, magazines, and journals. Display your cover design in a polished reading environment.',
-    tags: ['publishing'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'publishing' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Book cover mockup PSD with smart objects',
@@ -598,20 +696,25 @@ export const Mockups: ProductResponseTypes[] = [
   },
   {
     id: 'v3X5_z7B9d1F3h5J7l9N1',
-    user_id: 'user_1',
     slug: 'ipod-prod-mockup',
     name: 'Ipod Prod mockup',
-    price_cent: 100,
+    priceCent: 100,
     status: 'published',
-    is_featured: true,
+    isFeatured: true,
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['design'],
-    categories: ['MOCKUPS'],
+    tags: [{ name: 'design' }],
+    categories: [{ name: 'MOCKUPS' }],
     images: [
-      'https://images.unsplash.com/photo-1625864667518-914e1dd17377?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
-      'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8SXBhZCUyMGFwcGxlJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
-      'https://images.unsplash.com/photo-1625864667534-aa5208d45a87?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      {
+        url: 'https://images.unsplash.com/photo-1625864667518-914e1dd17377?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1570117858976-9490649cbf83?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8SXBhZCUyMGFwcGxlJTIwYmxhY2t8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1625864667534-aa5208d45a87?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fElwYWQlMjBhcHBsZSUyMGJsYWNrfGVufDB8fDB8fHww',
+      },
     ],
     included: [
       'PSD file with smart objects for easy customization',
@@ -626,20 +729,25 @@ export const Mockups: ProductResponseTypes[] = [
 export const Graphics: ProductResponseTypes[] = [
   {
     id: 'w4Y6_a8C0e2G4i6K8m0O2',
-    user_id: 'user_1',
     slug: 'logo-kit',
     name: 'Logo Kit',
-    price_cent: 45,
+    priceCent: 45,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A complete logo kit with multiple brand marks, color variations, and layout options. Ideal for startups and creative businesses.',
-    tags: ['branding'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'branding' }],
+    categories: [{ name: 'GRAPHICS' }],
     images: [
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1512325553582-8d7b2ae15147?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1512325553582-8d7b2ae15147?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Editable logo files in vector and raster formats',
@@ -651,19 +759,22 @@ export const Graphics: ProductResponseTypes[] = [
   },
   {
     id: 'x5Z7_b9D1f3H5j7L9n1P3',
-    user_id: 'user_1',
     slug: 'illustration-pack',
     name: 'Illustration Pack',
-    price_cent: 60,
+    priceCent: 60,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A set of handcrafted illustrations for web, mobile, and print design. Includes versatile characters, objects, and scenes.',
-    tags: ['illustration'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'illustration' }],
+    categories: [{ name: 'GRAPHICS' }],
     images: [
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Vector illustration files',
@@ -675,19 +786,22 @@ export const Graphics: ProductResponseTypes[] = [
   },
   {
     id: 'y6A8_c0E2g4I6k8M0o2Q4',
-    user_id: 'user_1',
     slug: 'icon-set',
     name: 'Icon Set',
-    price_cent: 30,
+    priceCent: 30,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A modern icon set for apps, dashboards, and websites. Includes 80+ icons in consistent style and format.',
-    tags: ['icons'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'icons' }],
+    categories: [{ name: 'GRAPHICS' }],
     images: [
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1522274716079-9239d2c3a5d4?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1522274716079-9239d2c3a5d4?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'SVG icon files',
@@ -699,19 +813,22 @@ export const Graphics: ProductResponseTypes[] = [
   },
   {
     id: 'z7B9_d1F3h5J7l9N1p3R5',
-    user_id: 'user_1',
     slug: 'pattern-collection',
     name: 'Pattern Collection',
-    price_cent: 38,
+    priceCent: 38,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A collection of seamless patterns for backgrounds, packaging, and textile projects. Contains geometric, floral, and abstract styles.',
-    tags: ['pattern'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'pattern' }],
+    categories: [{ name: 'GRAPHICS' }],
     images: [
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Seamless pattern files',
@@ -723,19 +840,22 @@ export const Graphics: ProductResponseTypes[] = [
   },
   {
     id: 'a8C0_e2G4i6K8m0O2q4S6',
-    user_id: 'user_1',
     slug: 'social-media-graphics',
     name: 'Social Media Graphics',
-    price_cent: 52,
+    priceCent: 52,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A set of social media visuals and story TEMPLATESs crafted to drive engagement and reinforce brand voice across platforms.',
-    tags: ['social'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'social' }],
+    categories: [{ name: 'GRAPHICS' }],
     images: [
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Square, story, and landscape graphics',
@@ -747,19 +867,22 @@ export const Graphics: ProductResponseTypes[] = [
   },
   {
     id: 'b9D1_f3H5j7L9n1P3r5T7',
-    user_id: 'user_1',
     slug: 'infographic-bundle',
     name: 'Infographic Bundle',
-    price_cent: 48,
+    priceCent: 48,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A bundle of infographic TEMPLATESs designed for reports, presentations, and data storytelling. Includes charts, timelines, and process diagrams.',
-    tags: ['infographic'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'infographic' }],
+    categories: [{ name: 'GRAPHICS' }],
     images: [
-      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Chart and timeline TEMPLATESs',
@@ -771,19 +894,22 @@ export const Graphics: ProductResponseTypes[] = [
   },
   {
     id: 'c0E2_g4I6k8M0o2Q4s6U8',
-    user_id: 'user_1',
     slug: 'ui-elements-kit',
     name: 'UI Elements Kit',
-    price_cent: 65,
+    priceCent: 65,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A UI element kit for web and app design, containing buttons, cards, forms, and navigation components in a polished aesthetic.',
-    tags: ['ui'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'ui' }],
+    categories: [{ name: 'GRAPHICS' }],
     images: [
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Styled UI components',
@@ -795,19 +921,22 @@ export const Graphics: ProductResponseTypes[] = [
   },
   {
     id: 'd1F3_h5J7l9N1p3R5t7V9',
-    user_id: 'user_1',
     slug: 'business-card-graphics',
     name: 'Business Card Graphics',
-    price_cent: 42,
+    priceCent: 42,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A smart business card graphics pack with modern layouts, accent shapes, and brand-first visual styling.',
-    tags: ['business'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'business' }],
+    categories: [{ name: 'GRAPHICS' }],
     images: [
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Business card graphic layouts',
@@ -819,19 +948,22 @@ export const Graphics: ProductResponseTypes[] = [
   },
   {
     id: 'e2G4_i6K8m0O2q4S6u8W0',
-    user_id: 'user_1',
     slug: 'sticker-pack',
     name: 'Sticker Pack',
-    price_cent: 36,
+    priceCent: 36,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A creative sticker pack with icons, hand-drawn labels, and expressive badges for packaging, digital mockups, and campaigns.',
-    tags: ['stickers'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'stickers' }],
+    categories: [{ name: 'GRAPHICS' }],
     images: [
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Sticker-style graphics',
@@ -843,19 +975,22 @@ export const Graphics: ProductResponseTypes[] = [
   },
   {
     id: 'f3H5_j7L9n1P3r5T7v9X1',
-    user_id: 'user_1',
     slug: 'poster-design-set',
     name: 'Poster Design Set',
-    price_cent: 70,
+    priceCent: 70,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A set of bold poster designs optimized for events, promotions, and brand campaigns. Includes layered artwork and typography styling.',
-    tags: ['poster'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'poster' }],
+    categories: [{ name: 'GRAPHICS' }],
     images: [
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Layered poster design files',
@@ -867,21 +1002,26 @@ export const Graphics: ProductResponseTypes[] = [
   },
   {
     id: 'g4I6_k8M0o2Q4s6U8w0Y2',
-    user_id: 'user_1',
     slug: 'mackbook-pro-mockup',
     name: 'Mackbook Pro mockup',
-    price_cent: 120,
+    priceCent: 120,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     images: [
-      'https://images.unsplash.com/photo-1703002574442-1996d6f59bc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
-      'https://images.unsplash.com/photo-1703002574210-faaac4dde3b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
-      'https://images.unsplash.com/photo-1606560114363-e60d00c93734?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxhcHRvcCUyMGFwcGxlfGVufDB8fDB8fHww',
+      {
+        url: 'https://images.unsplash.com/photo-1703002574442-1996d6f59bc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1703002574210-faaac4dde3b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wJTIwYXBwbGV8ZW58MHx8MHx8fDA%3D',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1606560114363-e60d00c93734?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxhcHRvcCUyMGFwcGxlfGVufDB8fDB8fHww',
+      },
     ],
     description:
       'Mockup to elevate your product presentation. Showcase your designs in a realistic and professional manner with our high-quality mockup TEMPLATESs. Perfect for designers, marketers, and businesses looking to create stunning visuals for their products.',
-    tags: ['business'],
-    categories: ['GRAPHICS'],
+    tags: [{ name: 'business' }],
+    categories: [{ name: 'GRAPHICS' }],
     included: [
       'PSD file with smart objects for easy customization',
       'High-resolution images for crisp and clear visuals',
@@ -895,19 +1035,22 @@ export const Graphics: ProductResponseTypes[] = [
 export const Magazines: ProductResponseTypes[] = [
   {
     id: 'h5J7_l9N1p3R5t7V9x1Z3',
-    user_id: 'user_1',
     slug: 'magazine-cover-templates',
     name: 'Magazine Cover TEMPLATES',
-    price_cent: 85,
+    priceCent: 85,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A modern magazine cover TEMPLATES built for lifestyle, fashion, and editorial brands. Includes bold headlines, photo frames, and cover lines.',
-    tags: ['magazine'],
-    categories: ['MAGAZINES'],
+    tags: [{ name: 'magazine' }],
+    categories: [{ name: 'MAGAZINES' }],
     images: [
-      'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Magazine cover layout file',
@@ -919,19 +1062,22 @@ export const Magazines: ProductResponseTypes[] = [
   },
   {
     id: 'i6K8_m0O2q4S6u8W0y2A4',
-    user_id: 'user_1',
     slug: 'editorial-layout-set',
     name: 'Editorial Layout Set',
-    price_cent: 95,
+    priceCent: 95,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A versatile editorial layout pack for magazine spreads, features, and long-form articles. Designed for strong readability and visual rhythm.',
-    tags: ['magazine'],
-    categories: ['MAGAZINES'],
+    tags: [{ name: 'magazine' }],
+    categories: [{ name: 'MAGAZINES' }],
     images: [
-      'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Editorial spread TEMPLATESs',
@@ -943,19 +1089,22 @@ export const Magazines: ProductResponseTypes[] = [
   },
   {
     id: 'j7L9_n1P3r5T7v9X1z3B5',
-    user_id: 'user_1',
     slug: 'fashion-magazine-kit',
     name: 'Fashion Magazine Kit',
-    price_cent: 75,
+    priceCent: 75,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A fashion magazine design kit with polished layout systems, model imagery frames, and editorial styling for lookbooks and features.',
-    tags: ['magazine'],
-    categories: ['MAGAZINES'],
+    tags: [{ name: 'magazine' }],
+    categories: [{ name: 'MAGAZINES' }],
     images: [
-      'https://images.unsplash.com/photo-1495121605193-b116b5b9c5d5?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1495121605193-b116b5b9c5d5?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Fashion editorial layouts',
@@ -967,19 +1116,22 @@ export const Magazines: ProductResponseTypes[] = [
   },
   {
     id: 'k8M0_o2Q4s6U8w0Y2a4C6',
-    user_id: 'user_1',
     slug: 'travel-magazine-kit',
     name: 'Travel Magazine Kit',
-    price_cent: 78,
+    priceCent: 78,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A travel magazine kit with inspiring layouts that highlight destinations, itineraries, and storytelling photography.',
-    tags: ['magazine'],
-    categories: ['MAGAZINES'],
+    tags: [{ name: 'magazine' }],
+    categories: [{ name: 'MAGAZINES' }],
     images: [
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Travel feature layouts',
@@ -991,19 +1143,22 @@ export const Magazines: ProductResponseTypes[] = [
   },
   {
     id: 'l9N1_p3R5t7V9x1Z3b5D7',
-    user_id: 'user_1',
     slug: 'food-magazine-kit',
     name: 'Food Magazine Kit',
-    price_cent: 80,
+    priceCent: 80,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A vibrant food magazine kit designed for recipes, restaurant reviews, and culinary storytelling with strong editorial visuals.',
-    tags: ['magazine'],
-    categories: ['MAGAZINES'],
+    tags: [{ name: 'magazine' }],
+    categories: [{ name: 'MAGAZINES' }],
     images: [
-      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Recipe and feature spreads',
@@ -1015,19 +1170,22 @@ export const Magazines: ProductResponseTypes[] = [
   },
   {
     id: 'm0O2_q4S6u8W0y2A4c6E8',
-    user_id: 'user_1',
     slug: 'tech-magazine-kit',
     name: 'Tech Magazine Kit',
-    price_cent: 82,
+    priceCent: 82,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A technology magazine kit with sleek, futuristic layouts for product launches, reviews, and trend coverage.',
-    tags: ['magazine'],
-    categories: ['MAGAZINES'],
+    tags: [{ name: 'magazine' }],
+    categories: [{ name: 'MAGAZINES' }],
     images: [
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Tech editorial page designs',
@@ -1039,19 +1197,22 @@ export const Magazines: ProductResponseTypes[] = [
   },
   {
     id: 'n1P3_r5T7v9X1z3B5d7F9',
-    user_id: 'user_1',
     slug: 'beauty-magazine-kit',
     name: 'Beauty Magazine Kit',
-    price_cent: 76,
+    priceCent: 76,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A beauty magazine kit for cosmetics, skincare, and wellness stories. Includes elegant visuals and editorial layout options.',
-    tags: ['magazine'],
-    categories: ['MAGAZINES'],
+    tags: [{ name: 'magazine' }],
+    categories: [{ name: 'MAGAZINES' }],
     images: [
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Beauty feature spreads',
@@ -1063,19 +1224,22 @@ export const Magazines: ProductResponseTypes[] = [
   },
   {
     id: 'o2Q4_s6U8w0Y2a4C6e8G0',
-    user_id: 'user_1',
     slug: 'lifestyle-magazine-kit',
     name: 'Lifestyle Magazine Kit',
-    price_cent: 79,
+    priceCent: 79,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A lifestyle magazine kit with curated editorial layouts for homes, wellness, and personal stories.',
-    tags: ['magazine'],
-    categories: ['MAGAZINES'],
+    tags: [{ name: 'magazine' }],
+    categories: [{ name: 'MAGAZINES' }],
     images: [
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Lifestyle editorial TEMPLATESs',
@@ -1087,19 +1251,22 @@ export const Magazines: ProductResponseTypes[] = [
   },
   {
     id: 'p3R5_t7V9x1Z3b5D7f9H1',
-    user_id: 'user_1',
     slug: 'sports-magazine-kit',
     name: 'Sports Magazine Kit',
-    price_cent: 74,
+    priceCent: 74,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A dynamic sports magazine kit for athlete profiles, match previews, and highlight spreads with bold editorial layouts.',
-    tags: ['magazine'],
-    categories: ['MAGAZINES'],
+    tags: [{ name: 'magazine' }],
+    categories: [{ name: 'MAGAZINES' }],
     images: [
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Sports editorial pages',
@@ -1111,19 +1278,22 @@ export const Magazines: ProductResponseTypes[] = [
   },
   {
     id: 'q4S6_u8W0y2A4c6E8g0I2',
-    user_id: 'user_1',
     slug: 'business-magazine-kit',
     name: 'Business Magazine Kit',
-    price_cent: 92,
+    priceCent: 92,
     status: 'published',
-    is_featured: false,
+    isFeatured: false,
     description:
       'A business magazine kit with smart page layouts for industry reports, executive profiles, and corporate storytelling.',
-    tags: ['magazine'],
-    categories: ['MAGAZINES'],
+    tags: [{ name: 'magazine' }],
+    categories: [{ name: 'MAGAZINES' }],
     images: [
-      'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&auto=format&fit=crop&q=60',
+      {
+        url: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&auto=format&fit=crop&q=60',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&auto=format&fit=crop&q=60',
+      },
     ],
     included: [
       'Business editorial TEMPLATESs',

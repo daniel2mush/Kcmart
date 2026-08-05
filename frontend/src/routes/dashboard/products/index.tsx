@@ -61,7 +61,11 @@ function RouteComponent() {
     },
   })
 
-  const queryData = data as { user_products: ProductResponseTypes[] }
+  const queryData = data as { userProduct: ProductResponseTypes[] }
+
+  if (!loading) {
+    console.log(queryData.userProduct, 'Data')
+  }
 
   const {
     register,
@@ -210,9 +214,9 @@ function RouteComponent() {
           </div>
         ) : (
           <div className={'w-full'}>
-            {!loading && queryData.user_products.length > 0 && (
+            {!loading && queryData.userProduct.length > 0 && (
               <AdminCard
-                iterable={queryData.user_products}
+                iterable={queryData.userProduct}
                 title={'My products'}
               />
             )}

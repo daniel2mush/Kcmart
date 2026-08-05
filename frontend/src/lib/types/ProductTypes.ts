@@ -2,18 +2,25 @@ import z from 'zod'
 
 export interface ProductResponseTypes {
   id: string
-  user_id: string
   name: string
   slug: string
   description: string
-  price_cent: number
+  priceCent: number
   status: string
-  is_featured: boolean
+  isFeatured?: boolean
   included: string[]
-  tags: string[] // UUIDs
-  categories: string[] // UUIDs
-  images: string[]
-  asset_url?: string[]
+  categories: {
+    name: string
+  }[]
+  tags: {
+    name: string
+  }[]
+  images: {
+    url: string
+  }[]
+  asset?: {
+    url: string
+  }
 }
 
 export type CategoryTypes = {

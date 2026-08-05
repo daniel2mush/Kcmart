@@ -19,6 +19,11 @@ from repository.product_repo import (
 class ProductMutation:
     @strawberry.mutation(name="create_product")
     async def add_product(self, info: strawberry.Info, data: ProductInput) -> Product:
+        user = info.context.current_user
+
+        if not user:
+            raise Exception("Authentication required")
+
         db = info.context.db
         user = info.context.current_user
 
@@ -30,6 +35,11 @@ class ProductMutation:
     async def update_product(
         self, info: strawberry.Info, slug: str, data: ProductUpdate
     ) -> Product:
+        user = info.context.current_user
+
+        if not user:
+            raise Exception("Authentication required")
+
         db = info.context.db
         user = info.context.current_user
 
@@ -41,6 +51,11 @@ class ProductMutation:
 
     @strawberry.mutation(description="This is to delete a product")
     async def delete_product(self, info: strawberry.Info, slug: str) -> bool:
+        user = info.context.current_user
+
+        if not user:
+            raise Exception("Authentication required")
+
         db = info.context.db
         user = info.context.current_user
 

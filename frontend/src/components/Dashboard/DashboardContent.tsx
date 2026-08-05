@@ -33,6 +33,8 @@ const DashboardContent = () => {
 
   const data = query_data as { products: ProductResponseTypes[] }
 
+  // console.log(data.products)
+
   const products = useMemo(() => {
     const combined = [
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition

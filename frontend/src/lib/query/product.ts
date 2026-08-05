@@ -7,31 +7,65 @@ export const GET_All_PUBLISHED_PRODUCTS = gql`
       name
       slug
       description
+      included
       priceCent
-      images
+      images {
+        url
+      }
       status
-      isFeatured
-      categories
-      tags
+      categories {
+        name
+      }
+      tags {
+        name
+      }
     }
   }
 `
 
 export const GET_USER_PRODUCTS = gql`
   query getUserProducts($page: Int!, $limit: Int!) {
-    user_products(page: $page, limit: $limit) {
+    userProduct(page: $page, limit: $limit) {
       id
       name
-      description
       slug
-      status
+      description
       priceCent
       included
+      images {
+        url
+      }
+      status
       isFeatured
-      images
-      categories
-      tags
-      assetUrl
+      categories {
+        name
+      }
+      tags {
+        name
+      }
+    }
+  }
+`
+
+export const GET_PRODUCT_WITH_SLUG = gql`
+  query getProductWithSlug($slug: String!) {
+    productWithSlug(slug: $slug) {
+      id
+      name
+      slug
+      description
+      priceCent
+      included
+      images {
+        url
+      }
+      status
+      categories {
+        name
+      }
+      tags {
+        name
+      }
     }
   }
 `

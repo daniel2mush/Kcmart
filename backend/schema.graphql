@@ -1,0 +1,98 @@
+schema {
+  query: ProductQuery
+  mutation: ProductMutation
+}
+
+type Asset {
+  id: UUID!
+  url: String!
+}
+
+type Category {
+  id: UUID!
+  name: String!
+  slug: String!
+}
+
+"""Date with time (isoformat)"""
+scalar DateTime
+
+type Images {
+  id: UUID!
+  url: String!
+  position: Int!
+}
+
+type Product {
+  id: UUID!
+  name: String!
+  slug: String!
+  description: String!
+  priceCent: Int!
+  included: [String!]!
+  status: String!
+  isFeatured: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  userId: UUID
+
+  """Tags"""
+  tags: [Tag!]
+
+  """Categories"""
+  categories: [Category!]
+
+  """Images"""
+  images: [Images!]
+
+  """Asset"""
+  asset: Asset
+}
+
+input ProductInput {
+  name: String!
+  description: String!
+  priceCent: Int!
+  included: [String!]!
+  images: [String!]!
+  assetUrl: String!
+  tagIds: [UUID!]!
+  categoriesIds: [UUID!]!
+}
+
+type ProductMutation {
+  create_product(data: ProductInput!): Product!
+
+  """This is to update the product"""
+  updateProduct(slug: String!, data: ProductUpdate!): Product!
+
+  """This is to delete a product"""
+  deleteProduct(slug: String!): Boolean!
+}
+
+type ProductQuery {
+  """products"""
+  products(page: Int! = 1, limit: Int! = 10): [Product!]!
+
+  """user_products"""
+  userProduct(page: Int! = 1, limit: Int! = 10): [Product!]!
+
+  """Product with slugs"""
+  productWithSlug(slug: String!): Product!
+}
+
+input ProductUpdate {
+  name: String = null
+  description: String = null
+  priceCent: Int = null
+  included: [String!] = null
+  status: String = null
+  isFeatured: Boolean = null
+}
+
+type Tag {
+  id: UUID!
+  name: String!
+}
+
+scalar UUID

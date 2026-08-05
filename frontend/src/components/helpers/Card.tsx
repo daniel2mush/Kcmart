@@ -117,10 +117,10 @@ export const Card = ({
       {/* Grid */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {displayItems.map((drop, index) => {
-          const category = drop.categories[0]
+          const category = drop.categories.map((c) => c.name)
           const tags = drop.tags.slice(0, 3)
 
-          const link = `/${category.toLowerCase()}/${drop.slug}`
+          const link = `/${category[0].toLowerCase()}/${drop.slug}`
 
           return (
             <article
@@ -162,7 +162,7 @@ export const Card = ({
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
                 <img
-                  src={drop.images[0]}
+                  src={drop.images[0].url}
                   alt={drop.name}
                   loading="lazy"
                   className="
@@ -219,7 +219,7 @@ export const Card = ({
                     </h3>
 
                     <span className="whitespace-nowrap text-lg font-bold text-primary">
-                      ${drop.price_cent}
+                      ${drop.priceCent}
                     </span>
                   </div>
 
@@ -228,7 +228,7 @@ export const Card = ({
                     <div className="flex flex-wrap gap-1.5">
                       {tags.map((tag) => (
                         <span
-                          key={tag}
+                          key={tag.name}
                           className="
                             inline-flex items-center gap-1
                             rounded-full
@@ -238,7 +238,7 @@ export const Card = ({
                           "
                         >
                           <Tag size={10} />
-                          {tag}
+                          {tag.name}
                         </span>
                       ))}
 

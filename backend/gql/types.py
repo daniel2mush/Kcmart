@@ -55,24 +55,24 @@ class Product:
 
     user_id: uuid.UUID | None = None
 
-    @strawberry.field(description="This is the tag")
-    async def tags(self, info: strawberry.Info) -> list[Tag]:
+    @strawberry.field(description="Tags")
+    async def tags(self, info: strawberry.Info) -> list[Tag] | None:
 
         loader = info.context.tag_loader
 
         return await loader.load_many(self.tag_ids)
 
-    @strawberry.field(description="This loads the categories")
-    async def categories(self, info: strawberry.Info) -> list[Category]:
+    @strawberry.field(description="Categories")
+    async def categories(self, info: strawberry.Info) -> list[Category] | None:
         loader = info.context.category_loader
         return await loader.load_many(self.category_ids)
 
     @strawberry.field(description="Images")
-    async def images(self, info: strawberry.Info) -> list[Images]:
+    async def images(self, info: strawberry.Info) -> list[Images] | None:
         loader = info.context.image_loader
         return await loader.load_many(self.image_ids)
 
-    @strawberry.field(description="Categories")
-    async def asset(self, info: strawberry.Info) -> Asset:
+    @strawberry.field(description="Asset")
+    async def asset(self, info: strawberry.Info) -> Asset | None:
         loader = info.context.asset_loader
         return await loader.load(self.asset_id)

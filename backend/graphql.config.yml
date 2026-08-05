@@ -1,2 +1,2 @@
-schema: http://localhost:8000/graphql
+schema: schema.graphql
 documents: '**/*.graphql'

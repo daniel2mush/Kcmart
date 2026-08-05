@@ -1,32 +1,37 @@
 import ProductView from '#/components/helpers/ProductView'
 import { Templates } from '#/lib/staticResources'
 import { createFileRoute } from '@tanstack/react-router'
-import { getProductWithSlug } from '#/lib/helpers/getProductWithSlug'
 import type { ProductResponseTypes } from '#/lib/types/ProductTypes.ts'
+import { useQuery } from '@apollo/client/react'
+import { GET_PRODUCT_WITH_SLUG } from '#/lib/query/product.ts'
+import { Loader } from 'lucide-react'
 
-export const Route = createFileRoute('/templates/$itemId')({
+export const Route = createFileRoute('/templates/$slug')({
   component: RouteComponent,
-  loader: async ({ params }) => {
-    try {
-      return await getProductWithSlug({ data: { slug: params.itemId } })
-    } catch {
-      // Catch backend errors so the static fallback can execute safely
-      return null
-    }
-  },
 })
 
 function RouteComponent() {
-  const { itemId } = Route.useParams()
-  const apiProduct = Route.useLoaderData()
+  const { slug } = Route.useParams()
+
+  const { data, loading, error } = useQuery(GET_PRODUCT_WITH_SLUG, {
+    variables: { slug },
+  })
+  if (loading) {
+    return (
+      <div className={' h-screen w-screen flex items-center justify-center'}>
+        <Loader />
+      </div>
+    )
+  }
+  const validData = data as { productWithSlug: ProductResponseTypes }
 
   // 1. Fallback lookup with array safety check
   const staticProduct = Array.isArray(Templates)
-    ? Templates.find((item) => item.slug === itemId)
+    ? Templates.find((item) => item.slug === slug)
     : null
 
   // 2. Resolve final product
-  const validProduct = apiProduct ?? staticProduct
+  const validProduct = error ? staticProduct : validData.productWithSlug
 
   // 3. Guard against invalid items (prevents ProductView runtime crash)
   if (!validProduct) {
@@ -44,7 +49,7 @@ function RouteComponent() {
 
   return (
     <div>
-      <ProductView validProduct={validProduct as ProductResponseTypes} />
+      <ProductView validProduct={validProduct} />
     </div>
   )
 }

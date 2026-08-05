@@ -1,32 +1,39 @@
 import ProductView from '#/components/helpers/ProductView'
 import { Mockups } from '#/lib/staticResources'
 import { createFileRoute } from '@tanstack/react-router'
-import { getProductWithSlug } from '#/lib/helpers/getProductWithSlug.ts'
 import type { ProductResponseTypes } from '#/lib/types/ProductTypes.ts'
+import { useQuery } from '@apollo/client/react'
+import { GET_PRODUCT_WITH_SLUG } from '#/lib/query/product.ts'
+import { Loader } from 'lucide-react'
 
-export const Route = createFileRoute('/mockups/$itemId')({
+export const Route = createFileRoute('/mockups/$slug')({
   component: RouteComponent,
-  loader: async ({ params }) => {
-    try {
-      return await getProductWithSlug({ data: { slug: params.itemId } })
-    } catch {
-      // Gracefully handle backend errors so static fallback can run
-      return null
-    }
-  },
 })
 
 function RouteComponent() {
-  const { itemId } = Route.useParams()
-  const apiProduct = Route.useLoaderData()
+  const { slug } = Route.useParams()
+
+  const { data, loading, error } = useQuery(GET_PRODUCT_WITH_SLUG, {
+    variables: { slug },
+  })
+  if (loading) {
+    return (
+      <div className={' h-screen w-screen flex items-center justify-center'}>
+        <Loader />
+      </div>
+    )
+  }
+  const validData = data as { productWithSlug: ProductResponseTypes }
+
+  // console.log(validData.productWithSlug, 'Valid data')
 
   // 1. Fallback lookup with array guard
   const staticProduct = Array.isArray(Mockups)
-    ? Mockups.find((item) => item.slug === itemId)
+    ? Mockups.find((item) => item.slug === slug)
     : null
 
   // 2. Resolve target product
-  const validProduct = apiProduct ?? staticProduct
+  const validProduct = error ? staticProduct : validData.productWithSlug
 
   // 3. Prevent runtime crash if slug exists in neither backend nor static files
   if (!validProduct) {
@@ -44,7 +51,7 @@ function RouteComponent() {
 
   return (
     <div>
-      <ProductView validProduct={validProduct as ProductResponseTypes} />
+      <ProductView validProduct={validProduct} />
     </div>
   )
 }

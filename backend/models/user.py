@@ -5,7 +5,10 @@ from sqlalchemy.orm import Mapped, mapped_column
 import uuid
 
 from database.postgresql import Base
-from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
+from fastapi_users_db_sqlalchemy import (
+    SQLAlchemyBaseUserTableUUID,
+    SQLAlchemyUserDatabase,
+)
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):

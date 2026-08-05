@@ -1,32 +1,37 @@
 import ProductView from '#/components/helpers/ProductView'
 import { Graphics } from '#/lib/staticResources'
 import { createFileRoute } from '@tanstack/react-router'
-import { getProductWithSlug } from '#/lib/helpers/getProductWithSlug.ts'
 import type { ProductResponseTypes } from '#/lib/types/ProductTypes.ts'
+import { useQuery } from '@apollo/client/react'
+import { GET_PRODUCT_WITH_SLUG } from '#/lib/query/product.ts'
+import { Loader } from 'lucide-react'
 
-export const Route = createFileRoute('/graphics/$itemId')({
+export const Route = createFileRoute('/graphics/$slug')({
   component: RouteComponent,
-  loader: async ({ params }) => {
-    try {
-      return await getProductWithSlug({ data: { slug: params.itemId } })
-    } catch {
-      // Return null or handle API failure gracefully so fallback can run
-      return null
-    }
-  },
 })
 
 function RouteComponent() {
-  const { itemId } = Route.useParams()
-  const apiProduct = Route.useLoaderData()
+  const { slug } = Route.useParams()
+
+  const { data, loading, error } = useQuery(GET_PRODUCT_WITH_SLUG, {
+    variables: { slug },
+  })
+  if (loading) {
+    return (
+      <div className={' h-screen w-screen flex items-center justify-center'}>
+        <Loader />
+      </div>
+    )
+  }
+  const validData = data as { productWithSlug: ProductResponseTypes }
 
   // 1. Safely find static fallback
   const staticProduct = Array.isArray(Graphics)
-    ? Graphics.find((item) => item.slug === itemId)
+    ? Graphics.find((item) => item.slug === slug)
     : null
 
   // 2. Resolve final product
-  const validProduct = apiProduct ?? staticProduct
+  const validProduct = error ? staticProduct : validData.productWithSlug
 
   // 3. Prevent runtime crash if no product exists in either source
   if (!validProduct) {
@@ -44,7 +49,7 @@ function RouteComponent() {
 
   return (
     <div>
-      <ProductView validProduct={validProduct as ProductResponseTypes} />
+      <ProductView validProduct={validProduct} />
     </div>
   )
 }
