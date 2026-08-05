@@ -15,6 +15,8 @@ import NavBar from '#/components/NavBar'
 import Footer from '#/components/Footer'
 import { Toaster } from 'sonner'
 import NotFound from '#/components/NotFound.tsx'
+import { ApolloProvider } from '@apollo/client/react'
+import { apollo } from '#/lib/apollo.ts'
 
 export const Route = createRootRouteWithContext()({
   head: () => ({
@@ -82,7 +84,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <NavBar />
-        {children}
+        <ApolloProvider client={apollo}>{children}</ApolloProvider>
         <Footer />
         <Toaster richColors={true} />
         <TanStackDevtools

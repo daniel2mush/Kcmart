@@ -6,6 +6,9 @@ from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
 from gql.types import Product
 from ..inputs import ProductInput, ProductUpdate
 from repository.product_repo import (
+    # create_product,
+    # update_product_repo,
+    # delete_product_repo,
     create_product,
     update_product_repo,
     delete_product_repo,
@@ -25,24 +28,22 @@ class ProductMutation:
 
     @strawberry.mutation(description="This is to update the product")
     async def update_product(
-        self, info: strawberry.Info, product_id: uuid.UUID, data: ProductUpdate
+        self, info: strawberry.Info, slug: str, data: ProductUpdate
     ) -> Product:
         db = info.context.db
         user = info.context.current_user
 
         updated_product = await update_product_repo(
-            db=db, product=data, product_id=product_id, user_id=user.id
+            db=db, product=data, product_slug=slug, user_id=user.id
         )
 
         return Product(**updated_product)
 
     @strawberry.mutation(description="This is to delete a product")
-    async def delete_product(
-        self, info: strawberry.Info, product_id: uuid.UUID
-    ) -> bool:
+    async def delete_product(self, info: strawberry.Info, slug: str) -> bool:
         db = info.context.db
         user = info.context.current_user
 
-        res = await delete_product_repo(product_id=product_id, db=db, user_id=user.id)
+        res = await delete_product_repo(slug=slug, db=db, user_id=user.id)
 
         return res

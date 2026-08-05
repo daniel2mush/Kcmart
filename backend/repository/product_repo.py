@@ -3,27 +3,22 @@ import uuid
 from fastapi import status
 from slugify import slugify
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import text
-from aiosql import aiosql
+
 from exceptions.base import AppException
 from gql.inputs import ProductInput
-from models import User
-from repository.user_repo import current_active_user
+
 from sql.product_quries import (
+    get_all_product,
+    get_user_product,
+    get_product_with_slug_query,
     check_query,
     insert_product_query,
     image_query,
     asset_query,
     tag_query,
     category_query,
-    fetch_query,
-    is_authorized_user,
-    is_product_exist,
     update_product,
-    CTE_get_all_product,
     delete_product_query,
-    CTE_get_all_user_product,
-    CTE_get_all_product_with_slug,
 )
 from schemas.product import ProductCreate, ProductUpdate
 from dependencies.initials import user
@@ -63,7 +58,8 @@ async def create_product(product: ProductInput, db: AsyncSession, user_id: uuid.
 
         for index, url in enumerate(product.images):
             await db.execute(
-                image_query, {"url": url, "product_id": product_id, "position": index}
+                image_query,
+                {"url": url, "product_id": product_id, "position": index},
             )
 
     # 4. Insert Asset
@@ -92,7 +88,7 @@ async def create_product(product: ProductInput, db: AsyncSession, user_id: uuid.
 
     # 8. Fetch the newly created product with subqueries to prevent Cartesian explosions
 
-    final_result = await db.execute(fetch_query, {"product_id": product_id})
+    final_result = await db.execute(get_product_with_slug_query, {"slug": slug})
     return final_result.mappings().first()
 
 
@@ -103,7 +99,7 @@ async def get_products(db: AsyncSession, page: int = 1, limit: int = 10):
     # Standard 1-based pagination formula
     offset = (page - 1) * limit
 
-    result = await db.execute(CTE_get_all_product, {"offset": offset, "limit": limit})
+    result = await db.execute(get_all_product, {"offset": offset, "limit": limit})
     products = result.mappings().all()
     return products
 
@@ -111,7 +107,7 @@ async def get_products(db: AsyncSession, page: int = 1, limit: int = 10):
 async def update_product_repo(
     user_id: uuid.UUID,
     db: AsyncSession,
-    product_id: uuid.UUID,
+    product_slug: str,
     product: ProductUpdate,  # or int
 ):
 
@@ -128,7 +124,6 @@ async def update_product_repo(
 
     # 3. Build SET clause dynamically (e.g., "name = :name, price_cent = :price_cent")
     params = {
-        "id": product_id,
         "user_id": user_id,
         "name": product.name,
         "slug": slug,
@@ -137,12 +132,13 @@ async def update_product_repo(
         "included": product.included,
         "status": product.status,
         "is_featured": product.is_featured,
+        "product_slug": product_slug,
     }
 
     result = await db.execute(update_product, params)
-    updated_product = result.mappings().first()
+    new_slug = result.scalar()
 
-    if not updated_product:
+    if not new_slug:
         raise AppException(
             message="Product not found or you are not authorized to edit it",
             status_code=status.HTTP_404_NOT_FOUND,
@@ -150,15 +146,14 @@ async def update_product_repo(
         )
 
     await db.commit()
-    return updated_product
+
+    updated_product = await db.execute(get_product_with_slug_query, {"slug": new_slug})
+
+    return updated_product.mappings().first()
 
 
-async def delete_product_repo(
-    db: AsyncSession, user_id: uuid.UUID, product_id: uuid.UUID
-) -> bool:
-    results = await db.execute(
-        delete_product_query, {"user_id": user_id, "product_id": product_id}
-    )
+async def delete_product_repo(db: AsyncSession, user_id: uuid.UUID, slug: str) -> bool:
+    results = await db.execute(delete_product_query, {"user_id": user_id, "slug": slug})
     deleted_id = results.scalar_one_or_none()
 
     if deleted_id is None:
@@ -182,7 +177,7 @@ async def get_user_products(
     offset = (page - 1) * limit
 
     result = await db.execute(
-        CTE_get_all_user_product, {"offset": offset, "limit": limit, "id": user_id}
+        get_user_product, {"offset": offset, "limit": limit, "id": user_id}
     )
     products = result.mappings().all()
     return products
@@ -190,7 +185,7 @@ async def get_user_products(
 
 async def get_product_with_slug(db: AsyncSession, slug: str):
 
-    result = await db.execute(CTE_get_all_product_with_slug, {"slug": slug})
+    result = await db.execute(get_product_with_slug_query, {"slug": slug})
 
     product = result.mappings().first()
 

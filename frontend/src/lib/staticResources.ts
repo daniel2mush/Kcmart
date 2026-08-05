@@ -2,7 +2,7 @@ import type { ProductResponseTypes } from '#/lib/types/ProductTypes'
 
 export const latestDrops: ProductResponseTypes[] = [
   {
-    id: '1',
+    id: 'xK9v_m4B8fP2zR1vL5T3w',
     user_id: 'user_1',
     slug: 'ipod-prod-mockup',
     name: 'Ipod Prod mockup',
@@ -27,7 +27,7 @@ export const latestDrops: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '2',
+    id: 'Q78nJ-Xy9_P2M4zR1vL5c',
     user_id: 'user_1',
     slug: 'distort-collection-mockup',
     name: 'Distort Collection mockup',
@@ -52,7 +52,7 @@ export const latestDrops: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '3',
+    id: 'c5b8_F3mX9fP2zR1vL5T3',
     user_id: 'user_1',
     slug: 'mackbook-pro-mockup',
     name: 'Mackbook Pro mockup',
@@ -80,7 +80,7 @@ export const latestDrops: ProductResponseTypes[] = [
 
 export const Templates: ProductResponseTypes[] = [
   {
-    id: '1',
+    id: 'a2C4_e6G8i0K2m4O6q8S0',
     user_id: 'user_1',
     slug: 'text-templates',
     name: 'Text TEMPLATES',
@@ -105,7 +105,7 @@ export const Templates: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '2',
+    id: 'b3D5_f7H9j1L3n5P7r9T1',
     user_id: 'user_1',
     slug: 'flyers-templates',
     name: 'Flyers TEMPLATES',
@@ -130,7 +130,7 @@ export const Templates: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '3',
+    id: 'c4E6_g8I0k2M4o6Q8s0U2',
     user_id: 'user_1',
     slug: 'product-catalog-templates',
     name: 'Product Catalog TEMPLATES',
@@ -155,7 +155,7 @@ export const Templates: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '4',
+    id: 'd5F7_h9J1l3N5p7R9t1V3',
     user_id: 'user_1',
     slug: 'social-media-post-templates',
     name: 'Social Media Post TEMPLATES',
@@ -180,7 +180,7 @@ export const Templates: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '5',
+    id: 'e6G8_i0K2m4O6q8S0u2W4',
     user_id: 'user_1',
     slug: 'newsletter-templates',
     name: 'Newsletter TEMPLATES',
@@ -205,7 +205,7 @@ export const Templates: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '6',
+    id: 'f7H9_j1L3n5P7r9T1v3X5',
     user_id: 'user_1',
     slug: 'business-card-templates',
     name: 'Business Card TEMPLATES',
@@ -230,7 +230,7 @@ export const Templates: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '7',
+    id: 'g8I0_k2M4o6Q8s0U2w4Y6',
     user_id: 'user_1',
     slug: 'presentation-deck-templates',
     name: 'Presentation Deck TEMPLATES',
@@ -255,7 +255,7 @@ export const Templates: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '8',
+    id: 'h9J1_l3N5p7R9t1V3x5Z7',
     user_id: 'user_1',
     slug: 'event-invitation-templates',
     name: 'Event Invitation TEMPLATES',
@@ -280,7 +280,7 @@ export const Templates: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '9',
+    id: 'i0K2_m4O6q8S0u2W4y6A8',
     user_id: 'user_1',
     slug: 'brochure-templates',
     name: 'Brochure TEMPLATES',
@@ -305,7 +305,7 @@ export const Templates: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '10',
+    id: 'j1L3_n5P7r9T1v3X5z7B9',
     user_id: 'user_1',
     slug: 'portfolio-templates',
     name: 'Portfolio TEMPLATES',
@@ -330,7 +330,7 @@ export const Templates: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '11',
+    id: 'k2M4_o6Q8s0U2w4Y6a8C0',
     user_id: 'user_1',
     slug: 'distort-collection-mockup',
     name: 'Distort Collection mockup',
@@ -358,7 +358,7 @@ export const Templates: ProductResponseTypes[] = [
 
 export const Mockups: ProductResponseTypes[] = [
   {
-    id: '1',
+    id: 'l3N5_p7R9t1V3x5Z7b9D1',
     user_id: 'user_1',
     slug: 'iphone-mockup',
     name: 'Iphone Mockup',
@@ -383,7 +383,7 @@ export const Mockups: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '2',
+    id: 'm4O6_q8S0u2W4y6A8c0E2',
     user_id: 'user_1',
     slug: 'laptop-mockup',
     name: 'Laptop Mockup',
@@ -408,7 +408,7 @@ export const Mockups: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '3',
+    id: 'n5P7_r9T1v3X5z7B9d1F3',
     user_id: 'user_1',
     slug: 'digital-art-mockup',
     name: 'Digital Art Mockup',
@@ -431,7 +431,7 @@ export const Mockups: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '4',
+    id: 'o6Q8_s0U2w4Y6a8C0e2G4',
     user_id: 'user_1',
     slug: 'camera-mockup',
     name: 'Camera Mockup',
@@ -454,7 +454,7 @@ export const Mockups: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '5',
+    id: 'p7R9_t1V3x5Z7b9D1f3H5',
     user_id: 'user_1',
     slug: 'headphones-mockup',
     name: 'Headphones Mockup',
@@ -477,7 +477,7 @@ export const Mockups: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '6',
+    id: 'q8S0_u2W4y6A8c0E2g4I6',
     user_id: 'user_1',
     slug: 'watch-mockup',
     name: 'Watch Mockup',
@@ -501,7 +501,7 @@ export const Mockups: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '7',
+    id: 'r9T1_v3X5z7B9d1F3h5J7',
     user_id: 'user_1',
     slug: 't-shirt-mockup',
     name: 'T-Shirt Mockup',
@@ -525,7 +525,7 @@ export const Mockups: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '8',
+    id: 's0U2_w4Y6a8C0e2G4i6K8',
     user_id: 'user_1',
     slug: 'poster-mockup',
     name: 'Poster Mockup',
@@ -549,7 +549,7 @@ export const Mockups: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '9',
+    id: 't1V3_x5Z7b9D1f3H5j7L9',
     user_id: 'user_1',
     slug: 'packaging-mockup',
     name: 'Packaging Mockup',
@@ -573,7 +573,7 @@ export const Mockups: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '10',
+    id: 'u2W4_y6A8c0E2g4I6k8M0',
     user_id: 'user_1',
     slug: 'book-cover-mockup',
     name: 'Book Cover Mockup',
@@ -597,7 +597,7 @@ export const Mockups: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '11',
+    id: 'v3X5_z7B9d1F3h5J7l9N1',
     user_id: 'user_1',
     slug: 'ipod-prod-mockup',
     name: 'Ipod Prod mockup',
@@ -625,7 +625,7 @@ export const Mockups: ProductResponseTypes[] = [
 
 export const Graphics: ProductResponseTypes[] = [
   {
-    id: '1',
+    id: 'w4Y6_a8C0e2G4i6K8m0O2',
     user_id: 'user_1',
     slug: 'logo-kit',
     name: 'Logo Kit',
@@ -650,7 +650,7 @@ export const Graphics: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '2',
+    id: 'x5Z7_b9D1f3H5j7L9n1P3',
     user_id: 'user_1',
     slug: 'illustration-pack',
     name: 'Illustration Pack',
@@ -674,7 +674,7 @@ export const Graphics: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '3',
+    id: 'y6A8_c0E2g4I6k8M0o2Q4',
     user_id: 'user_1',
     slug: 'icon-set',
     name: 'Icon Set',
@@ -698,7 +698,7 @@ export const Graphics: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '4',
+    id: 'z7B9_d1F3h5J7l9N1p3R5',
     user_id: 'user_1',
     slug: 'pattern-collection',
     name: 'Pattern Collection',
@@ -722,7 +722,7 @@ export const Graphics: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '5',
+    id: 'a8C0_e2G4i6K8m0O2q4S6',
     user_id: 'user_1',
     slug: 'social-media-graphics',
     name: 'Social Media Graphics',
@@ -746,7 +746,7 @@ export const Graphics: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '6',
+    id: 'b9D1_f3H5j7L9n1P3r5T7',
     user_id: 'user_1',
     slug: 'infographic-bundle',
     name: 'Infographic Bundle',
@@ -770,7 +770,7 @@ export const Graphics: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '7',
+    id: 'c0E2_g4I6k8M0o2Q4s6U8',
     user_id: 'user_1',
     slug: 'ui-elements-kit',
     name: 'UI Elements Kit',
@@ -794,7 +794,7 @@ export const Graphics: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '8',
+    id: 'd1F3_h5J7l9N1p3R5t7V9',
     user_id: 'user_1',
     slug: 'business-card-graphics',
     name: 'Business Card Graphics',
@@ -818,7 +818,7 @@ export const Graphics: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '9',
+    id: 'e2G4_i6K8m0O2q4S6u8W0',
     user_id: 'user_1',
     slug: 'sticker-pack',
     name: 'Sticker Pack',
@@ -842,7 +842,7 @@ export const Graphics: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '10',
+    id: 'f3H5_j7L9n1P3r5T7v9X1',
     user_id: 'user_1',
     slug: 'poster-design-set',
     name: 'Poster Design Set',
@@ -866,7 +866,7 @@ export const Graphics: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '11',
+    id: 'g4I6_k8M0o2Q4s6U8w0Y2',
     user_id: 'user_1',
     slug: 'mackbook-pro-mockup',
     name: 'Mackbook Pro mockup',
@@ -894,7 +894,7 @@ export const Graphics: ProductResponseTypes[] = [
 
 export const Magazines: ProductResponseTypes[] = [
   {
-    id: '1',
+    id: 'h5J7_l9N1p3R5t7V9x1Z3',
     user_id: 'user_1',
     slug: 'magazine-cover-templates',
     name: 'Magazine Cover TEMPLATES',
@@ -918,7 +918,7 @@ export const Magazines: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '2',
+    id: 'i6K8_m0O2q4S6u8W0y2A4',
     user_id: 'user_1',
     slug: 'editorial-layout-set',
     name: 'Editorial Layout Set',
@@ -942,7 +942,7 @@ export const Magazines: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '3',
+    id: 'j7L9_n1P3r5T7v9X1z3B5',
     user_id: 'user_1',
     slug: 'fashion-magazine-kit',
     name: 'Fashion Magazine Kit',
@@ -966,7 +966,7 @@ export const Magazines: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '4',
+    id: 'k8M0_o2Q4s6U8w0Y2a4C6',
     user_id: 'user_1',
     slug: 'travel-magazine-kit',
     name: 'Travel Magazine Kit',
@@ -990,7 +990,7 @@ export const Magazines: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '5',
+    id: 'l9N1_p3R5t7V9x1Z3b5D7',
     user_id: 'user_1',
     slug: 'food-magazine-kit',
     name: 'Food Magazine Kit',
@@ -1014,7 +1014,7 @@ export const Magazines: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '6',
+    id: 'm0O2_q4S6u8W0y2A4c6E8',
     user_id: 'user_1',
     slug: 'tech-magazine-kit',
     name: 'Tech Magazine Kit',
@@ -1038,7 +1038,7 @@ export const Magazines: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '7',
+    id: 'n1P3_r5T7v9X1z3B5d7F9',
     user_id: 'user_1',
     slug: 'beauty-magazine-kit',
     name: 'Beauty Magazine Kit',
@@ -1062,7 +1062,7 @@ export const Magazines: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '8',
+    id: 'o2Q4_s6U8w0Y2a4C6e8G0',
     user_id: 'user_1',
     slug: 'lifestyle-magazine-kit',
     name: 'Lifestyle Magazine Kit',
@@ -1086,7 +1086,7 @@ export const Magazines: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '9',
+    id: 'p3R5_t7V9x1Z3b5D7f9H1',
     user_id: 'user_1',
     slug: 'sports-magazine-kit',
     name: 'Sports Magazine Kit',
@@ -1110,7 +1110,7 @@ export const Magazines: ProductResponseTypes[] = [
     ],
   },
   {
-    id: '10',
+    id: 'q4S6_u8W0y2A4c6E8g0I2',
     user_id: 'user_1',
     slug: 'business-magazine-kit',
     name: 'Business Magazine Kit',

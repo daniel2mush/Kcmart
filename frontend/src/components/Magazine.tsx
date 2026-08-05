@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card } from './helpers/Card'
 import { Magazines as Mag } from '../lib/staticResources'
 

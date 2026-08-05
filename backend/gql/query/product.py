@@ -4,12 +4,16 @@ import strawberry
 from sqlalchemy.sql.functions import current_user
 
 from gql.types import Product
-from repository.product_repo import get_products, get_user_products
+from repository.product_repo import (
+    get_products,
+    get_user_products,
+    get_product_with_slug,
+)
 
 
 @strawberry.type
 class ProductQuery:
-    @strawberry.field(name="products")
+    @strawberry.field(description="products")
     async def products(
         self, info: strawberry.Info, page: int = 1, limit: int = 10
     ) -> List[Product]:
@@ -17,7 +21,7 @@ class ProductQuery:
         products = await get_products(db=db, page=page, limit=limit)
         return [Product(**product) for product in products]
 
-    @strawberry.field(name="user_products")
+    @strawberry.field(description="user_products")
     async def user_product(
         self, info: strawberry.Info, page: int = 1, limit: int = 10
     ) -> List[Product]:
@@ -30,3 +34,9 @@ class ProductQuery:
         )
 
         return [Product(**p) for p in products]
+
+    @strawberry.field(description="Product with slugs")
+    async def product_with_slug(self, info: strawberry.Info, slug: str) -> Product:
+        db = info.context.db
+        product = await get_product_with_slug(db, slug)
+        return Product(**product)

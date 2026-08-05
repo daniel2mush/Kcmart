@@ -4,6 +4,10 @@ get_all_categories_query = text("""
     SELECT c.id, c.name, c.slug FROM category c
 """)
 
+get_categories_by_ids = text("""
+SELECT * FROM category WHERE id = ANY(:ids)
+""")
+
 
 update_category_query = text("""
     UPDATE category

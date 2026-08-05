@@ -1,9 +1,8 @@
 import { Input } from '#/components/ui/input.tsx'
 import { BellDot, MessageCircle, Search } from 'lucide-react'
 import { Button } from '#/components/ui/button.tsx'
-import { useGetAllProducts } from '#/components/queries/products/ProductQuery'
 import { Card } from '#/components/helpers/Card'
-import { useState } from 'react'
+import { useMemo } from 'react'
 import {
   Mockups,
   Templates,
@@ -11,6 +10,8 @@ import {
   Magazines,
 } from '#/lib/staticResources.ts'
 import type { ProductResponseTypes } from '#/lib/types/ProductTypes.ts'
+import { useQuery } from '@apollo/client/react'
+import { GET_All_PUBLISHED_PRODUCTS } from '#/lib/query/product.ts'
 
 const DashboardContent = () => {
   // This is called Fisher-Yates Shuffle (recommended for true randomness and large arrays)
@@ -23,17 +24,29 @@ const DashboardContent = () => {
     return arr
   }
 
-  const { data, isLoading } = useGetAllProducts()
-  const [products] = useState(() => {
+  const { data: query_data, loading } = useQuery(GET_All_PUBLISHED_PRODUCTS, {
+    variables: {
+      limit: 10,
+      page: 1,
+    },
+  })
+
+  const data = query_data as { products: ProductResponseTypes[] }
+
+  const products = useMemo(() => {
     const combined = [
-      ...(data || []),
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      ...(data ? data.products : []),
       ...Templates,
       ...Mockups,
       ...Graphics,
       ...Magazines,
     ]
-    return { data: shuffleArray(combined) }
-  })
+
+    return {
+      data: shuffleArray(combined),
+    }
+  }, [data])
 
   return (
     <div className={'max-h-screen min-h-screen overflow-x-scroll w-full'}>
@@ -72,9 +85,9 @@ const DashboardContent = () => {
         </div>
       </div>
       {/* Grid views. */}
-      {isLoading ? (
+      {loading ? (
         <div>Loading...</div>
-      ) : data && data.length > 0 ? (
+      ) : data.products.length > 0 ? (
         <div>
           <Card iterable={products.data} />
         </div>

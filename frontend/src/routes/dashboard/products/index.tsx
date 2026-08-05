@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from '#/components/ui/dialog.tsx'
 import { useState } from 'react'
-import { FileQuestion, Plus } from 'lucide-react'
+import { FileQuestion, Loader, Plus } from 'lucide-react'
 import { Button } from '#/components/ui/button.tsx'
 import { Field, FieldGroup } from '#/components/ui/field.tsx'
 import { Label } from '#/components/ui/label.tsx'
@@ -31,6 +31,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Checkbox } from '#/components/ui/checkbox.tsx'
 import type {
   ProductFormTypes,
+  ProductResponseTypes,
   ProductTypes,
 } from '#/lib/types/ProductTypes.ts'
 import { ProductSchema } from '#/lib/types/ProductTypes.ts'
@@ -39,20 +40,28 @@ import {
   useAddProduct,
   useGetCategories,
   useGetTags,
-  useGetUserProducts,
 } from '#/components/queries/products/ProductQuery.ts'
 import AdminCard from '#/components/Dashboard/AdminCard.tsx'
+import { useQuery } from '@apollo/client/react'
+import { GET_USER_PRODUCTS } from '#/lib/query/product.ts'
 
 export const Route = createFileRoute('/dashboard/products/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { data, isLoading } = useGetUserProducts()
   const [isOpen, setIsOpen] = useState(false)
   const { mutateAsync } = useAddProduct()
   const { data: categoryData } = useGetCategories()
   const { data: tagsData } = useGetTags()
+  const { data, loading } = useQuery(GET_USER_PRODUCTS, {
+    variables: {
+      limit: 10,
+      page: 1,
+    },
+  })
+
+  const queryData = data as { user_products: ProductResponseTypes[] }
 
   const {
     register,
@@ -163,13 +172,20 @@ function RouteComponent() {
     }
   }
 
-  const hasNoProducts = !isLoading && (!data || data.length === 0)
-
   return (
     <div>
       <DashboardHeader />
       <div className={'p-10'}>
-        {hasNoProducts ? (
+        {loading && (
+          <div
+            className={
+              'spinner-border mt-50 w-full flex justify-center items-center'
+            }
+          >
+            <Loader />
+          </div>
+        )}
+        {!loading && !data ? (
           <div>
             <Empty>
               <EmptyHeader>
@@ -194,7 +210,12 @@ function RouteComponent() {
           </div>
         ) : (
           <div className={'w-full'}>
-            {data && <AdminCard iterable={data} title={'My products'} />}
+            {!loading && queryData.user_products.length > 0 && (
+              <AdminCard
+                iterable={queryData.user_products}
+                title={'My products'}
+              />
+            )}
           </div>
         )}
 
