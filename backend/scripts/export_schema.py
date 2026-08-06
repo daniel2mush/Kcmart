@@ -15,3 +15,6 @@ frontend_schema.write_text(schema_text)
 
 print(f"Backend schema: {backend_schema}")
 print(f"Frontend schema: {frontend_schema}")
+
+
+# python -m scripts.export_schema

@@ -85,7 +85,13 @@ const iconList: IconsTypes[] = [
 ]
 
 const NavBar = () => {
-  // const { isAuthenticated } = useRouteContext({ from: '__root__' })
+  // const [AuthChecker, setAuthChecker] = useState<boolean>(false)
+
+  // async function CheckAuth() {
+  //   const isAuthenticated = await getIsAuthenticated()
+  //   return !!isAuthenticated
+  // }
+
   const navRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const wasDashboardRef = useRef(false)
@@ -103,6 +109,20 @@ const NavBar = () => {
   const isRestoringFromDashboard =
     wasDashboardRef.current && !invalidPaths.includes(pathname)
   const shouldShowNav = hasPlayedIntroRef.current || isRestoringFromDashboard
+
+  // useEffect(() => {
+  //   async function Check() {
+  //     const isValid = await CheckAuth()
+  //
+  //     if (isValid) {
+  //       setAuthChecker(true)
+  //     } else {
+  //       setAuthChecker(false)
+  //     }
+  //   }
+  //
+  //   Check()
+  // }, [AuthChecker])
 
   useGSAP(
     () => {
@@ -251,6 +271,8 @@ const NavBar = () => {
     }
   }
   if (isDashboardRoute || invalidPaths.includes(pathname)) return
+
+  // if (AuthChecker) return null
 
   return (
     <>

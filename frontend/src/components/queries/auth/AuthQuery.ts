@@ -54,8 +54,6 @@ export const useLogout = () => {
         method: 'POST',
       })
 
-      console.log(res.status)
-
       if (res.status === 204) {
         return {
           detail: 'User logged out successfully',

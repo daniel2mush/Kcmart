@@ -10,12 +10,14 @@ export interface ProductResponseTypes {
   isFeatured?: boolean
   included: string[]
   categories: {
+    id?: string
     name: string
   }[]
   tags: {
+    id?: string
     name: string
   }[]
-  images: {
+  images?: {
     url: string
   }[]
   asset?: {
@@ -63,7 +65,6 @@ export const fileSchema = z
       message: 'Each file must be less than 5MB',
     }),
   )
-  .min(1, { message: 'At least one file is required' })
   .max(10, { message: 'Maximum 10 files allowed' })
 
 export const assetSchema = z
@@ -89,8 +90,8 @@ export const ProductSchema = z.object({
   included: z.array(z.string()).min(1, {
     message: 'At least one included item is required',
   }),
-  images: fileSchema,
-  asset_url: assetSchema,
+  images: fileSchema.optional(),
+  asset_url: assetSchema.optional(),
 })
 
 export interface GetProductsParams {

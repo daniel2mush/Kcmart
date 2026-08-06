@@ -21,5 +21,8 @@ class ProductUpdate:
     description: str | None = None
     price_cent: int | None = None
     included: list[str] | None = None
-    status: str | None = None
-    is_featured: bool | None = None
+
+
+@strawberry.input
+class PublishProductInput:
+    slug: str

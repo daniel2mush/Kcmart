@@ -288,6 +288,7 @@ SELECT
     ) AS asset_id
 
 FROM product p
+    
 """
 
 get_all_product = text(base_product_query)
@@ -295,6 +296,7 @@ get_all_product = text(base_product_query)
 
 get_user_product = text(base_product_query + """
     WHERE p.user_id = :id
+    ORDER BY p.created_at DESC 
     """)
 
 get_product_with_slug_query = text(base_product_query + """
@@ -331,9 +333,7 @@ update_product = text("""
                      slug = COALESCE(:slug, slug),
                      description = COALESCE(:description, description),
                      price_cent = COALESCE(:price_cent, price_cent),
-                     included = COALESCE(:included, included),
-                     status = COALESCE(:status, status),
-                     is_featured = COALESCE(:is_featured, is_featured)
+                     included = COALESCE(:included, included)
                  WHERE slug = :product_slug
                    AND user_id = :user_id
                  RETURNING slug
@@ -344,4 +344,12 @@ delete_product_query = text("""
         RETURNING id
 
 """)
-#
+
+publish_product_query = text("""
+UPDATE product
+SET 
+    status = 'PUBLISHED'    
+    WHERE slug = :slug AND user_id = :user_id
+    RETURNING id
+
+""")

@@ -1,4 +1,5 @@
 import uuid
+from unittest import result
 
 from fastapi import status
 from slugify import slugify
@@ -19,6 +20,7 @@ from sql.product_quries import (
     category_query,
     update_product,
     delete_product_query,
+    publish_product_query,
 )
 from schemas.product import ProductCreate, ProductUpdate
 from dependencies.initials import user
@@ -130,13 +132,11 @@ async def update_product_repo(
         "description": product.description,
         "price_cent": product.price_cent,
         "included": product.included,
-        "status": product.status,
-        "is_featured": product.is_featured,
         "product_slug": product_slug,
     }
 
-    result = await db.execute(update_product, params)
-    new_slug = result.scalar()
+    results = await db.execute(update_product, params)
+    new_slug = results.scalar()
 
     if not new_slug:
         raise AppException(
@@ -176,18 +176,18 @@ async def get_user_products(
     # Standard 1-based pagination formula
     offset = (page - 1) * limit
 
-    result = await db.execute(
+    results = await db.execute(
         get_user_product, {"offset": offset, "limit": limit, "id": user_id}
     )
-    products = result.mappings().all()
+    products = results.mappings().all()
     return products
 
 
 async def get_product_with_slug(db: AsyncSession, slug: str):
 
-    result = await db.execute(get_product_with_slug_query, {"slug": slug})
+    results = await db.execute(get_product_with_slug_query, {"slug": slug})
 
-    product = result.mappings().first()
+    product = results.mappings().first()
 
     if product is None:
         raise AppException(
@@ -196,3 +196,22 @@ async def get_product_with_slug(db: AsyncSession, slug: str):
             error_code="PRODUCT_NOT_FOUND",
         )
     return product
+
+
+async def publish_product_repo(db: AsyncSession, slug: str, user_id: uuid.UUID):
+
+    results = await db.execute(
+        publish_product_query, {"slug": slug, "user_id": user_id}
+    )
+
+    is_valid = results.scalar_one_or_none()
+
+    if is_valid is None:
+        raise AppException(
+            message="Product not found with this slug or you are not authorized to perform this action",
+            error_code="PRODUCT_NOT_FOUND_OR_NOT_AUTHORIZED",
+        )
+
+    await db.commit()
+
+    return True

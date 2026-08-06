@@ -4,7 +4,7 @@ import strawberry
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
 
 from gql.types import Product
-from ..inputs import ProductInput, ProductUpdate
+from ..inputs import ProductInput, ProductUpdate, PublishProductInput
 from repository.product_repo import (
     # create_product,
     # update_product_repo,
@@ -12,6 +12,7 @@ from repository.product_repo import (
     create_product,
     update_product_repo,
     delete_product_repo,
+    publish_product_repo,
 )
 
 
@@ -57,8 +58,20 @@ class ProductMutation:
             raise Exception("Authentication required")
 
         db = info.context.db
-        user = info.context.current_user
 
         res = await delete_product_repo(slug=slug, db=db, user_id=user.id)
 
+        return res
+
+    @strawberry.mutation(description="Publish a product")
+    async def publish_product(
+        self, info: strawberry.Info, data: PublishProductInput
+    ) -> bool:
+        user = info.context.current_user
+
+        if not user:
+            raise Exception("Authentication required")
+
+        db = info.context.db
+        res = await publish_product_repo(db=db, slug=data.slug, user_id=user.id)
         return res

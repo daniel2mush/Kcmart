@@ -1,8 +1,14 @@
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { Link } from '@tanstack/react-router'
-import { ArrowRight, FolderOpen, MoreHorizontal, Tag } from 'lucide-react'
+import {
+  ArrowRight,
+  FolderOpen,
+  Loader,
+  MoreHorizontal,
+  Tag,
+} from 'lucide-react'
 import { Badge } from '#/components/ui/badge.tsx'
 
 import type { ProductResponseTypes } from '#/lib/types/ProductTypes.ts'
@@ -12,12 +18,24 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from '#/components/ui/dropdown-menu'
+import {
+  deleteStorageFiles,
+  getStoragePath,
+} from '#/lib/helpers/productHelper.ts'
+import {
+  DELETE_PRODUCT,
+  GET_USER_PRODUCTS,
+  PUBLISH_PRODUCT,
+} from '#/lib/query/product.ts'
+import { toast } from 'sonner'
+import { useMutation } from '@apollo/client/react'
 
 interface CardProps {
   title?: string
   viewMoreLink?: string
   iterable: ProductResponseTypes[]
   sliceValue?: number
+  getProductSlug?: (slug: string) => void
 }
 
 const AdminCard = ({
@@ -25,17 +43,102 @@ const AdminCard = ({
   title,
   viewMoreLink,
   sliceValue,
+  getProductSlug,
 }: CardProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
+
+  /* ---------------------------------------------------------------------------------*/
+
+  const [delete_product] = useMutation(DELETE_PRODUCT)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const displayItems = useMemo(
     () => (sliceValue ? iterable.slice(0, sliceValue) : iterable),
     [iterable, sliceValue],
   )
 
+  const [publish_product] = useMutation(PUBLISH_PRODUCT)
+
+  const [isPublishing, setIsPublishing] = useState(false)
+  const [productid, setProductId] = useState<string | null>(null)
+  /* ---------------------------------------------------------------------------------*/
+
+  async function handleDelete(
+    slug: string,
+    image_urls: string[],
+    asset_url: string,
+  ) {
+    setIsDeleting(true)
+    try {
+      const imagePaths = image_urls.map(getStoragePath)
+
+      const assetPath = getStoragePath(asset_url)
+
+      await deleteStorageFiles([...imagePaths, assetPath])
+
+      await delete_product({
+        variables: {
+          slug,
+        },
+        refetchQueries: [
+          {
+            query: GET_USER_PRODUCTS,
+            variables: {
+              page: 1,
+              limit: 10,
+            },
+          },
+        ],
+      })
+
+      setIsDeleting(false)
+      setProductId(null)
+      toast.success('Product deleted')
+    } catch (error) {
+      console.error(error)
+
+      toast.error('Failed to delete product')
+      setIsDeleting(false)
+      setProductId(null)
+    }
+  }
+
+  /* ---------------------------------------------------------------------------------*/
+
+  async function handlePublish(slug: string) {
+    setIsPublishing(true)
+    const { error } = await publish_product({
+      variables: {
+        slug: slug,
+      },
+      refetchQueries: [
+        {
+          query: GET_USER_PRODUCTS,
+          variables: {
+            page: 1,
+            limit: 10,
+          },
+        },
+      ],
+    })
+    if (!error) {
+      setIsPublishing(false)
+      setProductId(null)
+
+      toast.success('Product published')
+      return
+    }
+    console.log(error)
+    toast.error(error.message)
+    setIsPublishing(false)
+    setProductId(null)
+  }
+
   /**
    * Container entrance animation
    */
+  /* ---------------------------------------------------------------------------------*/
+
   useGSAP(
     () => {
       if (!containerRef.current) return
@@ -53,6 +156,8 @@ const AdminCard = ({
   /**
    * Cards stagger animation
    */
+  /* ---------------------------------------------------------------------------------*/
+
   useGSAP(
     () => {
       if (!containerRef.current || displayItems.length === 0) return
@@ -81,6 +186,8 @@ const AdminCard = ({
       scope: containerRef,
     },
   )
+
+  /* ---------------------------------------------------------------------------------*/
 
   return (
     <section
@@ -212,7 +319,12 @@ const AdminCard = ({
                   </Badge>
 
                   {/* Menu */}
-                  <DropdownMenu>
+                  <DropdownMenu
+                    onOpenChange={(isOpen) => {
+                      setProductId(isOpen ? product.id : null)
+                    }}
+                    open={product.id === productid}
+                  >
                     <DropdownMenuTrigger asChild>
                       <button
                         type="button"
@@ -248,19 +360,50 @@ const AdminCard = ({
                         backproduct-blur-2xl
                       "
                     >
-                      <DropdownMenuItem className="cursor-pointer rounded-xl px-3 py-2.5">
+                      <DropdownMenuItem
+                        onClick={() => {
+                          if (getProductSlug) {
+                            getProductSlug(product.slug)
+                          }
+                        }}
+                        className="cursor-pointer rounded-xl px-3 py-2.5"
+                      >
                         Edit
                       </DropdownMenuItem>
 
-                      <DropdownMenuItem
-                        className={`cursor-pointer rounded-xl px-3 py-2.5 ${product.isFeatured ? ' ' : 'text-green-600!'}`}
-                      >
-                        {product.isFeatured ? 'Unpublish' : 'Publish'}
-                      </DropdownMenuItem>
+                      {product.status != 'PUBLISHED' && (
+                        <DropdownMenuItem
+                          disabled={isPublishing}
+                          onSelect={(e) => e.preventDefault()}
+                          className={`cursor-pointer rounded-xl px-3 py-2.5 text-green-600!`}
+                          onClick={() => handlePublish(product.slug)}
+                        >
+                          {isPublishing ? (
+                            <div
+                              className={
+                                'w-full h-full flex justify-center items-center'
+                              }
+                            >
+                              <Loader />
+                            </div>
+                          ) : (
+                            'Publish'
+                          )}
+                        </DropdownMenuItem>
+                      )}
 
                       <div className="my-1 h-px bg-border/50" />
 
                       <DropdownMenuItem
+                        disabled={isDeleting}
+                        onSelect={(e) => e.preventDefault()}
+                        onClick={() =>
+                          handleDelete(
+                            product.slug,
+                            product.images.map((d) => d.url),
+                            product.asset!.url,
+                          )
+                        }
                         className="
                           cursor-pointer
                           rounded-xl
@@ -269,7 +412,17 @@ const AdminCard = ({
                           focus:text-red-500!
                         "
                       >
-                        Delete
+                        {isDeleting ? (
+                          <div
+                            className={
+                              'w-full h-full flex justify-center items-center'
+                            }
+                          >
+                            <Loader />
+                          </div>
+                        ) : (
+                          'Delete'
+                        )}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

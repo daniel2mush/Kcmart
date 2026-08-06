@@ -1,8 +1,3 @@
-schema {
-  query: ProductQuery
-  mutation: ProductMutation
-}
-
 type Asset {
   id: UUID!
   url: String!
@@ -21,6 +16,19 @@ type Images {
   id: UUID!
   url: String!
   position: Int!
+}
+
+type Mutation {
+  create_product(data: ProductInput!): Product!
+
+  """This is to update the product"""
+  updateProduct(slug: String!, data: ProductUpdate!): Product!
+
+  """This is to delete a product"""
+  deleteProduct(slug: String!): Boolean!
+
+  """Publish a product"""
+  publishProduct(data: PublishProductInput!): Boolean!
 }
 
 type Product {
@@ -60,17 +68,18 @@ input ProductInput {
   categoriesIds: [UUID!]!
 }
 
-type ProductMutation {
-  create_product(data: ProductInput!): Product!
-
-  """This is to update the product"""
-  updateProduct(slug: String!, data: ProductUpdate!): Product!
-
-  """This is to delete a product"""
-  deleteProduct(slug: String!): Boolean!
+input ProductUpdate {
+  name: String = null
+  description: String = null
+  priceCent: Int = null
+  included: [String!] = null
 }
 
-type ProductQuery {
+input PublishProductInput {
+  slug: String!
+}
+
+type Query {
   """products"""
   products(page: Int! = 1, limit: Int! = 10): [Product!]!
 
@@ -79,15 +88,12 @@ type ProductQuery {
 
   """Product with slugs"""
   productWithSlug(slug: String!): Product!
-}
 
-input ProductUpdate {
-  name: String = null
-  description: String = null
-  priceCent: Int = null
-  included: [String!] = null
-  status: String = null
-  isFeatured: Boolean = null
+  """Get allCategories"""
+  categories: [Category!]!
+
+  """Get all tags"""
+  tags: [Tag!]!
 }
 
 type Tag {

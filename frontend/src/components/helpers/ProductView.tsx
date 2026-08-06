@@ -4,12 +4,25 @@ import { ArrowLeft, ShoppingBag } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Graphics, Magazines, Mockups, Templates } from '#/lib/staticResources'
 import { Card } from './Card'
+import { getIsAuthenticated } from '#/lib/helpers/authentication/authenticate.ts'
+import { useEffect, useState } from 'react'
 
 const ProductView = ({
   validProduct,
 }: {
   validProduct: ProductResponseTypes
 }) => {
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  async function CheckAuth() {
+    const response = await getIsAuthenticated()
+    setLoggedIn(!!response)
+  }
+
+  useEffect(() => {
+    CheckAuth()
+  }, [loggedIn])
+
   function GetProductCategory(params: string) {
     switch (params) {
       case 'Templates':
@@ -42,7 +55,7 @@ const ProductView = ({
   }
 
   const productCategory = GetProductCategory(derivedType)
-  const link = `/${derivedType.toLowerCase()}`
+  const link = loggedIn ? '/dashboard' : `/${derivedType.toLowerCase()}`
   return (
     <div className=" max-w-500 min-h-screen flex justify-center items-center mx-auto">
       {/* This is where the grid starts */}
@@ -66,7 +79,7 @@ const ProductView = ({
               to={link}
               className="flex items-center gap-2 mb-4 text-sm text-muted"
             >
-              <ArrowLeft /> {derivedType}
+              <ArrowLeft /> {loggedIn ? 'Dashboard' : derivedType}
             </Link>
             <h1 className=" text-3xl font-bold md:text-6xl text-secondary">
               {validProduct.name}

@@ -3,6 +3,7 @@ import { createServerFn } from '@tanstack/react-start'
 // Import directly from TanStack's server utilities:
 import { getRequestHeaders } from '@tanstack/react-start/server'
 import axios from 'axios'
+import { redirect } from '@tanstack/react-router'
 
 export const getIsAuthenticated = createServerFn({
   method: 'GET',
@@ -23,3 +24,33 @@ export const getIsAuthenticated = createServerFn({
     return null
   }
 })
+
+export async function requireAuth() {
+  const user = await getIsAuthenticated()
+
+  if (!user) {
+    throw redirect({
+      to: '/signin',
+    })
+  }
+
+  return user
+}
+
+export async function requireGuest() {
+  const user = await getIsAuthenticated()
+
+  if (user) {
+    throw redirect({
+      to: '/dashboard',
+    })
+  }
+}
+
+export async function alreadyAuthenticated() {
+  const user = await getIsAuthenticated()
+  if (user) {
+    return user
+  }
+  return null
+}

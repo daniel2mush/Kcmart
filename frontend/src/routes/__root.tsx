@@ -11,12 +11,12 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 
 import appCss from '../styles.css?url'
 
-import NavBar from '#/components/NavBar'
 import Footer from '#/components/Footer'
 import { Toaster } from 'sonner'
 import NotFound from '#/components/NotFound.tsx'
 import { ApolloProvider } from '@apollo/client/react'
 import { apollo } from '#/lib/apollo.ts'
+import NavSwitcher from '#/components/helpers/NavSwitcher.tsx'
 
 export const Route = createRootRouteWithContext()({
   head: () => ({
@@ -83,7 +83,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <NavBar />
+        <NavSwitcher />
         <ApolloProvider client={apollo}>{children}</ApolloProvider>
         <Footer />
         <Toaster richColors={true} />

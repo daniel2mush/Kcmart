@@ -35,6 +35,9 @@ export const GET_USER_PRODUCTS = gql`
       images {
         url
       }
+      asset {
+        url
+      }
       status
       isFeatured
       categories {
@@ -61,11 +64,97 @@ export const GET_PRODUCT_WITH_SLUG = gql`
       }
       status
       categories {
+        id
         name
       }
       tags {
+        id
         name
       }
+    }
+  }
+`
+
+export const CREATE_PRODUCT = gql`
+  mutation createProduct(
+    $name: String!
+    $description: String!
+    $priceCent: Int!
+    $included: [String!]!
+    $categoriesIds: [UUID!]!
+    $tagIds: [UUID!]!
+    $images: [String!]!
+    $assetUrl: String!
+  ) {
+    create_product(
+      data: {
+        name: $name
+        description: $description
+        priceCent: $priceCent
+        included: $included
+        categoriesIds: $categoriesIds
+        tagIds: $tagIds
+        images: $images
+        assetUrl: $assetUrl
+      }
+    ) {
+      id
+    }
+  }
+`
+
+export const PUBLISH_PRODUCT = gql`
+  mutation publish_product($slug: String!) {
+    publishProduct(data: { slug: $slug })
+  }
+`
+
+export const DELETE_PRODUCT = gql`
+  mutation delete_product($slug: String!) {
+    deleteProduct(slug: $slug)
+  }
+`
+
+// export const UPDATE_PRODUCT = gql`
+//   mutation update_product(
+//     $slug: String!
+//     $name: String
+//     $description: String
+//     $priceCent: Int
+//     $included: [String!]
+//   ) {
+//     updateProduct(
+//       slug: $slug
+//       data: {
+//         name: $name
+//         description: $description
+//         priceCent: $priceCent
+//         included: $included
+//       }
+//     ) {
+//       id
+//     }
+//   }
+// `
+
+export const UPDATE_PRODUCT = gql`
+  mutation update_product(
+    $name: String!
+    $description: String!
+    $priceCent: Int!
+    $included: [String!]!
+    $slug: String!
+  ) {
+    updateProduct(
+      slug: $slug
+      data: {
+        name: $name
+        description: $description
+        priceCent: $priceCent
+        included: $included
+      }
+    ) {
+      id
     }
   }
 `
