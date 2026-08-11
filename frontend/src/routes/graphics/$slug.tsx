@@ -49,7 +49,7 @@ function RouteComponent() {
 
   return (
     <div>
-      <ProductView validProduct={validProduct} />
+      <ProductView product={validProduct} />
     </div>
   )
 }

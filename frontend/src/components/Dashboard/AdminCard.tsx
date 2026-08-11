@@ -276,7 +276,7 @@ const AdminCard = ({
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
                 <img
-                  src={product.images[0].url}
+                  src={product.images![0].url}
                   alt={product.name}
                   loading="lazy"
                   className="
@@ -400,7 +400,7 @@ const AdminCard = ({
                         onClick={() =>
                           handleDelete(
                             product.slug,
-                            product.images.map((d) => d.url),
+                            product.images!.map((d) => d.url),
                             product.asset!.url,
                           )
                         }

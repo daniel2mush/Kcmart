@@ -49,7 +49,7 @@ function RouteComponent() {
 
   return (
     <div>
-      <ProductView validProduct={validProduct as ProductResponseTypes} />
+      <ProductView product={validProduct} />
     </div>
   )
 }

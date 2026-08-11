@@ -291,7 +291,7 @@ FROM product p
     
 """
 
-get_all_product = text(base_product_query)
+get_all_product = text(base_product_query + """ WHERE status = 'PUBLISHED' """)
 
 
 get_user_product = text(base_product_query + """

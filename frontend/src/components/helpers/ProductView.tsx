@@ -7,11 +7,7 @@ import { Card } from './Card'
 import { getIsAuthenticated } from '#/lib/helpers/authentication/authenticate.ts'
 import { useEffect, useState } from 'react'
 
-const ProductView = ({
-  validProduct,
-}: {
-  validProduct: ProductResponseTypes
-}) => {
+const ProductView = ({ product }: { product: ProductResponseTypes }) => {
   const [loggedIn, setLoggedIn] = useState(false)
 
   async function CheckAuth() {
@@ -38,8 +34,8 @@ const ProductView = ({
     }
   }
 
-  const categories = validProduct.categories.map((category) => category.name)
-  const tags = validProduct.tags.map((tag) => tag.name)
+  const categories = product.categories.map((category) => category.name)
+  const tags = product.tags.map((tag) => tag.name)
 
   let derivedType = 'Templates'
   if (categories.includes('MOCKUPS')) {
@@ -63,7 +59,7 @@ const ProductView = ({
         <div className=" relative grid grid-cols-1 md:grid-cols-2 w-full gap-15">
           <div>
             <div className="">
-              {validProduct.images.map((image, index) => (
+              {product.images!.map((image, index) => (
                 <img
                   key={index}
                   src={image.url}
@@ -82,23 +78,23 @@ const ProductView = ({
               <ArrowLeft /> {loggedIn ? 'Dashboard' : derivedType}
             </Link>
             <h1 className=" text-3xl font-bold md:text-6xl text-secondary">
-              {validProduct.name}
+              {product.name}
             </h1>
             <p className=" space-x-4 text-sm text-muted">
-              {validProduct.categories.map((cat, i) => (
+              {product.categories.map((cat, i) => (
                 <span key={i} className=" bg-muted/10 px-3 py-2 rounded-lg">
                   {cat.name}
                 </span>
               ))}
 
-              {validProduct.tags.map((tag, i) => (
+              {product.tags.map((tag, i) => (
                 <span key={i} className=" bg-muted/10 px-3 py-2 rounded-lg">
                   {tag.name}
                 </span>
               ))}
             </p>
 
-            <p className=" text-secondary">{validProduct.description}</p>
+            <p className=" text-secondary">{product.description}</p>
 
             <div>
               <h3 className=" font-bold text-secondary text-xl">
@@ -107,7 +103,7 @@ const ProductView = ({
 
               {
                 <ul className="list-disc pl-5 space-y-2 mt-10">
-                  {validProduct.included.map((item, index) => (
+                  {product.included.map((item, index) => (
                     <li key={index} className="text-secondary">
                       {item}
                     </li>
@@ -118,7 +114,7 @@ const ProductView = ({
             {/* Button for buy now  */}
             <Button className=" w-full text-app cursor-pointer">
               <ShoppingBag />
-              Buy Now
+              Buy Now <b>${(product.priceCent / 100).toFixed(2)}</b>
             </Button>
           </div>
         </div>

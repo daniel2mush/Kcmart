@@ -5,7 +5,7 @@ export const latestDrops: ProductResponseTypes[] = [
     id: 'xK9v_m4B8fP2zR1vL5T3w',
     slug: 'ipod-prod-mockup',
     name: 'Ipod Prod mockup',
-    priceCent: 100,
+    priceCent: 10000,
     status: 'published',
     isFeatured: true,
     description:
@@ -35,7 +35,7 @@ export const latestDrops: ProductResponseTypes[] = [
     id: 'Q78nJ-Xy9_P2M4zR1vL5c',
     slug: 'distort-collection-mockup',
     name: 'Distort Collection mockup',
-    priceCent: 150,
+    priceCent: 15000,
     status: 'published',
     isFeatured: false,
     images: [
@@ -65,7 +65,7 @@ export const latestDrops: ProductResponseTypes[] = [
     id: 'c5b8_F3mX9fP2zR1vL5T3',
     slug: 'mackbook-pro-mockup',
     name: 'Mackbook Pro mockup',
-    priceCent: 120,
+    priceCent: 12000,
     status: 'published',
     isFeatured: false,
     images: [
@@ -98,7 +98,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'a2C4_e6G8i0K2m4O6q8S0',
     slug: 'text-templates',
     name: 'Text TEMPLATES',
-    priceCent: 50,
+    priceCent: 5000,
     status: 'published',
     isFeatured: false,
     images: [
@@ -128,7 +128,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'b3D5_f7H9j1L3n5P7r9T1',
     slug: 'flyers-templates',
     name: 'Flyers TEMPLATES',
-    priceCent: 70,
+    priceCent: 7000,
     status: 'published',
     isFeatured: false,
     images: [
@@ -158,7 +158,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'c4E6_g8I0k2M4o6Q8s0U2',
     slug: 'product-catalog-templates',
     name: 'Product Catalog TEMPLATES',
-    priceCent: 90,
+    priceCent: 9000,
     status: 'published',
     isFeatured: false,
     images: [
@@ -188,7 +188,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'd5F7_h9J1l3N5p7R9t1V3',
     slug: 'social-media-post-templates',
     name: 'Social Media Post TEMPLATES',
-    priceCent: 65,
+    priceCent: 6500,
     status: 'published',
     isFeatured: false,
     images: [
@@ -218,7 +218,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'e6G8_i0K2m4O6q8S0u2W4',
     slug: 'newsletter-templates',
     name: 'Newsletter TEMPLATES',
-    priceCent: 75,
+    priceCent: 7500,
     status: 'published',
     isFeatured: false,
     images: [
@@ -248,7 +248,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'f7H9_j1L3n5P7r9T1v3X5',
     slug: 'business-card-templates',
     name: 'Business Card TEMPLATES',
-    priceCent: 55,
+    priceCent: 5500,
     status: 'published',
     isFeatured: false,
     images: [
@@ -278,7 +278,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'g8I0_k2M4o6Q8s0U2w4Y6',
     slug: 'presentation-deck-templates',
     name: 'Presentation Deck TEMPLATES',
-    priceCent: 85,
+    priceCent: 850,
     status: 'published',
     isFeatured: false,
     images: [
@@ -308,7 +308,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'h9J1_l3N5p7R9t1V3x5Z7',
     slug: 'event-invitation-templates',
     name: 'Event Invitation TEMPLATES',
-    priceCent: 60,
+    priceCent: 600,
     status: 'published',
     isFeatured: false,
     images: [
@@ -338,7 +338,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'i0K2_m4O6q8S0u2W4y6A8',
     slug: 'brochure-templates',
     name: 'Brochure TEMPLATES',
-    priceCent: 80,
+    priceCent: 800,
     status: 'published',
     isFeatured: false,
     images: [
@@ -368,7 +368,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'j1L3_n5P7r9T1v3X5z7B9',
     slug: 'portfolio-templates',
     name: 'Portfolio TEMPLATES',
-    priceCent: 95,
+    priceCent: 9500,
     status: 'published',
     isFeatured: false,
     images: [
@@ -398,7 +398,7 @@ export const Templates: ProductResponseTypes[] = [
     id: 'k2M4_o6Q8s0U2w4Y6a8C0',
     slug: 'distort-collection-mockup',
     name: 'Distort Collection mockup',
-    priceCent: 150,
+    priceCent: 15000,
     status: 'published',
     isFeatured: false,
     images: [
@@ -431,7 +431,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 'l3N5_p7R9t1V3x5Z7b9D1',
     slug: 'iphone-mockup',
     name: 'Iphone Mockup',
-    priceCent: 100,
+    priceCent: 10000,
     status: 'published',
     isFeatured: false,
     description:
@@ -461,7 +461,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 'm4O6_q8S0u2W4y6A8c0E2',
     slug: 'laptop-mockup',
     name: 'Laptop Mockup',
-    priceCent: 120,
+    priceCent: 12000,
     status: 'published',
     isFeatured: false,
     description:
@@ -491,7 +491,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 'n5P7_r9T1v3X5z7B9d1F3',
     slug: 'digital-art-mockup',
     name: 'Digital Art Mockup',
-    priceCent: 80,
+    priceCent: 800,
     status: 'published',
     isFeatured: false,
     description:
@@ -515,7 +515,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 'o6Q8_s0U2w4Y6a8C0e2G4',
     slug: 'camera-mockup',
     name: 'Camera Mockup',
-    priceCent: 90,
+    priceCent: 900,
     status: 'published',
     isFeatured: false,
     description:
@@ -539,7 +539,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 'p7R9_t1V3x5Z7b9D1f3H5',
     slug: 'headphones-mockup',
     name: 'Headphones Mockup',
-    priceCent: 110,
+    priceCent: 1100,
     status: 'published',
     isFeatured: false,
     description:
@@ -563,7 +563,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 'q8S0_u2W4y6A8c0E2g4I6',
     slug: 'watch-mockup',
     name: 'Watch Mockup',
-    priceCent: 95,
+    priceCent: 950,
     status: 'published',
     isFeatured: false,
     description:
@@ -590,7 +590,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 'r9T1_v3X5z7B9d1F3h5J7',
     slug: 't-shirt-mockup',
     name: 'T-Shirt Mockup',
-    priceCent: 85,
+    priceCent: 850,
     status: 'published',
     isFeatured: false,
     description:
@@ -617,7 +617,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 's0U2_w4Y6a8C0e2G4i6K8',
     slug: 'poster-mockup',
     name: 'Poster Mockup',
-    priceCent: 75,
+    priceCent: 750,
     status: 'published',
     isFeatured: false,
     description:
@@ -644,7 +644,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 't1V3_x5Z7b9D1f3H5j7L9',
     slug: 'packaging-mockup',
     name: 'Packaging Mockup',
-    priceCent: 105,
+    priceCent: 1050,
     status: 'published',
     isFeatured: false,
     description:
@@ -671,7 +671,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 'u2W4_y6A8c0E2g4I6k8M0',
     slug: 'book-cover-mockup',
     name: 'Book Cover Mockup',
-    priceCent: 88,
+    priceCent: 880,
     status: 'published',
     isFeatured: false,
     description:
@@ -698,7 +698,7 @@ export const Mockups: ProductResponseTypes[] = [
     id: 'v3X5_z7B9d1F3h5J7l9N1',
     slug: 'ipod-prod-mockup',
     name: 'Ipod Prod mockup',
-    priceCent: 100,
+    priceCent: 1000,
     status: 'published',
     isFeatured: true,
     description:
@@ -731,7 +731,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'w4Y6_a8C0e2G4i6K8m0O2',
     slug: 'logo-kit',
     name: 'Logo Kit',
-    priceCent: 45,
+    priceCent: 450,
     status: 'published',
     isFeatured: false,
     description:
@@ -761,7 +761,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'x5Z7_b9D1f3H5j7L9n1P3',
     slug: 'illustration-pack',
     name: 'Illustration Pack',
-    priceCent: 60,
+    priceCent: 600,
     status: 'published',
     isFeatured: false,
     description:
@@ -788,7 +788,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'y6A8_c0E2g4I6k8M0o2Q4',
     slug: 'icon-set',
     name: 'Icon Set',
-    priceCent: 30,
+    priceCent: 300,
     status: 'published',
     isFeatured: false,
     description:
@@ -815,7 +815,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'z7B9_d1F3h5J7l9N1p3R5',
     slug: 'pattern-collection',
     name: 'Pattern Collection',
-    priceCent: 38,
+    priceCent: 380,
     status: 'published',
     isFeatured: false,
     description:
@@ -842,7 +842,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'a8C0_e2G4i6K8m0O2q4S6',
     slug: 'social-media-graphics',
     name: 'Social Media Graphics',
-    priceCent: 52,
+    priceCent: 520,
     status: 'published',
     isFeatured: false,
     description:
@@ -869,7 +869,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'b9D1_f3H5j7L9n1P3r5T7',
     slug: 'infographic-bundle',
     name: 'Infographic Bundle',
-    priceCent: 48,
+    priceCent: 480,
     status: 'published',
     isFeatured: false,
     description:
@@ -896,7 +896,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'c0E2_g4I6k8M0o2Q4s6U8',
     slug: 'ui-elements-kit',
     name: 'UI Elements Kit',
-    priceCent: 65,
+    priceCent: 650,
     status: 'published',
     isFeatured: false,
     description:
@@ -923,7 +923,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'd1F3_h5J7l9N1p3R5t7V9',
     slug: 'business-card-graphics',
     name: 'Business Card Graphics',
-    priceCent: 42,
+    priceCent: 420,
     status: 'published',
     isFeatured: false,
     description:
@@ -950,7 +950,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'e2G4_i6K8m0O2q4S6u8W0',
     slug: 'sticker-pack',
     name: 'Sticker Pack',
-    priceCent: 36,
+    priceCent: 360,
     status: 'published',
     isFeatured: false,
     description:
@@ -977,7 +977,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'f3H5_j7L9n1P3r5T7v9X1',
     slug: 'poster-design-set',
     name: 'Poster Design Set',
-    priceCent: 70,
+    priceCent: 700,
     status: 'published',
     isFeatured: false,
     description:
@@ -1004,7 +1004,7 @@ export const Graphics: ProductResponseTypes[] = [
     id: 'g4I6_k8M0o2Q4s6U8w0Y2',
     slug: 'mackbook-pro-mockup',
     name: 'Mackbook Pro mockup',
-    priceCent: 120,
+    priceCent: 1200,
     status: 'published',
     isFeatured: false,
     images: [
@@ -1037,7 +1037,7 @@ export const Magazines: ProductResponseTypes[] = [
     id: 'h5J7_l9N1p3R5t7V9x1Z3',
     slug: 'magazine-cover-templates',
     name: 'Magazine Cover TEMPLATES',
-    priceCent: 85,
+    priceCent: 850,
     status: 'published',
     isFeatured: false,
     description:
@@ -1064,7 +1064,7 @@ export const Magazines: ProductResponseTypes[] = [
     id: 'i6K8_m0O2q4S6u8W0y2A4',
     slug: 'editorial-layout-set',
     name: 'Editorial Layout Set',
-    priceCent: 95,
+    priceCent: 950,
     status: 'published',
     isFeatured: false,
     description:
@@ -1091,7 +1091,7 @@ export const Magazines: ProductResponseTypes[] = [
     id: 'j7L9_n1P3r5T7v9X1z3B5',
     slug: 'fashion-magazine-kit',
     name: 'Fashion Magazine Kit',
-    priceCent: 75,
+    priceCent: 750,
     status: 'published',
     isFeatured: false,
     description:
@@ -1118,7 +1118,7 @@ export const Magazines: ProductResponseTypes[] = [
     id: 'k8M0_o2Q4s6U8w0Y2a4C6',
     slug: 'travel-magazine-kit',
     name: 'Travel Magazine Kit',
-    priceCent: 78,
+    priceCent: 780,
     status: 'published',
     isFeatured: false,
     description:
@@ -1145,7 +1145,7 @@ export const Magazines: ProductResponseTypes[] = [
     id: 'l9N1_p3R5t7V9x1Z3b5D7',
     slug: 'food-magazine-kit',
     name: 'Food Magazine Kit',
-    priceCent: 80,
+    priceCent: 800,
     status: 'published',
     isFeatured: false,
     description:
@@ -1172,7 +1172,7 @@ export const Magazines: ProductResponseTypes[] = [
     id: 'm0O2_q4S6u8W0y2A4c6E8',
     slug: 'tech-magazine-kit',
     name: 'Tech Magazine Kit',
-    priceCent: 82,
+    priceCent: 820,
     status: 'published',
     isFeatured: false,
     description:
@@ -1199,7 +1199,7 @@ export const Magazines: ProductResponseTypes[] = [
     id: 'n1P3_r5T7v9X1z3B5d7F9',
     slug: 'beauty-magazine-kit',
     name: 'Beauty Magazine Kit',
-    priceCent: 76,
+    priceCent: 760,
     status: 'published',
     isFeatured: false,
     description:
@@ -1226,7 +1226,7 @@ export const Magazines: ProductResponseTypes[] = [
     id: 'o2Q4_s6U8w0Y2a4C6e8G0',
     slug: 'lifestyle-magazine-kit',
     name: 'Lifestyle Magazine Kit',
-    priceCent: 79,
+    priceCent: 790,
     status: 'published',
     isFeatured: false,
     description:
@@ -1253,7 +1253,7 @@ export const Magazines: ProductResponseTypes[] = [
     id: 'p3R5_t7V9x1Z3b5D7f9H1',
     slug: 'sports-magazine-kit',
     name: 'Sports Magazine Kit',
-    priceCent: 74,
+    priceCent: 740,
     status: 'published',
     isFeatured: false,
     description:
@@ -1280,7 +1280,7 @@ export const Magazines: ProductResponseTypes[] = [
     id: 'q4S6_u8W0y2A4c6E8g0I2',
     slug: 'business-magazine-kit',
     name: 'Business Magazine Kit',
-    priceCent: 92,
+    priceCent: 920,
     status: 'published',
     isFeatured: false,
     description:

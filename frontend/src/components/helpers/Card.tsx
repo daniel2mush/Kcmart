@@ -116,15 +116,15 @@ export const Card = ({
 
       {/* Grid */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {displayItems.map((drop, index) => {
-          const category = drop.categories.map((c) => c.name)
-          const tags = drop.tags.slice(0, 3)
+        {displayItems.map((product, index) => {
+          const category = product.categories.map((c) => c.name)
+          const tags = product.tags.slice(0, 3)
 
-          const link = `/${category[0].toLowerCase()}/${drop.slug}`
+          const link = `/${category[0].toLowerCase()}/${product.slug}`
 
           return (
             <article
-              key={drop.id || index}
+              key={product.id || index}
               style={{
                 opacity: 0,
                 transform: 'translateY(30px)',
@@ -162,8 +162,8 @@ export const Card = ({
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
                 <img
-                  src={drop.images[0].url}
-                  alt={drop.name}
+                  src={product.images![0].url}
+                  alt={product.name}
                   loading="lazy"
                   className="
                     h-full w-full object-cover
@@ -181,7 +181,7 @@ export const Card = ({
                       bg-black/50
                       px-3 py-1.5
                       text-xs font-medium text-white
-                      backdrop-blur-md
+                      backproduct-blur-md
                     "
                   >
                     <FolderOpen size={12} />
@@ -197,7 +197,7 @@ export const Card = ({
                   border-t border-border/50
                   bg-surface/95
                   p-5
-                  backdrop-blur-md
+                  backproduct-blur-md
                   translate-y-20
                   transition-transform duration-500 ease-out
                   group-hover:translate-y-0
@@ -215,11 +215,11 @@ export const Card = ({
                         group-hover:text-primary
                       "
                     >
-                      {drop.name}
+                      {product.name}
                     </h3>
 
                     <span className="whitespace-nowrap text-lg font-bold text-primary">
-                      ${drop.priceCent}
+                      ${(product.priceCent / 100).toFixed(2)}
                     </span>
                   </div>
 
@@ -242,9 +242,9 @@ export const Card = ({
                         </span>
                       ))}
 
-                      {drop.tags.length > 3 && (
+                      {product.tags.length > 3 && (
                         <span className="self-center text-xs text-muted">
-                          +{drop.tags.length - 3} more
+                          +{product.tags.length - 3} more
                         </span>
                       )}
                     </div>
