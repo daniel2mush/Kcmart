@@ -9,7 +9,7 @@ import {
 import React, { useEffect, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import { Link, useLocation } from '@tanstack/react-router'
-import { gsap } from 'gsap'
+import gsap from 'gsap'
 import { useMediaQuery } from 'react-responsive'
 import {
   Collapsible,

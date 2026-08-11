@@ -1,7 +1,7 @@
 import PageLoader from '#/components/PageLoader'
 import { useGSAP } from '@gsap/react'
 import { useRouterState } from '@tanstack/react-router'
-import { gsap } from 'gsap'
+import gsap from 'gsap'
 import { useEffect, useRef, useState } from 'react'
 
 gsap.registerPlugin(useGSAP)
@@ -27,8 +27,12 @@ const waitForPageAssets = () => {
       }),
   )
 
-  const assetsPromise = Promise.all([waitForFonts, ...waitForImages]).then(() => undefined)
-  const timeoutPromise = new Promise<void>((resolve) => window.setTimeout(resolve, 500))
+  const assetsPromise = Promise.all([waitForFonts, ...waitForImages]).then(
+    () => undefined,
+  )
+  const timeoutPromise = new Promise<void>((resolve) =>
+    window.setTimeout(resolve, 500),
+  )
 
   return Promise.race([assetsPromise, timeoutPromise])
 }

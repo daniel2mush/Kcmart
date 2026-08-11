@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap'
+import gsap from 'gsap'
 import { Link } from '@tanstack/react-router'
 import {
   ArrowRight,

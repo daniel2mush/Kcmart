@@ -1,6 +1,6 @@
 import { Boxes, PackageSearch, ShoppingBag } from 'lucide-react'
 import { useRef } from 'react'
-import { gsap } from 'gsap'
+import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
 const PageLoader = () => {
@@ -15,25 +15,25 @@ const PageLoader = () => {
       tl.fromTo(
         '.loader-box',
         { scale: 0.8, opacity: 0, y: 20 },
-        { scale: 1, opacity: 1, y: 0, duration: 0.8 }
+        { scale: 1, opacity: 1, y: 0, duration: 0.8 },
       )
         .fromTo(
           '.loader-icons > *',
           { opacity: 0, x: -10 },
           { opacity: 1, x: 0, stagger: 0.15, duration: 0.5 },
-          '-=0.4'
+          '-=0.4',
         )
         .fromTo(
           '.loader-title',
           { opacity: 0, y: 15 },
           { opacity: 1, y: 0, duration: 0.6 },
-          '-=0.3'
+          '-=0.3',
         )
         .fromTo(
           '.loader-desc',
           { opacity: 0 },
           { opacity: 1, duration: 0.6 },
-          '-=0.2'
+          '-=0.2',
         )
 
       // Infinite floating animation for the box
@@ -45,7 +45,7 @@ const PageLoader = () => {
         yoyo: true,
       })
     },
-    { scope: container }
+    { scope: container },
   )
 
   return (
