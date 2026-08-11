@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react'
-import gsap from 'gsap'
+import { gsap } from 'gsap/dist/gsap'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight, FolderOpen, Tag } from 'lucide-react'
 import { useGSAP } from '@gsap/react'

@@ -1,7 +1,7 @@
 import PageLoader from '#/components/PageLoader'
 import { useGSAP } from '@gsap/react'
 import { useRouterState } from '@tanstack/react-router'
-import gsap from 'gsap'
+import { gsap } from 'gsap/dist/gsap'
 import { useEffect, useRef, useState } from 'react'
 
 gsap.registerPlugin(useGSAP)

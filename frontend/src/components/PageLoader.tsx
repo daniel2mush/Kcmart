@@ -1,6 +1,6 @@
 import { Boxes, PackageSearch, ShoppingBag } from 'lucide-react'
 import { useRef } from 'react'
-import gsap from 'gsap'
+import { gsap } from 'gsap/dist/gsap'
 import { useGSAP } from '@gsap/react'
 
 const PageLoader = () => {
