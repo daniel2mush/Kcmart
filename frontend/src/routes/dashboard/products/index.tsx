@@ -56,13 +56,6 @@ export const Route = createFileRoute('/dashboard/products/')({
 })
 
 function RouteComponent() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [productSlug, setProductSlug] = useState<string | null>(null)
-
-  const [update_product] = useMutation(UPDATE_PRODUCT)
-
-  const [isEditMode, setIsEditMode] = useState(false)
-
   // Register hidden/custom managed fields with react-hook-form
 
   // Watch current values to control checkbox states

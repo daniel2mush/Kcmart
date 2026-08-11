@@ -11,7 +11,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard
-
-// const Sidebar2 = () => {
-//   return <div>''This is new''</div>
-// }

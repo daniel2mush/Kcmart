@@ -3,6 +3,7 @@ import {
   Cuboid,
   FileType,
   Folder,
+  Home,
   Image,
   LayoutTemplate,
   LogOut,
@@ -22,7 +23,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '#/components/ui/collapsible.tsx'
-import { Link, useRouter } from '@tanstack/react-router'
+import { Link, useNavigate, useRouter } from '@tanstack/react-router'
 import { useGetUser, useLogout } from '../queries/auth/AuthQuery.ts'
 import { toast } from 'sonner'
 
@@ -32,6 +33,11 @@ type NavsTypes = {
   navIcons: React.ReactNode
 }
 const NavLisits: NavsTypes[] = [
+  {
+    navName: 'All',
+    navValue: 'all',
+    navIcons: <Home />,
+  },
   {
     navName: 'Templates',
     navValue: 'templates',
@@ -112,6 +118,18 @@ export default function Sidebar() {
 
   const user = data as User | null
 
+  const navigate = useNavigate()
+
+  function handleUrl(value: string) {
+    navigate({
+      to: '/dashboard',
+      search: {
+        page: 1,
+        category: value,
+      },
+    })
+  }
+
   return (
     <div
       className={`relative h-screen max-w-64 border-r border-border bg-surface ${isCollapsed ? 'w-20' : 'w-64'} transition-all duration-500 ease-in-out`}
@@ -155,6 +173,7 @@ export default function Sidebar() {
             return (
               <button
                 type="button"
+                onClick={() => handleUrl(nav.navValue)}
                 key={i}
                 title={isCollapsed ? nav.navName : undefined}
                 className="group mb-1 flex h-11 w-full cursor-pointer items-center gap-3 rounded-lg px-3 text-left text-sm font-medium text-muted transition-colors hover:bg-app hover:text-primary"

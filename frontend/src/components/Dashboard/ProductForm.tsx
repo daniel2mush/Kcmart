@@ -1,8 +1,6 @@
-import {
-  type ProductResponseTypes,
-  ProductSchema,
-} from '#/lib/types/ProductTypes'
+import { ProductSchema } from '#/lib/types/ProductTypes'
 import type {
+  ProductResponseTypes,
   CategoryTypes,
   TagsTypes,
   ProductFormTypes,
@@ -34,16 +32,18 @@ import { useMutation, useQuery } from '@apollo/client/react'
 import { GET_CATEGORIES } from '#/lib/query/category.ts'
 import { GET_TAGS } from '#/lib/query/tag.ts'
 import { Checkbox } from '#/components/ui/checkbox.tsx'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 interface ProductFormProps {
   setOpenDialogue: (value: boolean) => void
   productSlug?: string
+  clearProductSlug: () => void
 }
 
 export function ProductForm({
   setOpenDialogue,
   productSlug,
+  clearProductSlug,
 }: ProductFormProps) {
   const { data: categories_res, loading: category_loading } =
     useQuery(GET_CATEGORIES)
@@ -58,6 +58,8 @@ export function ProductForm({
       skip: !productSlug,
     },
   )
+
+  const [update_product, { loading: isUpdating }] = useMutation(UPDATE_PRODUCT)
 
   const isEditMode = productSlug != null
 
@@ -153,10 +155,51 @@ export function ProductForm({
     }
   }
 
-  useEffect(() => {
-    if (isEditMode && !product_slug_loading) {
-      console.log(product_data, 'Product data')
+  async function onUpdate(validData: ProductFormTypes) {
+    const { productWithSlug: product } = product_data as {
+      productWithSlug: ProductResponseTypes
+    }
+    const priceCents = Math.round(parseFloat(validData.price_cents) * 100)
 
+    const variables = {
+      name: validData.name,
+      description: validData.description,
+      priceCent: Number(priceCents),
+      included: validData.included,
+      categoriesIds: validData.categories,
+      tagIds: validData.tags,
+      slug: productSlug,
+      product_id: product.id,
+    }
+
+    const { error } = await update_product({
+      variables,
+      refetchQueries: [
+        {
+          query: GET_USER_PRODUCTS,
+          variables: {
+            page: 1,
+            limit: 10,
+          },
+        },
+      ],
+    })
+
+    if (!error) {
+      toast.success('Product Updated')
+      clearProductSlug()
+      setOpenDialogue(false)
+
+      return
+    }
+
+    toast.error(error.message)
+    clearProductSlug()
+    setOpenDialogue(false)
+  }
+
+  useEffect(() => {
+    if (isEditMode && !product_slug_loading && product_data) {
       const { productWithSlug: product } = product_data as {
         productWithSlug: ProductResponseTypes
       }
@@ -172,20 +215,24 @@ export function ProductForm({
         asset_url: undefined,
       })
     }
-  }, [product_slug_loading, isEditMode])
+  }, [product_data, product_slug_loading, isEditMode, reset])
 
   return (
     <>
       <form
-        onSubmit={handleSubmit(onSubmit, (form_errors) => {
-          console.log('FORM ERRORS:', form_errors)
-        })}
+        onSubmit={handleSubmit(
+          isEditMode ? onUpdate : onSubmit,
+          (form_errors) => {
+            console.log('FORM ERRORS:', form_errors)
+          },
+        )}
       >
         <DialogHeader>
           <DialogTitle>
             {/* { isEditMode ? 'Update product' : 'Add product'}*/}
             Add product
           </DialogTitle>
+
           <DialogDescription />
         </DialogHeader>
 
@@ -289,8 +336,8 @@ export function ProductForm({
           <Field>
             <Label htmlFor={'includes'}>Includes</Label>
             <Textarea
-              id={'includes'}
-              value={watch('included')}
+              id="includes"
+              value={(watch('included') ?? []).join('\n')}
               placeholder={
                 'One item per line\nExample:\nFigma file\nDocumentation'
               }
@@ -298,7 +345,7 @@ export function ProductForm({
                 const includes = e.target.value
                   .split('\n')
                   .map((item) => item.trim())
-                  .filter(Boolean)
+
                 setValue('included', includes, {
                   shouldValidate: true,
                   shouldDirty: true,
@@ -375,6 +422,7 @@ export function ProductForm({
                 // setProductSlug(null)
                 // setIsEditMode(false)
                 // reset()
+                clearProductSlug()
               }}
             >
               Cancel
@@ -386,7 +434,13 @@ export function ProductForm({
             disabled={isSubmitting}
             className={'text-black'}
           >
-            {isSubmitting ? 'Adding...' : 'Add product'}
+            {isEditMode
+              ? isUpdating
+                ? 'Updating...'
+                : 'Update'
+              : isSubmitting
+                ? 'Adding...'
+                : 'Add product'}
           </Button>
         </DialogFooter>
       </form>

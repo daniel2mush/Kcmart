@@ -69,10 +69,13 @@ input ProductInput {
 }
 
 input ProductUpdate {
+  id: UUID!
   name: String = null
   description: String = null
   priceCent: Int = null
   included: [String!] = null
+  tagIds: [UUID!]!
+  categoriesIds: [UUID!]!
 }
 
 input PublishProductInput {

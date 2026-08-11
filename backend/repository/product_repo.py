@@ -6,7 +6,7 @@ from slugify import slugify
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from exceptions.base import AppException
-from gql.inputs import ProductInput
+from gql.inputs import ProductInput, ProductUpdate
 
 from sql.product_quries import (
     get_all_product,
@@ -21,8 +21,9 @@ from sql.product_quries import (
     update_product,
     delete_product_query,
     publish_product_query,
+    delete_category_list_query,
+    delete_tag_list_query,
 )
-from schemas.product import ProductCreate, ProductUpdate
 from dependencies.initials import user
 
 
@@ -145,8 +146,18 @@ async def update_product_repo(
             error_code="PRODUCT_NOT_FOUND",
         )
 
-    await db.commit()
+    c_result = await db.execute(delete_category_list_query, {"product_id": product.id})
 
+    for category_id in product.categories_ids:
+        await db.execute(
+            category_query, {"category_id": category_id, "product_id": product.id}
+        )
+
+    await db.execute(delete_tag_list_query, {"product_id": product.id})
+    for tag_id in product.tag_ids:
+        await db.execute(tag_query, {"tag_id": tag_id, "product_id": product.id})
+
+    await db.commit()
     updated_product = await db.execute(get_product_with_slug_query, {"slug": new_slug})
 
     return updated_product.mappings().first()

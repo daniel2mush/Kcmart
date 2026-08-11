@@ -2,8 +2,10 @@ import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
 
 // import { errorLink } from './apollo_errors.ts'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const link = new HttpLink({
-  uri: 'http://localhost:8000/graphql',
+  uri: API_URL,
   credentials: 'include',
 })
 

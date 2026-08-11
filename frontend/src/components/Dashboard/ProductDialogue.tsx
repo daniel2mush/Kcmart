@@ -28,7 +28,16 @@ export function ProductDialogue({
 
   return (
     <>
-      <Dialog open={dialogueOpen} onOpenChange={setDialogueOpen}>
+      <Dialog
+        open={dialogueOpen}
+        onOpenChange={(open) => {
+          setDialogueOpen(open)
+
+          if (!open) {
+            clearProductSlug()
+          }
+        }}
+      >
         <DialogTrigger asChild className={'fixed bottom-20 right-10'}>
           <Button
             onClick={() => {
@@ -48,6 +57,7 @@ export function ProductDialogue({
           <ProductForm
             setOpenDialogue={(value) => setDialogueOpen(value)}
             productSlug={productSlug}
+            clearProductSlug={() => clearProductSlug()}
           />
         </DialogContent>
       </Dialog>

@@ -353,3 +353,14 @@ SET
     RETURNING id
 
 """)
+
+
+delete_category_list_query = text("""
+    DELETE FROM category_list
+    WHERE product_id = :product_id
+""")
+
+delete_tag_list_query = text("""
+    DELETE FROM tag_list
+    WHERE product_id = :product_id
+""")

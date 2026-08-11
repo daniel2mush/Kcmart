@@ -17,10 +17,13 @@ class ProductInput:
 
 @strawberry.input
 class ProductUpdate:
+    id: uuid.UUID
     name: str | None = None
     description: str | None = None
     price_cent: int | None = None
     included: list[str] | None = None
+    tag_ids: list[uuid.UUID]
+    categories_ids: list[uuid.UUID]
 
 
 @strawberry.input

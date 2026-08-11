@@ -144,6 +144,9 @@ export const UPDATE_PRODUCT = gql`
     $priceCent: Int!
     $included: [String!]!
     $slug: String!
+    $tagIds: [UUID!]!
+    $categoriesIds: [UUID!]!
+    $product_id: UUID!
   ) {
     updateProduct(
       slug: $slug
@@ -152,6 +155,9 @@ export const UPDATE_PRODUCT = gql`
         description: $description
         priceCent: $priceCent
         included: $included
+        categoriesIds: $categoriesIds
+        tagIds: $tagIds
+        id: $product_id
       }
     ) {
       id
