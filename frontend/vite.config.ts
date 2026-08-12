@@ -16,8 +16,12 @@ export default defineConfig({
   plugins: [
     devtools(),
     tanstackStart(),
-    // netlify(),
+    netlify(),
     tailwindcss(),
     viteReact(),
   ],
 })
+function netlify(): import("vite").PluginOption {
+    throw new Error('Function not implemented.')
+}
+
