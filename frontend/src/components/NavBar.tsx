@@ -7,9 +7,7 @@ import {
   X,
 } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
-import { useGSAP } from '@gsap/react'
 import { Link, useLocation } from '@tanstack/react-router'
-import { gsap } from 'gsap/dist/gsap'
 import { useMediaQuery } from 'react-responsive'
 import {
   Collapsible,
@@ -18,8 +16,6 @@ import {
 } from './ui/collapsible'
 import { Button } from './ui/button'
 
-gsap.registerPlugin(useGSAP)
-
 type navTypes = {
   title?: string
   link?: string
@@ -27,41 +23,17 @@ type navTypes = {
 }
 
 const navList: navTypes[] = [
-  {
-    title: 'Discover',
-    link: '/',
-  },
-  {
-    title: 'Templates',
-    link: '/templates',
-  },
-  {
-    title: 'Mockups',
-    link: '/mockups',
-  },
-  {
-    title: 'Graphics',
-    link: '/graphics',
-  },
+  { title: 'Discover', link: '/' },
+  { title: 'Templates', link: '/templates' },
+  { title: 'Mockups', link: '/mockups' },
+  { title: 'Graphics', link: '/graphics' },
 ]
 
 const moreNav: navTypes[] = [
-  {
-    title: 'Magazines',
-    link: '/magazines',
-  },
-  {
-    title: 'About',
-    link: '/about',
-  },
-  {
-    title: 'Support',
-    link: '/support',
-  },
-  {
-    title: 'Contact',
-    link: '/contact',
-  },
+  { title: 'Magazines', link: '/magazines' },
+  { title: 'About', link: '/about' },
+  { title: 'Support', link: '/support' },
+  { title: 'Contact', link: '/contact' },
 ]
 
 type IconsTypes = {
@@ -70,32 +42,17 @@ type IconsTypes = {
 }
 
 const iconList: IconsTypes[] = [
-  {
-    icon: <Instagram size={20} />,
-    link: 'http://instagram.com',
-  },
-  {
-    icon: <Facebook size={20} />,
-    link: 'http://facebook.com',
-  },
-  {
-    icon: <Twitter size={20} />,
-    link: 'http://twitter.com',
-  },
+  { icon: <Instagram size={20} />, link: 'http://instagram.com' },
+  { icon: <Facebook size={20} />, link: 'http://facebook.com' },
+  { icon: <Twitter size={20} />, link: 'http://twitter.com' },
 ]
 
 const NavBar = () => {
-  // const [AuthChecker, setAuthChecker] = useState<boolean>(false)
-
-  // async function CheckAuth() {
-  //   const isAuthenticated = await getIsAuthenticated()
-  //   return !!isAuthenticated
-  // }
-
   const navRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const wasDashboardRef = useRef(false)
   const hasPlayedIntroRef = useRef(false)
+
   const [isOpen, setIsOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isFixed, setIsFixed] = useState(false)
@@ -110,91 +67,62 @@ const NavBar = () => {
     wasDashboardRef.current && !invalidPaths.includes(pathname)
   const shouldShowNav = hasPlayedIntroRef.current || isRestoringFromDashboard
 
-  // useEffect(() => {
-  //   async function Check() {
-  //     const isValid = await CheckAuth()
-  //
-  //     if (isValid) {
-  //       setAuthChecker(true)
-  //     } else {
-  //       setAuthChecker(false)
-  //     }
-  //   }
-  //
-  //   Check()
-  // }, [AuthChecker])
+  // ---------- Intro animation (client-only) ----------
+  useEffect(() => {
+    if (
+      invalidPaths.includes(pathname) ||
+      !navRef.current ||
+      hasPlayedIntroRef.current
+    )
+      return
 
-  useGSAP(
-    () => {
-      if (
-        invalidPaths.includes(pathname) ||
-        !navRef.current ||
-        hasPlayedIntroRef.current
-      )
-        return
+    let ctx: any
 
-      const timeline = gsap.timeline({
-        defaults: { ease: 'power3.out', duration: 0.7 },
-      })
+    const run = async () => {
+      const { gsap } = await import('gsap')
 
-      timeline
-        .fromTo(
-          navRef.current,
-          {
-            y: -28,
-            filter: 'blur(10px)',
-          },
-          {
-            y: 0,
-            filter: 'blur(0px)',
-          },
-        )
-        .fromTo(
-          '.logo',
-          {
-            y: -12,
-            autoAlpha: 0,
-          },
-          {
-            y: 0,
-            autoAlpha: 1,
-          },
-          '-=0.35',
-        )
-        .fromTo(
-          '.nav-item',
-          {
-            y: -10,
-            autoAlpha: 0,
-          },
-          {
-            y: 0,
-            autoAlpha: 1,
-            stagger: 0.08,
-          },
-          '-=0.45',
-        )
-        .fromTo(
-          '.social-link',
-          {
-            scale: 0.75,
-            autoAlpha: 0,
-          },
-          {
-            scale: 1,
-            autoAlpha: 1,
-            stagger: 0.07,
-          },
-          '-=0.35',
-        )
+      ctx = gsap.context(() => {
+        const timeline = gsap.timeline({
+          defaults: { ease: 'power3.out', duration: 0.7 },
+        })
 
-      timeline.eventCallback('onComplete', () => {
-        hasPlayedIntroRef.current = true
-      })
-    },
-    { dependencies: [], scope: navRef },
-  )
+        timeline
+          .fromTo(
+            navRef.current,
+            { y: -28, filter: 'blur(10px)' },
+            { y: 0, filter: 'blur(0px)' },
+          )
+          .fromTo(
+            '.logo',
+            { y: -12, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1 },
+            '-=0.35',
+          )
+          .fromTo(
+            '.nav-item',
+            { y: -10, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, stagger: 0.08 },
+            '-=0.45',
+          )
+          .fromTo(
+            '.social-link',
+            { scale: 0.75, autoAlpha: 0 },
+            { scale: 1, autoAlpha: 1, stagger: 0.07 },
+            '-=0.35',
+          )
 
+        timeline.eventCallback('onComplete', () => {
+          hasPlayedIntroRef.current = true
+        })
+      }, navRef)
+    }
+
+    run()
+
+    return () => ctx?.revert?.()
+  }, [pathname])
+
+  // ---------- Dashboard route tracking ----------
   useEffect(() => {
     if (isDashboardRoute || invalidPaths.includes(pathname)) {
       wasDashboardRef.current = true
@@ -205,33 +133,44 @@ const NavBar = () => {
       hasPlayedIntroRef.current = true
       wasDashboardRef.current = false
     }
-  }, [invalidPaths.includes(pathname), isDashboardRoute])
+  }, [pathname, isDashboardRoute])
 
-  useGSAP(
-    () => {
-      if (!isMobileMenuOpen) return
+  // ---------- Mobile menu open animation ----------
+  useEffect(() => {
+    if (!isMobileMenuOpen || !mobileMenuRef.current) return
 
-      gsap.fromTo(
-        mobileMenuRef.current,
-        { yPercent: -100 },
-        { yPercent: 0, duration: 0.6, ease: 'power4.out' },
-      )
+    let ctx: any
 
-      gsap.fromTo(
-        '.mobile-nav-item',
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.1,
-          delay: 0.3,
-          ease: 'power3.out',
-        },
-      )
-    },
-    { dependencies: [isMobileMenuOpen], scope: mobileMenuRef },
-  )
+    const run = async () => {
+      const { gsap } = await import('gsap')
 
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          mobileMenuRef.current,
+          { yPercent: -100 },
+          { yPercent: 0, duration: 0.6, ease: 'power4.out' },
+        )
+
+        gsap.fromTo(
+          '.mobile-nav-item',
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+            delay: 0.3,
+            ease: 'power3.out',
+          },
+        )
+      }, mobileMenuRef)
+    }
+
+    run()
+
+    return () => ctx?.revert?.()
+  }, [isMobileMenuOpen])
+
+  // ---------- Scroll fixed state ----------
   useEffect(() => {
     const onScroll = () => setIsFixed(window.scrollY > 20)
     onScroll()
@@ -239,9 +178,11 @@ const NavBar = () => {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // ---------- Placeholder height ----------
   useEffect(() => {
     if (!navRef.current) return
     setPlaceholderHeight(navRef.current.offsetHeight)
+
     const ro = new ResizeObserver(() => {
       if (navRef.current) setPlaceholderHeight(navRef.current.offsetHeight)
     })
@@ -249,17 +190,15 @@ const NavBar = () => {
     return () => ro.disconnect()
   }, [])
 
-  // Prevent scroll when mobile menu is open
+  // ---------- Prevent body scroll when mobile menu open ----------
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
   }, [isMobileMenuOpen])
 
-  const toggleMobileMenu = () => {
+  // ---------- Toggle mobile menu (with GSAP close animation) ----------
+  const toggleMobileMenu = async () => {
     if (isMobileMenuOpen) {
+      const { gsap } = await import('gsap')
       gsap.to(mobileMenuRef.current, {
         yPercent: -100,
         duration: 0.5,
@@ -270,17 +209,21 @@ const NavBar = () => {
       setIsMobileMenuOpen(true)
     }
   }
-  if (isDashboardRoute || invalidPaths.includes(pathname)) return
 
-  // if (AuthChecker) return null
+  if (isDashboardRoute || invalidPaths.includes(pathname)) return null
 
   return (
     <>
       {isFixed && <div aria-hidden style={{ height: placeholderHeight }} />}
+
       <div
         ref={navRef}
         id="container"
-        className={`${isFixed ? 'fixed top-0 left-0 right-0 backdrop-blur-md bg-app/80 shadow-md' : 'fixed top-0'} z-1000 h-20 w-full px-6 md:px-10 py-5 transition-all duration-300`}
+        className={`${
+          isFixed
+            ? 'fixed top-0 left-0 right-0 backdrop-blur-md bg-app/80 shadow-md'
+            : 'fixed top-0'
+        } z-1000 h-20 w-full px-6 md:px-10 py-5 transition-all duration-300`}
       >
         <nav className="flex justify-between items-center max-w-7xl mx-auto">
           <Link
@@ -292,12 +235,12 @@ const NavBar = () => {
                 : { opacity: 0, visibility: 'hidden' }
             }
           >
-            <h1 className=" font-black text-2xl text-secondary">KCMart</h1>
+            <h1 className="font-black text-2xl text-secondary">KCMart</h1>
           </Link>
 
           {!isMobile ? (
             <>
-              <ul className=" content flex items-center justify-center gap-6 text-secondary">
+              <ul className="content flex items-center justify-center gap-6 text-secondary">
                 {navList.map((nav, i) => (
                   <div
                     key={i}
@@ -315,7 +258,7 @@ const NavBar = () => {
                           activeOptions={{ exact: true }}
                           activeProps={{
                             className:
-                              ' !text-primary w-full bg-surface rounded-md border border-border px-4 py-2',
+                              '!text-primary w-full bg-surface rounded-md border border-border px-4 py-2',
                           }}
                         >
                           {nav.title}
@@ -324,6 +267,7 @@ const NavBar = () => {
                     </li>
                   </div>
                 ))}
+
                 <div
                   className="nav-item"
                   style={
@@ -368,8 +312,9 @@ const NavBar = () => {
                   </li>
                 </div>
               </ul>
-              <div className=" flex items-center gap-10">
-                <div className=" social flex justify-center items-center gap-6 text-secondary">
+
+              <div className="flex items-center gap-10">
+                <div className="social flex justify-center items-center gap-6 text-secondary">
                   {iconList.map((icon, i) => (
                     <a
                       key={i}
@@ -388,7 +333,7 @@ const NavBar = () => {
                 <div>
                   <Link
                     to="/signin"
-                    className=" px-5 py-2 rounded-xl bg-app  border border-border text-secondary hover:text-primary cursor-pointer transition-colors hover:bg-app/80"
+                    className="px-5 py-2 rounded-xl bg-app border border-border text-secondary hover:text-primary cursor-pointer transition-colors hover:bg-app/80"
                   >
                     Sign In
                   </Link>
@@ -418,7 +363,7 @@ const NavBar = () => {
             {[...navList, ...moreNav].map((nav, i) => (
               <div key={i} className="mobile-nav-item">
                 <Link
-                  to={nav.link}
+                  to={nav.link!}
                   onClick={toggleMobileMenu}
                   className="text-4xl font-bold text-secondary hover:text-primary transition-colors"
                 >

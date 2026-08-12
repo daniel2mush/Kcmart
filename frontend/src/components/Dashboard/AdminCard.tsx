@@ -1,6 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
-import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap/dist/gsap'
+import { useMemo, useRef, useState, useEffect } from 'react'
 import { Link } from '@tanstack/react-router'
 import {
   ArrowRight,
@@ -10,7 +8,6 @@ import {
   Tag,
 } from 'lucide-react'
 import { Badge } from '#/components/ui/badge.tsx'
-
 import type { ProductResponseTypes } from '#/lib/types/ProductTypes.ts'
 import {
   DropdownMenu,
@@ -47,8 +44,6 @@ const AdminCard = ({
 }: CardProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
-  /* ---------------------------------------------------------------------------------*/
-
   const [delete_product] = useMutation(DELETE_PRODUCT)
   const [isDeleting, setIsDeleting] = useState(false)
 
@@ -58,11 +53,10 @@ const AdminCard = ({
   )
 
   const [publish_product] = useMutation(PUBLISH_PRODUCT)
-
   const [isPublishing, setIsPublishing] = useState(false)
   const [productid, setProductId] = useState<string | null>(null)
-  /* ---------------------------------------------------------------------------------*/
 
+  // ---------- Delete ----------
   async function handleDelete(
     slug: string,
     image_urls: string[],
@@ -71,22 +65,16 @@ const AdminCard = ({
     setIsDeleting(true)
     try {
       const imagePaths = image_urls.map(getStoragePath)
-
       const assetPath = getStoragePath(asset_url)
 
       await deleteStorageFiles([...imagePaths, assetPath])
 
       await delete_product({
-        variables: {
-          slug,
-        },
+        variables: { slug },
         refetchQueries: [
           {
             query: GET_USER_PRODUCTS,
-            variables: {
-              page: 1,
-              limit: 10,
-            },
+            variables: { page: 1, limit: 10 },
           },
         ],
       })
@@ -96,82 +84,64 @@ const AdminCard = ({
       toast.success('Product deleted')
     } catch (error) {
       console.error(error)
-
       toast.error('Failed to delete product')
       setIsDeleting(false)
       setProductId(null)
     }
   }
 
-  /* ---------------------------------------------------------------------------------*/
-
+  // ---------- Publish ----------
   async function handlePublish(slug: string) {
     setIsPublishing(true)
     const { error } = await publish_product({
-      variables: {
-        slug: slug,
-      },
+      variables: { slug },
       refetchQueries: [
         {
           query: GET_USER_PRODUCTS,
-          variables: {
-            page: 1,
-            limit: 10,
-          },
+          variables: { page: 1, limit: 10 },
         },
       ],
     })
+
     if (!error) {
       setIsPublishing(false)
       setProductId(null)
-
       toast.success('Product published')
       return
     }
+
     console.log(error)
     toast.error(error.message)
     setIsPublishing(false)
     setProductId(null)
   }
 
-  /**
-   * Container entrance animation
-   */
-  /* ---------------------------------------------------------------------------------*/
+  // ---------- GSAP (client-only) ----------
+  useEffect(() => {
+    let ctx: any
 
-  useGSAP(
-    () => {
+    const runAnimations = async () => {
       if (!containerRef.current) return
 
+      const { gsap } = await import('gsap')
+
+      // Container entrance
       gsap.to(containerRef.current, {
         y: 0,
         duration: 0.8,
         delay: 0.2,
         ease: 'power3.out',
       })
-    },
-    { scope: containerRef },
-  )
 
-  /**
-   * Cards stagger animation
-   */
-  /* ---------------------------------------------------------------------------------*/
-
-  useGSAP(
-    () => {
-      if (!containerRef.current || displayItems.length === 0) return
+      // Cards stagger
+      if (displayItems.length === 0) return
 
       const cards = gsap.utils.toArray('.card-item', containerRef.current)
-
       gsap.killTweensOf(cards)
 
       gsap.fromTo(
         cards,
-        {
-          opacity: 0,
-          y: 30,
-        },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
@@ -180,14 +150,15 @@ const AdminCard = ({
           ease: 'power3.out',
         },
       )
-    },
-    {
-      dependencies: [displayItems],
-      scope: containerRef,
-    },
-  )
+    }
 
-  /* ---------------------------------------------------------------------------------*/
+    runAnimations()
+
+    return () => {
+      // optional cleanup if you later store a context
+      ctx?.revert?.()
+    }
+  }, [displayItems])
 
   return (
     <section
@@ -201,7 +172,6 @@ const AdminCard = ({
           {title && (
             <>
               <div className="h-8 w-1 rounded-full bg-linear-to-b from-primary to-primary/20" />
-
               <h2 className="text-3xl font-bold tracking-tight text-secondary lg:text-4xl">
                 {title}
               </h2>
@@ -215,10 +185,8 @@ const AdminCard = ({
             className="group/view flex items-center gap-2 text-secondary/70 transition-colors duration-300 hover:text-secondary"
           >
             <span className="text-sm font-medium">View All</span>
-
             <div className="relative">
               <div className="absolute inset-0 scale-0 rounded-full bg-primary/20 transition-transform duration-300 group-hover/view:scale-150" />
-
               <ArrowRight
                 size={16}
                 className="relative transition-transform duration-300 group-hover/view:translate-x-1"
@@ -233,7 +201,6 @@ const AdminCard = ({
         {displayItems.map((product, index) => {
           const category = product.categories.map((c) => c.name)
           const tags = product.tags.slice(0, 3)
-
           const link = `/${category[0].toLowerCase()}/${product.slug}`
 
           return (
@@ -295,7 +262,7 @@ const AdminCard = ({
                       bg-black/50
                       px-3 py-1.5
                       text-xs font-medium text-white
-                      backproduct-blur-md
+                      backdrop-blur-md
                     "
                   >
                     <FolderOpen size={12} />
@@ -305,7 +272,6 @@ const AdminCard = ({
 
                 {/* Top Right Actions */}
                 <div className="absolute top-3 right-3 z-20 flex flex-col items-end gap-2">
-                  {/* Status */}
                   <Badge
                     className={
                       product.status === 'PUBLISHED'
@@ -318,7 +284,6 @@ const AdminCard = ({
                     {product.status}
                   </Badge>
 
-                  {/* Menu */}
                   <DropdownMenu
                     onOpenChange={(isOpen) => {
                       setProductId(isOpen ? product.id : null)
@@ -336,7 +301,7 @@ const AdminCard = ({
                           bg-black/40
                           text-white/80
                           shadow-lg
-                          backproduct-blur-xl
+                          backdrop-blur-xl
                           transition-all duration-300
                           hover:scale-105
                           hover:bg-black/60
@@ -357,7 +322,7 @@ const AdminCard = ({
                         bg-surface/95
                         p-2
                         shadow-2xl
-                        backproduct-blur-2xl
+                        backdrop-blur-2xl
                       "
                     >
                       <DropdownMenuItem
@@ -375,15 +340,11 @@ const AdminCard = ({
                         <DropdownMenuItem
                           disabled={isPublishing}
                           onSelect={(e) => e.preventDefault()}
-                          className={`cursor-pointer rounded-xl px-3 py-2.5 text-green-600!`}
+                          className="cursor-pointer rounded-xl px-3 py-2.5 text-green-600!"
                           onClick={() => handlePublish(product.slug)}
                         >
                           {isPublishing ? (
-                            <div
-                              className={
-                                'w-full h-full flex justify-center items-center'
-                              }
-                            >
+                            <div className="w-full h-full flex justify-center items-center">
                               <Loader />
                             </div>
                           ) : (
@@ -413,11 +374,7 @@ const AdminCard = ({
                         "
                       >
                         {isDeleting ? (
-                          <div
-                            className={
-                              'w-full h-full flex justify-center items-center'
-                            }
-                          >
+                          <div className="w-full h-full flex justify-center items-center">
                             <Loader />
                           </div>
                         ) : (
@@ -436,14 +393,13 @@ const AdminCard = ({
                   border-t border-border/50
                   bg-surface/95
                   p-5
-                  backproduct-blur-md
+                  backdrop-blur-md
                   translate-y-20
                   transition-transform duration-500 ease-out
                   group-hover:translate-y-0
                 "
               >
                 <div className="space-y-4">
-                  {/* Title + Price */}
                   <div className="flex items-start justify-between gap-4">
                     <h3
                       className="
@@ -462,7 +418,6 @@ const AdminCard = ({
                     </span>
                   </div>
 
-                  {/* Tags */}
                   {tags.length > 0 && (
                     <div className="flex flex-wrap gap-1.5">
                       {tags.map((tag) => (
@@ -489,7 +444,6 @@ const AdminCard = ({
                     </div>
                   )}
 
-                  {/* Footer Action */}
                   <div
                     className="
                       pt-2
@@ -514,7 +468,6 @@ const AdminCard = ({
                       "
                     >
                       <span className="relative z-10">View Product</span>
-
                       <ArrowRight
                         size={16}
                         className="

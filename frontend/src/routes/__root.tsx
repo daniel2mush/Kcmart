@@ -54,6 +54,10 @@ export const Route = createRootRouteWithContext()({
         rel: 'stylesheet',
         href: appCss,
       },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap',
+      },
     ],
   }),
   // 1. Render active child routes inside root

@@ -6,6 +6,10 @@ import tailwindcss from '@tailwindcss/vite'
 import netlify from '@netlify/vite-plugin-tanstack-start'
 
 export default defineConfig({
+  ssr: {
+    noExternal: ['gsap', 'GSAP', '@gsap/react'],
+  },
+
   resolve: {
     tsconfigPaths: true,
   },

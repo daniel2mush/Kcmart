@@ -1,9 +1,6 @@
-import { useMemo, useRef } from 'react'
-import { gsap } from 'gsap/dist/gsap'
+import { useMemo, useRef, useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight, FolderOpen, Tag } from 'lucide-react'
-import { useGSAP } from '@gsap/react'
-
 import type { ProductResponseTypes } from '#/lib/types/ProductTypes.ts'
 
 interface CardProps {
@@ -20,60 +17,45 @@ export const Card = ({
   sliceValue,
 }: CardProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [gsapReady, setGsapReady] = useState(false)
 
   const displayItems = useMemo(
     () => (sliceValue ? iterable.slice(0, sliceValue) : iterable),
     [iterable, sliceValue],
   )
 
-  /**
-   * Container entrance animation
-   */
-  useGSAP(
-    () => {
-      if (!containerRef.current) return
+  useEffect(() => {
+    // Dynamically import only on client
+    Promise.all([import('gsap'), import('@gsap/react')]).then(
+      ([{ gsap }, { useGSAP }]) => {
+        // Now you can safely use gsap + useGSAP
+        // For simplicity, just run the animations here
+        if (!containerRef.current) return
 
-      gsap.to(containerRef.current, {
-        y: 0,
-        duration: 0.8,
-        delay: 0.2,
-        ease: 'power3.out',
-      })
-    },
-    { scope: containerRef },
-  )
-
-  /**
-   * Cards stagger animation
-   */
-  useGSAP(
-    () => {
-      if (!containerRef.current || displayItems.length === 0) return
-
-      const cards = gsap.utils.toArray('.card-item', containerRef.current)
-
-      gsap.killTweensOf(cards)
-
-      gsap.fromTo(
-        cards,
-        {
-          opacity: 0,
-          y: 30,
-        },
-        {
-          opacity: 1,
+        gsap.to(containerRef.current, {
           y: 0,
-          duration: 0.55,
-          stagger: 0.1,
+          duration: 0.8,
+          delay: 0.2,
           ease: 'power3.out',
-        },
-      )
-    },
-    {
-      dependencies: [displayItems],
-      scope: containerRef,
-    },
-  )
+        })
+
+        const cards = gsap.utils.toArray('.card-item', containerRef.current)
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.55,
+            stagger: 0.1,
+            ease: 'power3.out',
+          },
+        )
+
+        setGsapReady(true)
+      },
+    )
+  }, [displayItems])
 
   return (
     <section
