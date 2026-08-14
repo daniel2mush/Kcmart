@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className=" place-items-end">
+        <div>
           <h3 className="font-semibold mb-3 text-secondary">Products</h3>
           <ul className="flex flex-col gap-2 text-sm">
             <li>
@@ -57,7 +57,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className=" place-items-end">
+        <div className=" place-items-start">
           <h3 className="font-semibold mb-3 text-secondary">Company</h3>
           <ul className="flex flex-col gap-2 text-sm">
             <li>
@@ -78,7 +78,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className=" place-items-end">
+        <div className=" place-items-start">
           <h3 className="font-semibold mb-3 text-secondary">Legal</h3>
           <ul className="flex flex-col gap-2 text-sm">
             <li>
@@ -106,7 +106,7 @@ const Footer = () => {
             © {new Date().getFullYear()} KCMart. All rights reserved.
           </p>
           <div className="text-sm text-muted">
-            Built with care · Design resources
+            Built with care · zcoder +223 71907048
           </div>
         </div>
       </div>

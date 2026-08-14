@@ -24,49 +24,52 @@ export function AdminProduct() {
     },
   })
 
-  const productData = data as { userProduct: ProductResponseTypes[] }
+  const productData = data as {
+    userProduct: ProductResponseTypes[]
+  }
 
   const [productSlug, setProductSlug] = useState<string | null>(null)
 
   return (
     <>
       <DashboardHeader />
-      <div className={'p-10'}>
+
+      <div className="p-4 sm:p-6 lg:p-10">
         {loading && (
-          <div
-            className={
-              'spinner-border mt-50 w-full flex justify-center items-center'
-            }
-          >
+          <div className="mt-50 flex w-full items-center justify-center">
             <Loader />
           </div>
         )}
+
         {!loading && productData.userProduct.length === 0 ? (
           <div>
             <Empty>
               <EmptyHeader>
-                <EmptyMedia variant={'icon'}>
+                <EmptyMedia variant="icon">
                   <FileQuestion />
                 </EmptyMedia>
+
                 <EmptyTitle>No data</EmptyTitle>
+
                 <EmptyDescription>
                   You haven&apos;t created any product yet. Get started by
                   creating your first product.
                 </EmptyDescription>
               </EmptyHeader>
+
               <EmptyContent>
-                <Button className={'text-black cursor-pointer'}>
+                <Button className="cursor-pointer text-black">
                   Add product
                 </Button>
               </EmptyContent>
             </Empty>
           </div>
         ) : (
-          <div className={'w-full'}>
+          <div className="w-full">
             {!loading && productData.userProduct.length > 0 && (
               <AdminCard
                 iterable={productData.userProduct}
-                title={'My products'}
+                title="My products"
                 getProductSlug={(slug) => {
                   setProductSlug(slug)
                 }}

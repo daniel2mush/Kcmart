@@ -6,9 +6,11 @@ import NewsLetter from '#/components/NewsLetter'
 import Promo2 from '#/components/Promo2'
 import Template from '#/components/Template'
 import { createFileRoute } from '@tanstack/react-router'
+import { requireGuest } from '#/lib/helpers/authentication/authenticate.ts'
 
 export const Route = createFileRoute('/')({
   component: Home,
+  beforeLoad: async () => await requireGuest(),
 })
 
 function Home() {

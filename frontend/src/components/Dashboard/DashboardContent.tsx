@@ -13,7 +13,6 @@ import type { ProductResponseTypes } from '#/lib/types/ProductTypes.ts'
 import { useQuery } from '@apollo/client/react'
 import { GET_All_PUBLISHED_PRODUCTS } from '#/lib/query/product.ts'
 import { useNavigate, useSearch } from '@tanstack/react-router'
-
 import {
   Pagination,
   PaginationContent,
@@ -35,9 +34,6 @@ const DashboardContent = () => {
 
   const { data: query_data, loading } = useQuery(GET_All_PUBLISHED_PRODUCTS, {
     variables: {
-      // Backend pagination is intentionally not used for
-      // the catalog pagination. We fetch the DB products
-      // and paginate after mixing them with static products.
       limit: 1000,
       page: 1,
     },
@@ -62,10 +58,6 @@ const DashboardContent = () => {
 
   /**
    * Combine database products and static products.
-   *
-   * This only runs when the database data changes,
-   * so changing page/category does not reshuffle
-   * the products.
    */
   const products = useMemo(() => {
     const combined: ProductResponseTypes[] = [
@@ -81,8 +73,6 @@ const DashboardContent = () => {
 
   /**
    * Filter products by category.
-   *
-   * No category means "All".
    */
   const filteredProducts = useMemo(() => {
     if (!category || category.toLowerCase() === 'all') {
@@ -91,31 +81,20 @@ const DashboardContent = () => {
 
     const normalizedCategory = category.toLowerCase()
 
-    return products.filter((product) => {
-      return product.categories.some(
+    return products.filter((product) =>
+      product.categories.some(
         (item) => item.name.toLowerCase() === normalizedCategory,
-      )
-    })
+      ),
+    )
   }, [products, category])
 
   /**
-   * Total pages AFTER filtering.
+   * Total pages after filtering.
    */
   const totalPages = Math.ceil(filteredProducts.length / limit)
 
   /**
-   * If filtering leaves us on a page that no longer exists,
-   * go back to page 1.
-   *
-   * Example:
-   *
-   * All products:
-   * page 5
-   *
-   * Select Templates:
-   * only 2 pages
-   *
-   * Automatically goes to page 1.
+   * Keep page valid after filtering.
    */
   useEffect(() => {
     if (totalPages === 0) {
@@ -146,9 +125,7 @@ const DashboardContent = () => {
   }, [page, totalPages, navigate])
 
   /**
-   * Calculate current page.
-   *
-   * Filtering happens BEFORE this.
+   * Current page.
    */
   const start = (page - 1) * limit
   const end = start + limit
@@ -211,33 +188,7 @@ const DashboardContent = () => {
   }
 
   /**
-   * Change category.
-   *
-   * Whenever category changes, reset to page 1.
-   *
-   * "all" removes the category parameter completely.
-   */
-  // const handleCategoryChange = (value: string) => {
-  //   navigate({
-  //     to: '/dashboard',
-  //     search: (prev) => ({
-  //       ...prev,
-  //       page: 1,
-  //       category: value === 'all' ? undefined : value,
-  //     }),
-  //   })
-  // }
-
-  /**
    * Pagination numbers.
-   *
-   * Example:
-   *
-   * 1 2 3 4 5
-   *
-   * or:
-   *
-   * 1 ... 4 5 6 ... 20
    */
   const paginationItems = useMemo(() => {
     const pages: (number | 'ellipsis')[] = []
@@ -257,6 +208,7 @@ const DashboardContent = () => {
     }
 
     const startPage = Math.max(2, page - 1)
+
     const endPage = Math.min(totalPages - 1, page + 1)
 
     for (let i = startPage; i <= endPage; i++) {
@@ -273,21 +225,27 @@ const DashboardContent = () => {
   }, [page, totalPages])
 
   return (
-    <div className="max-h-screen min-h-screen w-full overflow-x-scroll">
+    <div className="min-h-screen w-full min-w-0 overflow-x-hidden">
       {/* Search / notifications */}
-      <div className="flex w-full items-center justify-between border-b-2 px-14 py-4">
-        <div className="flex w-xl items-center justify-between rounded-2xl border px-4 py-1">
+      <header className="flex w-full items-center gap-4 border-b border-border px-4 py-4 sm:px-6 lg:px-10">
+        {/* Search */}
+        <div className="flex min-w-0 flex-1 items-center rounded-2xl border px-3 py-1 sm:max-w-xl">
           <Input
             placeholder="Search product..."
-            className="border-none! bg-transparent! shadow-none outline-0! ring-0! focus-visible:ring-0 focus-visible:ring-offset-0"
+            className="min-w-0 border-none! bg-transparent! shadow-none outline-0! ring-0! focus-visible:ring-0 focus-visible:ring-offset-0"
           />
 
-          <Button size="icon-lg" variant="ghost" className="cursor-pointer">
+          <Button
+            size="icon-lg"
+            variant="ghost"
+            className="shrink-0 cursor-pointer"
+          >
             <Search size={16} />
           </Button>
         </div>
 
-        <div className="flex items-center gap-10">
+        {/* Notifications */}
+        <div className="hidden shrink-0 items-center gap-6 sm:flex lg:gap-10">
           <BellDot
             size={25}
             className="cursor-pointer text-secondary hover:text-gray-400"
@@ -298,19 +256,21 @@ const DashboardContent = () => {
             className="cursor-pointer text-secondary hover:text-gray-400"
           />
         </div>
-      </div>
+      </header>
 
       {/* Products */}
       {loading ? (
-        <div>Loading...</div>
+        <div className="flex min-h-60 items-center justify-center">
+          Loading...
+        </div>
       ) : filteredProducts.length > 0 ? (
-        <div>
+        <div className="min-w-0">
           <Card iterable={currentProducts} />
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <Pagination className="mt-8 pb-8">
-              <PaginationContent>
+            <Pagination className="mt-8 overflow-x-auto pb-8">
+              <PaginationContent className="mx-auto flex-nowrap">
                 {/* Previous */}
                 <PaginationItem>
                   <PaginationPrevious

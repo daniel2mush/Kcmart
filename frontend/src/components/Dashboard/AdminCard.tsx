@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import {
   ArrowRight,
@@ -42,19 +42,17 @@ const AdminCard = ({
   sliceValue,
   getProductSlug,
 }: CardProps) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-
   const [delete_product] = useMutation(DELETE_PRODUCT)
   const [isDeleting, setIsDeleting] = useState(false)
+
+  const [publish_product] = useMutation(PUBLISH_PRODUCT)
+  const [isPublishing, setIsPublishing] = useState(false)
+  const [productid, setProductId] = useState<string | null>(null)
 
   const displayItems = useMemo(
     () => (sliceValue ? iterable.slice(0, sliceValue) : iterable),
     [iterable, sliceValue],
   )
-
-  const [publish_product] = useMutation(PUBLISH_PRODUCT)
-  const [isPublishing, setIsPublishing] = useState(false)
-  const [productid, setProductId] = useState<string | null>(null)
 
   // ---------- Delete ----------
   async function handleDelete(
@@ -63,6 +61,7 @@ const AdminCard = ({
     asset_url: string,
   ) {
     setIsDeleting(true)
+
     try {
       const imagePaths = image_urls.map(getStoragePath)
       const assetPath = getStoragePath(asset_url)
@@ -81,10 +80,13 @@ const AdminCard = ({
 
       setIsDeleting(false)
       setProductId(null)
+
       toast.success('Product deleted')
     } catch (error) {
       console.error(error)
+
       toast.error('Failed to delete product')
+
       setIsDeleting(false)
       setProductId(null)
     }
@@ -93,6 +95,7 @@ const AdminCard = ({
   // ---------- Publish ----------
   async function handlePublish(slug: string) {
     setIsPublishing(true)
+
     const { error } = await publish_product({
       variables: { slug },
       refetchQueries: [
@@ -106,72 +109,29 @@ const AdminCard = ({
     if (!error) {
       setIsPublishing(false)
       setProductId(null)
+
       toast.success('Product published')
+
       return
     }
 
     console.log(error)
+
     toast.error(error.message)
+
     setIsPublishing(false)
     setProductId(null)
   }
 
-  // ---------- GSAP (client-only) ----------
-  useEffect(() => {
-    let ctx: any
-
-    const runAnimations = async () => {
-      if (!containerRef.current) return
-
-      const { gsap } = await import('gsap')
-
-      // Container entrance
-      gsap.to(containerRef.current, {
-        y: 0,
-        duration: 0.8,
-        delay: 0.2,
-        ease: 'power3.out',
-      })
-
-      // Cards stagger
-      if (displayItems.length === 0) return
-
-      const cards = gsap.utils.toArray('.card-item', containerRef.current)
-      gsap.killTweensOf(cards)
-
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.55,
-          stagger: 0.1,
-          ease: 'power3.out',
-        },
-      )
-    }
-
-    runAnimations()
-
-    return () => {
-      // optional cleanup if you later store a context
-      ctx?.revert?.()
-    }
-  }, [displayItems])
-
   return (
-    <section
-      ref={containerRef}
-      style={{ transform: 'translateY(100px)' }}
-      className="w-full space-y-8 p-8 lg:p-10"
-    >
+    <section className="w-full space-y-8 p-8 lg:p-10">
       {/* Header */}
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           {title && (
             <>
               <div className="h-8 w-1 rounded-full bg-linear-to-b from-primary to-primary/20" />
+
               <h2 className="text-3xl font-bold tracking-tight text-secondary lg:text-4xl">
                 {title}
               </h2>
@@ -185,8 +145,10 @@ const AdminCard = ({
             className="group/view flex items-center gap-2 text-secondary/70 transition-colors duration-300 hover:text-secondary"
           >
             <span className="text-sm font-medium">View All</span>
+
             <div className="relative">
               <div className="absolute inset-0 scale-0 rounded-full bg-primary/20 transition-transform duration-300 group-hover/view:scale-150" />
+
               <ArrowRight
                 size={16}
                 className="relative transition-transform duration-300 group-hover/view:translate-x-1"
@@ -201,20 +163,15 @@ const AdminCard = ({
         {displayItems.map((product, index) => {
           const category = product.categories.map((c) => c.name)
           const tags = product.tags.slice(0, 3)
+
           const link = `/${category[0].toLowerCase()}/${product.slug}`
 
           return (
             <article
               key={product.id || index}
-              style={{
-                opacity: 0,
-                transform: 'translateY(30px)',
-              }}
               className="
-                card-item
                 group
                 relative
-                h-85
                 overflow-hidden
                 rounded-2xl
                 border border-border/50
@@ -223,6 +180,7 @@ const AdminCard = ({
                 transition-all duration-500
                 hover:border-primary/20
                 hover:shadow-2xl
+                lg:h-85
               "
             >
               {/* Gradient Overlay */}
@@ -230,13 +188,15 @@ const AdminCard = ({
                 className="
                   pointer-events-none
                   absolute inset-0 z-10
+                  hidden
                   bg-linear-to-t
                   from-black/80
                   via-black/30
                   to-transparent
                   opacity-0
                   transition-opacity duration-500
-                  group-hover:opacity-100
+                  lg:block
+                  lg:group-hover:opacity-100
                 "
               />
 
@@ -249,7 +209,7 @@ const AdminCard = ({
                   className="
                     h-full w-full object-cover
                     transition-transform duration-700
-                    group-hover:scale-105
+                    lg:group-hover:scale-105
                   "
                 />
 
@@ -336,7 +296,7 @@ const AdminCard = ({
                         Edit
                       </DropdownMenuItem>
 
-                      {product.status != 'PUBLISHED' && (
+                      {product.status !== 'PUBLISHED' && (
                         <DropdownMenuItem
                           disabled={isPublishing}
                           onSelect={(e) => e.preventDefault()}
@@ -344,8 +304,8 @@ const AdminCard = ({
                           onClick={() => handlePublish(product.slug)}
                         >
                           {isPublishing ? (
-                            <div className="w-full h-full flex justify-center items-center">
-                              <Loader />
+                            <div className="flex h-full w-full items-center justify-center">
+                              <Loader className="animate-spin" />
                             </div>
                           ) : (
                             'Publish'
@@ -374,8 +334,8 @@ const AdminCard = ({
                         "
                       >
                         {isDeleting ? (
-                          <div className="w-full h-full flex justify-center items-center">
-                            <Loader />
+                          <div className="flex h-full w-full items-center justify-center">
+                            <Loader className="animate-spin" />
                           </div>
                         ) : (
                           'Delete'
@@ -389,17 +349,25 @@ const AdminCard = ({
               {/* Content */}
               <div
                 className="
-                  absolute bottom-0 left-0 right-0 z-20
+                  relative z-20
                   border-t border-border/50
                   bg-surface/95
                   p-5
                   backdrop-blur-md
-                  translate-y-20
-                  transition-transform duration-500 ease-out
-                  group-hover:translate-y-0
+
+                  lg:absolute
+                  lg:right-0
+                  lg:bottom-0
+                  lg:left-0
+                  lg:translate-y-20
+                  lg:transition-transform
+                  lg:duration-500
+                  lg:ease-out
+                  lg:group-hover:translate-y-0
                 "
               >
                 <div className="space-y-4">
+                  {/* Title + Price */}
                   <div className="flex items-start justify-between gap-4">
                     <h3
                       className="
@@ -407,7 +375,7 @@ const AdminCard = ({
                         text-lg font-semibold
                         leading-tight text-secondary
                         transition-colors
-                        group-hover:text-primary
+                        lg:group-hover:text-primary
                       "
                     >
                       {product.name}
@@ -418,6 +386,7 @@ const AdminCard = ({
                     </span>
                   </div>
 
+                  {/* Tags */}
                   {tags.length > 0 && (
                     <div className="flex flex-wrap gap-1.5">
                       {tags.map((tag) => (
@@ -444,14 +413,8 @@ const AdminCard = ({
                     </div>
                   )}
 
-                  <div
-                    className="
-                      pt-2
-                      opacity-0
-                      transition-opacity duration-700 delay-100
-                      group-hover:opacity-100
-                    "
-                  >
+                  {/* Footer Action */}
+                  <div className="pt-2">
                     <Link
                       to={link}
                       className="
@@ -468,11 +431,13 @@ const AdminCard = ({
                       "
                     >
                       <span className="relative z-10">View Product</span>
+
                       <ArrowRight
                         size={16}
                         className="
                           relative z-10
                           transition-transform
+                          duration-300
                           group-hover/btn:translate-x-1
                         "
                       />

@@ -143,6 +143,16 @@ button {
           color 0.2s ease;
 }
 
+.container {
+  min-height: 50dvh;
+  max-height:calc(var(--spacing) * 500);
+  width: 100dvw;
+      max-width: calc(var(--spacing) * 500) /* 125rem = 2000px */;
+  margin: auto;
+  overflow: hidden;
+
+}
+
 /* =========================================================
    SHADCN FIXES
 ========================================================= */

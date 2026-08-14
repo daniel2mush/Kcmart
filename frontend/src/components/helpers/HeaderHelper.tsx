@@ -3,7 +3,6 @@ import { ArrowRight } from 'lucide-react'
 
 const HeaderHelper = () => {
   const location = useLocation()
-
   const pathname = location.pathname
 
   const Heading = () => {
@@ -28,32 +27,32 @@ const HeaderHelper = () => {
         return 'Privacy Policy'
       case '/license':
         return 'License'
-
       default:
         return ''
     }
   }
 
-  // console.log(pathname)
-
   return (
-    <div className="  relative min-h-[40dvh] w-full flex justify-center items-center overflow-hidden">
-      <div className=" z-0 absolute top-0 left-0 opacity-5">
-        <img src="Hero.webp" alt="Hero" className=" object-cover" />
+    <div className="relative w-full min-h-[30vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0 opacity-5">
+        <img
+          src="Hero.webp"
+          alt="Hero"
+          className="object-cover w-full h-full"
+        />
       </div>
 
-      <div className=" z-50">
-        <div className="text-secondary text-sm  flex justify-center items-center gap-3 mb-4">
-          <Link to="/" className=" cursor-pointer hover:text-primary">
+      {/* Content */}
+      <div className="relative z-10 text-center px-4 sm:px-6 max-w-3xl mx-auto">
+        <div className="text-secondary text-sm flex items-center justify-center gap-3 mb-4">
+          <Link to="/" className="cursor-pointer hover:text-primary">
             Home
           </Link>
-          <span>
-            <ArrowRight className=" inline" size={16} />
-          </span>
-          <span className=" text-primary">{Heading()}</span>
+          <ArrowRight size={16} className="inline" />
+          <span className="text-primary">{Heading()}</span>
         </div>
-
-        <h1 className=" text-[clamp(1.5rem,5vw,4rem)] text-secondary font-bold">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-secondary">
           {Heading()}
         </h1>
       </div>

@@ -54,7 +54,7 @@ const Promo2 = () => {
     }
 
     return (
-      <div className="flex gap-3">
+      <div className=" flex gap-3">
         <div className="flex flex-col items-center px-3 py-2 bg-app rounded">
           <div className="text-3xl font-bold">{pad(days)}</div>
           <div className="text-xs font-bold mt-1 uppercase">Days</div>
@@ -76,14 +76,18 @@ const Promo2 = () => {
   }
 
   return (
-    <div className="overflow-hidden relative w-full min-h-[30dvh] bg-app flex justify-center items-center">
-      <div className="opacity-5 absolute inset-0">
-        <img src="Hero.webp" alt="bg" />
+    <div className="  container overflow-hidden relative w-full min-h-[30dvh] bg-app flex justify-center items-center">
+      <div className="opacity-5 absolute inset-0 h-full">
+        <img
+          src="Hero.webp"
+          alt="bg"
+          className={'object-cover h-full w-full'}
+        />
       </div>
 
       <div className="max-w-500 mx-auto w-full p-10 space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="max-w-lg space-y-4">
+          <div className="max-w-lg space-y-4 text-center md:text-start">
             <h1 className="text-secondary text-3xl font-bold">Lunch sales</h1>
             <p className="text-muted text-md">
               Get 20% off on all items during our lunch sales! Use code{' '}

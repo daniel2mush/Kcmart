@@ -10,16 +10,16 @@ import { useEffect, useState } from 'react'
 const ProductView = ({ product }: { product: ProductResponseTypes }) => {
   const [loggedIn, setLoggedIn] = useState(false)
 
-  async function CheckAuth() {
-    const response = await getIsAuthenticated()
-    setLoggedIn(!!response)
-  }
-
   useEffect(() => {
-    CheckAuth()
-  }, [loggedIn])
+    async function checkAuth() {
+      const response = await getIsAuthenticated()
+      setLoggedIn(!!response)
+    }
 
-  function GetProductCategory(params: string) {
+    checkAuth()
+  }, [])
+
+  function getProductCategory(params: string) {
     switch (params) {
       case 'Templates':
         return Templates
@@ -30,14 +30,16 @@ const ProductView = ({ product }: { product: ProductResponseTypes }) => {
       case 'Magazines':
         return Magazines
       default:
-        return ''
+        return []
     }
   }
 
   const categories = product.categories.map((category) => category.name)
+
   const tags = product.tags.map((tag) => tag.name)
 
   let derivedType = 'Templates'
+
   if (categories.includes('MOCKUPS')) {
     derivedType = 'Mockups'
   } else if (categories.includes('TEMPLATE')) {
@@ -50,87 +52,156 @@ const ProductView = ({ product }: { product: ProductResponseTypes }) => {
     }
   }
 
-  const productCategory = GetProductCategory(derivedType)
+  const productCategory = getProductCategory(derivedType)
+
   const link = loggedIn ? '/dashboard' : `/${derivedType.toLowerCase()}`
+
   return (
-    <div className=" max-w-500 min-h-screen flex justify-center items-center mx-auto">
-      {/* This is where the grid starts */}
-      <div className=" mt-20 p-20">
-        <div className=" relative grid grid-cols-1 md:grid-cols-2 w-full gap-15">
-          <div>
-            <div className="">
-              {product.images!.map((image, index) => (
-                <img
+    <main className="min-h-screen w-full">
+      {/* Main product section */}
+      <section className="mx-auto w-full max-w-7xl px-4 pt-24 pb-16 sm:px-6 lg:px-8 lg:pt-32">
+        <div className="grid w-full grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.8fr)] lg:gap-16">
+          {/* =========================
+              Product Images
+          ========================== */}
+          <div className="min-w-0 order-2 lg:order-1">
+            <div className="space-y-4">
+              {product.images?.map((image, index) => (
+                <div
                   key={index}
-                  src={image.url}
-                  alt={`Product Image ${index + 1}`}
-                  className="w-full h-auto mb-4 rounded"
-                />
+                  className="w-full overflow-hidden rounded-2xl border border-border/50 bg-surface"
+                >
+                  <img
+                    src={image.url}
+                    alt={`${product.name} - Image ${index + 1}`}
+                    className="block h-auto w-full object-cover"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
               ))}
             </div>
           </div>
 
-          <div className=" md:sticky md:top-30 self-start space-y-8">
-            <Link
-              to={link}
-              className="flex items-center gap-2 mb-4 text-sm text-muted"
-            >
-              <ArrowLeft /> {loggedIn ? 'Dashboard' : derivedType}
-            </Link>
-            <h1 className=" text-3xl font-bold md:text-6xl text-secondary">
-              {product.name}
-            </h1>
-            <p className=" space-x-4 text-sm text-muted">
-              {product.categories.map((cat, i) => (
-                <span key={i} className=" bg-muted/10 px-3 py-2 rounded-lg">
-                  {cat.name}
-                </span>
-              ))}
+          {/* =========================
+              Product Information
+          ========================== */}
+          <div className="min-w-0 order-1 lg:order-2 ">
+            <div className="lg:sticky lg:top-24">
+              <div className="space-y-7">
+                {/* Back */}
+                <Link
+                  to={link}
+                  className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-secondary"
+                >
+                  <ArrowLeft size={17} />
 
-              {product.tags.map((tag, i) => (
-                <span key={i} className=" bg-muted/10 px-3 py-2 rounded-lg">
-                  {tag.name}
-                </span>
-              ))}
-            </p>
+                  <span>{loggedIn ? 'Dashboard' : derivedType}</span>
+                </Link>
 
-            <p className=" text-secondary">{product.description}</p>
+                {/* Title */}
+                <div>
+                  <h1 className="text-3xl font-bold leading-tight tracking-tight text-secondary sm:text-4xl lg:text-5xl">
+                    {product.name}
+                  </h1>
+                </div>
 
-            <div>
-              <h3 className=" font-bold text-secondary text-xl">
-                What's Included
-              </h3>
-
-              {
-                <ul className="list-disc pl-5 space-y-2 mt-10">
-                  {product.included.map((item, index) => (
-                    <li key={index} className="text-secondary">
-                      {item}
-                    </li>
+                {/* Categories + Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {product.categories.map((category, index) => (
+                    <span
+                      key={`category-${index}`}
+                      className="rounded-lg bg-muted/10 px-3 py-1.5 text-xs font-medium text-muted"
+                    >
+                      {category.name}
+                    </span>
                   ))}
-                </ul>
-              }
+
+                  {product.tags.map((tag, index) => (
+                    <span
+                      key={`tag-${index}`}
+                      className="rounded-lg bg-muted/10 px-3 py-1.5 text-xs font-medium text-muted"
+                    >
+                      {tag.name}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Description */}
+                {product.description && (
+                  <div>
+                    <p className="text-base leading-7 text-muted">
+                      {product.description}
+                    </p>
+                  </div>
+                )}
+
+                {/* Included */}
+                {product.included.length > 0 && (
+                  <div className="border-t border-border/60 pt-7">
+                    <h2 className="text-xl font-bold text-secondary">
+                      What's Included
+                    </h2>
+
+                    <ul className="mt-5 space-y-3">
+                      {product.included.map((item, index) => (
+                        <li
+                          key={index}
+                          className="flex gap-3 text-sm leading-6 text-secondary"
+                        >
+                          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary" />
+
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Price + Buy */}
+                <div className="border-t border-border/60 pt-7">
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <span className="text-sm text-muted">Price</span>
+
+                    <span className="text-2xl font-bold text-primary">
+                      ${(product.priceCent / 100).toFixed(2)}
+                    </span>
+                  </div>
+
+                  <Button className="h-12 w-full cursor-pointer text-app">
+                    <ShoppingBag size={18} />
+
+                    <span>Buy Now</span>
+
+                    <span className="font-bold">
+                      ${(product.priceCent / 100).toFixed(2)}
+                    </span>
+                  </Button>
+                </div>
+              </div>
             </div>
-            {/* Button for buy now  */}
-            <Button className=" w-full text-app cursor-pointer">
-              <ShoppingBag />
-              Buy Now <b>${(product.priceCent / 100).toFixed(2)}</b>
-            </Button>
           </div>
         </div>
-        {/* More products suggestions  */}
+      </section>
 
-        <div>
-          <h2 className=" text-secondary font-bold text-2xl mt-20 mb-10">
-            You might also like some {derivedType}
-          </h2>
-          <Card
-            iterable={productCategory as ProductResponseTypes[]}
-            sliceValue={6}
-          />
+      {/* =========================
+          Related Products
+      ========================== */}
+      <section className="w-full border-t border-border/50">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className=" px-10 py-10">
+            <h2 className="text-2xl font-bold text-secondary sm:text-3xl">
+              You might also like
+            </h2>
+
+            <p className="mt-2 text-sm text-muted">
+              Explore more {derivedType.toLowerCase()}.
+            </p>
+          </div>
+
+          <Card iterable={productCategory} sliceValue={6} />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card } from './helpers/Card'
 import { Templates } from '#/lib/staticResources'
 

@@ -7,9 +7,13 @@ import {
 
 const NewsLetter = () => {
   return (
-    <div className=" relative  w-full  min-h-[clamp(20dvh,30dvw,40dvh)] overflow-hidden p-10  flex justify-center items-center  ">
-      <div className=" absolute opacity-5  top-0 left-0 w-full ">
-        <img src="/Hero.webp" alt="Background" className=" object-cover" />
+    <div className=" container relative  w-full  min-h-[clamp(20dvh,30dvw,40dvh)] overflow-hidden p-10  flex justify-center items-center  ">
+      <div className=" absolute opacity-5  top-0 left-0 w-full h-full ">
+        <img
+          src="/Hero.webp"
+          alt="Background"
+          className=" object-cover w-full h-full"
+        />
       </div>
 
       <div className=" flex justify-center items-center w-full h-full flex-col max-w-sm md:max-w-lg mx-auto">
