@@ -1,7 +1,7 @@
 [build]
-  base = "/frontend"
-  command = "bun run build"
-  publish = "dist/client"
+base = "."
+command = "bun run build"
+publish = "dist/client"
 
 [dev]
-  command = "bun run dev"
+command = "bun run dev"

@@ -2,10 +2,10 @@ import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
 
 // import { errorLink } from './apollo_errors.ts'
 
-const API_URL = import.meta.env.VITE_API_URL
+const GRAPHQL_URL = import.meta.env.GRAPHQL_URL
 
 const link = new HttpLink({
-  uri: API_URL,
+  uri: GRAPHQL_URL,
   credentials: 'include',
 })
 
