@@ -33,7 +33,7 @@ const HeaderHelper = () => {
   }
 
   return (
-    <div className="relative w-full min-h-[30vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden">
+    <div className=" container relative w-full min-h-[30vh] md:min-h-[40vh] flex items-center justify-center overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0 opacity-5">
         <img

@@ -11,7 +11,9 @@ function RouteComponent() {
   return (
     <div>
       <HeaderHelper />
-      <Card iterable={Magazines} />
+      <div className={'container'}>
+        <Card iterable={Magazines} />
+      </div>
     </div>
   )
 }

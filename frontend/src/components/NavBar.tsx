@@ -229,27 +229,27 @@ const NavBar = () => {
           id="mobile-menu"
           role="dialog"
           aria-modal="true"
-          className={`fixed inset-0 z-40 flex flex-col items-center justify-center bg-app p-10 transition-transform duration-300 ease-in-out ${
+          className={`fixed inset-0 z-40 flex flex-col items-center justify-center bg-app px-4 py-8 sm:px-6 sm:py-10 transition-transform duration-300 ease-in-out overflow-y-auto ${
             isMobileMenuOpen
               ? 'translate-y-0 pointer-events-auto'
               : '-translate-y-full pointer-events-none'
           }`}
         >
-          <div className="flex flex-col items-center gap-8 w-full">
+          <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 w-full max-w-sm mx-auto">
             {[...navList, ...moreNav].map((nav) => (
               <Link
                 key={nav.title}
                 to={nav.link}
                 onClick={toggleMobileMenu}
-                className="text-4xl font-bold text-secondary hover:text-primary transition-colors"
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary hover:text-primary transition-colors"
               >
                 {nav.title}
               </Link>
             ))}
           </div>
 
-          <div className="mt-16 flex flex-col items-center gap-8">
-            <div className="flex gap-8 text-secondary">
+          <div className="mt-8 sm:mt-12 flex flex-col items-center gap-6 sm:gap-8">
+            <div className="flex gap-6 sm:gap-8 text-secondary">
               {socialLinks.map((social) => (
                 <a
                   key={social.link}
@@ -270,7 +270,7 @@ const NavBar = () => {
               }}
               variant="outline"
               size="lg"
-              className="w-48 border-border text-secondary hover:text-primary"
+              className="w-44 sm:w-48 border-border text-secondary hover:text-primary"
             >
               Sign In
             </Button>
