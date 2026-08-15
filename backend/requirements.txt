@@ -1,5 +1,4 @@
-fastapi
-uvicorn
+fastapi[standard]
 sqlalchemy
 asyncpg
 pydantic
@@ -8,13 +7,10 @@ greenlet
 alembic
 pydantic[email]
 pyjwt
-#passlib[bcrypt]
 python-multipart
 pwdlib[bcrypt]
-pytest
 fastapi-users[sqlalchemy]
 python-slugify
 aiosql
 redis
 strawberry-graphql
-
