@@ -24,9 +24,7 @@ export function AdminProduct() {
     },
   })
 
-  const productData = data as {
-    userProduct: ProductResponseTypes[]
-  }
+  const productData = data?.userProduct ?? []
 
   const [productSlug, setProductSlug] = useState<string | null>(null)
 
@@ -41,7 +39,7 @@ export function AdminProduct() {
           </div>
         )}
 
-        {!loading && productData.userProduct.length === 0 ? (
+        {!loading && productData.length === 0 ? (
           <div>
             <Empty>
               <EmptyHeader>
@@ -66,9 +64,9 @@ export function AdminProduct() {
           </div>
         ) : (
           <div className="w-full">
-            {!loading && productData.userProduct.length > 0 && (
+            {!loading && productData.length > 0 && (
               <AdminCard
-                iterable={productData.userProduct}
+                iterable={productData}
                 title="My products"
                 getProductSlug={(slug) => {
                   setProductSlug(slug)

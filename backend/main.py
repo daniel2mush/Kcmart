@@ -37,7 +37,10 @@ async def app_exception_handler(request: Request, exc: AppException):
 # Middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://kcmart.netlify.app/"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://kcmart.netlify.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

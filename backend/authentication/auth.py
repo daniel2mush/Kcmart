@@ -18,9 +18,9 @@ redis_client = aioredis.from_url(redis_url, decode_responses=True)
 cookie_transport = CookieTransport(
     cookie_name="fastapiusersauth",
     cookie_max_age=3600,
-    cookie_secure=True,  # Set to True in production (requires HTTPS)
-    cookie_httponly=True,  # Prevents JavaScript access to the cookie
-    cookie_samesite="lax",  # CSRF protection
+    cookie_secure=True,
+    cookie_httponly=True,
+    cookie_samesite="none",
 )
 
 
