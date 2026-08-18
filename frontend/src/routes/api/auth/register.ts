@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import axios, { isAxiosError } from 'axios'
+import { isAxiosError } from 'axios'
+import axiosClient from '#/components/client/axiosClient.ts'
 
 const jsonResponse = (body: unknown, status: number) =>
   new Response(JSON.stringify(body), {
@@ -21,10 +22,7 @@ export const Route = createFileRoute('/api/auth/register')({
         }
 
         try {
-          const res = await axios.post(
-            `${process.env.VITE_PUBLIC_API}auth/register`,
-            data,
-          )
+          const res = await axiosClient.post(`auth/register`, data)
 
           return jsonResponse(res.data, res.status)
         } catch (error) {

@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import axios, { isAxiosError } from 'axios'
+import { isAxiosError } from 'axios'
 import { deleteCookie, getRequestHeaders } from '@tanstack/react-start/server'
+import axiosClient from '#/components/client/axiosClient.ts'
 
 export const Route = createFileRoute('/api/auth/logout')({
   server: {
@@ -10,8 +11,8 @@ export const Route = createFileRoute('/api/auth/logout')({
           const headers = getRequestHeaders()
           const cookie = headers.get('cookie') || ''
 
-          const res = await axios.post(
-            `${process.env.VITE_PUBLIC_API}auth/jwt/logout`,
+          const res = await axiosClient.post(
+            `auth/jwt/logout`,
             {},
             {
               headers: {

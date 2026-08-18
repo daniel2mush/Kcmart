@@ -56,7 +56,7 @@ export const Route = createFileRoute('/dashboard/products/')({
 })
 
 function RouteComponent() {
-  // Register hidden/custom managed fields with react-hook-form
+  // Page hidden/custom managed fields with react-hook-form
 
   // Watch current values to control checkbox states
 

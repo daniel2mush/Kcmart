@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import axios, { isAxiosError } from 'axios'
+import { isAxiosError } from 'axios'
+import axiosClient from '#/components/client/axiosClient.ts'
 
 export const Route = createFileRoute('/api/auth/login')({
   server: {
@@ -24,16 +25,12 @@ export const Route = createFileRoute('/api/auth/login')({
           params.set('username', data.email)
           params.set('password', data.password)
 
-          const res = await axios.post(
-            `${process.env.VITE_PUBLIC_API}auth/jwt/login`,
-            params,
-            {
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                Accept: 'application/json',
-              },
+          const res = await axiosClient.post(`auth/jwt/login`, params, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              Accept: 'application/json',
             },
-          )
+          })
 
           const headers = new Headers({
             'Content-Type': 'application/json',

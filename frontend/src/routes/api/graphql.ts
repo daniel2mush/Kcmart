@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import axios from 'axios'
+import axiosClient from '#/components/client/axiosClient.ts'
 
 export const Route = createFileRoute('/api/graphql')({
   server: {
@@ -13,18 +14,14 @@ export const Route = createFileRoute('/api/graphql')({
           const cookie = request.headers.get('cookie') ?? ''
 
           // Forward request to FastAPI
-          const response = await axios.post(
-            `${process.env.VITE_PUBLIC_API}graphql`,
-            body,
-            {
-              headers: {
-                'Content-Type':
-                  request.headers.get('content-type') ?? 'application/json',
+          const response = await axiosClient.post(`graphql`, body, {
+            headers: {
+              'Content-Type':
+                request.headers.get('content-type') ?? 'application/json',
 
-                Cookie: cookie,
-              },
+              Cookie: cookie,
             },
-          )
+          })
 
           return new Response(JSON.stringify(response.data), {
             status: response.status,
