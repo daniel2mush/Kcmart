@@ -12,7 +12,7 @@ export default defineConfig({
   plugins: [
     devtools(),
     tanstackStart(),
-    // netlify(), // now this works
+    netlify(), // now this works
     tailwindcss(),
     viteReact(),
   ],

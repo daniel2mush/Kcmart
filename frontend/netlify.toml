@@ -1,5 +1,5 @@
 [build]
-base = "."
+base = "frontend"
 command = "bun run build"
 publish = "dist/client"
 

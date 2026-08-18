@@ -26,6 +26,7 @@ import { Route as TemplatesSlugRouteImport } from './routes/templates/$slug'
 import { Route as MockupsSlugRouteImport } from './routes/mockups/$slug'
 import { Route as MagazinesSlugRouteImport } from './routes/magazines/$slug'
 import { Route as GraphicsSlugRouteImport } from './routes/graphics/$slug'
+import { Route as ApiGraphqlRouteImport } from './routes/api/graphql'
 import { Route as DashboardSettingsIndexRouteImport } from './routes/dashboard/settings/index'
 import { Route as DashboardPurchase_historyIndexRouteImport } from './routes/dashboard/purchase_history/index'
 import { Route as DashboardProfileIndexRouteImport } from './routes/dashboard/profile/index'
@@ -122,6 +123,11 @@ const GraphicsSlugRoute = GraphicsSlugRouteImport.update({
   path: '/graphics/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiGraphqlRoute = ApiGraphqlRouteImport.update({
+  id: '/api/graphql',
+  path: '/api/graphql',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardSettingsIndexRoute = DashboardSettingsIndexRouteImport.update({
   id: '/settings/',
   path: '/settings/',
@@ -177,6 +183,7 @@ const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/api/graphql': typeof ApiGraphqlRoute
   '/graphics/$slug': typeof GraphicsSlugRoute
   '/magazines/$slug': typeof MagazinesSlugRoute
   '/mockups/$slug': typeof MockupsSlugRoute
@@ -205,6 +212,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/graphql': typeof ApiGraphqlRoute
   '/graphics/$slug': typeof GraphicsSlugRoute
   '/magazines/$slug': typeof MagazinesSlugRoute
   '/mockups/$slug': typeof MockupsSlugRoute
@@ -235,6 +243,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/api/graphql': typeof ApiGraphqlRoute
   '/graphics/$slug': typeof GraphicsSlugRoute
   '/magazines/$slug': typeof MagazinesSlugRoute
   '/mockups/$slug': typeof MockupsSlugRoute
@@ -266,6 +275,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/api/graphql'
     | '/graphics/$slug'
     | '/magazines/$slug'
     | '/mockups/$slug'
@@ -294,6 +304,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/api/graphql'
     | '/graphics/$slug'
     | '/magazines/$slug'
     | '/mockups/$slug'
@@ -323,6 +334,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/dashboard'
+    | '/api/graphql'
     | '/graphics/$slug'
     | '/magazines/$slug'
     | '/mockups/$slug'
@@ -353,6 +365,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
+  ApiGraphqlRoute: typeof ApiGraphqlRoute
   GraphicsSlugRoute: typeof GraphicsSlugRoute
   MagazinesSlugRoute: typeof MagazinesSlugRoute
   MockupsSlugRoute: typeof MockupsSlugRoute
@@ -495,6 +508,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GraphicsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/graphql': {
+      id: '/api/graphql'
+      path: '/api/graphql'
+      fullPath: '/api/graphql'
+      preLoaderRoute: typeof ApiGraphqlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard/settings/': {
       id: '/dashboard/settings/'
       path: '/settings'
@@ -593,6 +613,7 @@ const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
+  ApiGraphqlRoute: ApiGraphqlRoute,
   GraphicsSlugRoute: GraphicsSlugRoute,
   MagazinesSlugRoute: MagazinesSlugRoute,
   MockupsSlugRoute: MockupsSlugRoute,

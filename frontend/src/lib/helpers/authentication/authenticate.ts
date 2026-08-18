@@ -9,14 +9,17 @@ export const getIsAuthenticated = createServerFn({
   method: 'GET',
 }).handler(async () => {
   try {
-    // Grab the headers from the incoming browser request
     const headers = getRequestHeaders()
     const cookie = headers.get('cookie') || ''
 
-    if (!cookie) return null
+    if (!cookie) {
+      return null
+    }
 
     const res = await axios.get(`${process.env.VITE_PUBLIC_API}users/me`, {
-      headers: { Cookie: cookie },
+      headers: {
+        Cookie: cookie,
+      },
     })
 
     return res.data
