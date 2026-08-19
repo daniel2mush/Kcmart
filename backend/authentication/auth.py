@@ -15,6 +15,15 @@ redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
 redis_client = aioredis.from_url(redis_url, decode_responses=True)
 
 # Your existing transport setup stays exactly the same!
+# cookie_transport = CookieTransport(
+#     cookie_name="fastapiusersauth",
+#     cookie_max_age=3600,
+#     cookie_secure=True,
+#     cookie_httponly=True,
+#     cookie_samesite="none",
+# )
+
+
 cookie_transport = CookieTransport(
     cookie_name="fastapiusersauth",
     cookie_max_age=3600,
