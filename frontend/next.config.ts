@@ -31,30 +31,30 @@ const nextConfig: NextConfig = {
  async rewrites() {
     return [
       // Proxy Auth routes
-      // {
-      //   source: "/api/auth/:path*",
-      //   destination: "https://kcmart.fastapicloud.dev/auth/:path*",
-      // },
-
-         {
+      {
         source: "/api/auth/:path*",
-        destination: "http://127.0.0.1:8000/auth/:path*",
+        destination: "https://kcmart.fastapicloud.dev/auth/:path*",
       },
+
+      //    {
+      //   source: "/api/auth/:path*",
+      //   destination: "http://127.0.0.1:8000/auth/:path*",
+      // },
       // Proxy User routes (for /me)
       {
         source: "/api/users/:path*",
         destination: "https://kcmart.fastapicloud.dev/users/:path*",
       },
       // Proxy GraphQL
-      // {
-      //   source: "/api/graphql",
-      //   destination: "https://kcmart.fastapicloud.dev/graphql",
-      // },
-
-         {
+      {
         source: "/api/graphql",
-        destination: "http://127.0.0.1:8000/graphql",
+        destination: "https://kcmart.fastapicloud.dev/graphql",
       },
+
+      //    {
+      //   source: "/api/graphql",
+      //   destination: "http://127.0.0.1:8000/graphql",
+      // },
     ];
   },
 
