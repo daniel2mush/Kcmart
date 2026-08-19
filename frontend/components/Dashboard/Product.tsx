@@ -15,6 +15,7 @@ import { useQuery } from '@apollo/client/react'
 import { GET_USER_PRODUCTS } from '@/lib/query/product'
 import { ProductDialogue } from '@/components/Dashboard/ProductDialogue'
 import { useState } from 'react'
+import {ProductResponseTypes} from "@/lib/types/ProductTypes";
 
 export function AdminProduct() {
   const { data, loading } = useQuery(GET_USER_PRODUCTS, {
@@ -24,7 +25,8 @@ export function AdminProduct() {
     },
   })
 
-  const productData = data?.userProduct ?? []
+  const productReceived = data as {userProduct : ProductResponseTypes[]}
+  const productData = productReceived?.userProduct ?? []
 
   const [productSlug, setProductSlug] = useState<string | null>(null)
 

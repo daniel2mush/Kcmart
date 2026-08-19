@@ -56,9 +56,13 @@ export function ProductForm({ setOpenDialogue, productSlug, clearProductSlug }: 
   const isSubmitting =isLoading || isCreating || isUpdating
   const isLoadingProduct = isEditMode && product_loading
 
-  const categories = (categories_res as any)?.categories as CategoryTypes[] || []
-  const tags = (tags_res as any)?.tags as TagsTypes[] || []
-  const product = (product_data as any)?.productWithSlug as ProductResponseTypes | undefined
+  const catValue = categories_res as {categories:CategoryTypes[]}
+  const tagValue = tags_res as {tags:TagsTypes[]}
+  const pValue = product_data as {productWithSlug:ProductResponseTypes}
+
+  const categories = catValue?.categories || []
+  const tags = tagValue?.tags || []
+  const product = pValue?.productWithSlug || undefined
 
   const { register, handleSubmit, setValue, watch, control, reset, formState: { errors } } = useForm<ProductFormTypes>({
     resolver: zodResolver(ProductSchema),
@@ -146,11 +150,11 @@ export function ProductForm({ setOpenDialogue, productSlug, clearProductSlug }: 
       clearProductSlug()
       setIsLoading(false)
       setOpenDialogue(false)
-    } catch (error: any) {
+    } catch (error) {
       setIsLoading(false)
       setOpenDialogue(false)
       console.error('Error saving product:', error)
-      toast.error(error?.message || 'Failed to save product')
+      toast.error( 'Failed to save product')
     }
   }
 
@@ -192,7 +196,7 @@ export function ProductForm({ setOpenDialogue, productSlug, clearProductSlug }: 
           {/* DESCRIPTION */}
           <Field>
             <Label htmlFor="description">Description</Label>
-            <Textarea id="description" placeholder="Describe your product..." className="min-h-[100px]" {...register('description')} />
+            <Textarea id="description" placeholder="Describe your product..." className="min-h-25" {...register('description')} />
             {errors.description && <p className="text-sm text-red-500 mt-1">{errors.description.message}</p>}
           </Field>
 
@@ -231,7 +235,7 @@ export function ProductForm({ setOpenDialogue, productSlug, clearProductSlug }: 
             <Controller
               name="included"
               control={control}
-              render={({ field }) => (
+              render={({  }) => (
                 <Textarea
               id="includes"
               value={(watch('included') ?? []).join('\n')}
@@ -266,7 +270,7 @@ export function ProductForm({ setOpenDialogue, productSlug, clearProductSlug }: 
     <Upload size={16} className="shrink-0" />
     <span className="truncate">
       {watch('images')?.length
-        ? `${watch('images').length} image(s) selected`
+        ? `${watch('images')?.length} image(s) selected`
         : 'Click to upload product images'}
     </span>
   </label>

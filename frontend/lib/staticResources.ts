@@ -1,4 +1,4 @@
-import type { ProductResponseTypes } from '#/lib/types/ProductTypes'
+import type { ProductResponseTypes } from '@/lib/types/ProductTypes'
 
 export const latestDrops: ProductResponseTypes[] = [
   {

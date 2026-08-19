@@ -29,7 +29,9 @@ export default function TemplateDetails() {
 
   // 2. Resolve final product (Database first, fallback to static)
 const dbProduct = data as {productWithSlug : ProductResponseTypes | undefined}
-  const validProduct = dbProduct.productWithSlug || staticProduct
+
+
+  const validProduct = dbProduct?.productWithSlug || staticProduct
 
   // 3. Loading State (Using min-h-[60vh] so it doesn't break your layout if a Navbar exists)
   if (loading) {
