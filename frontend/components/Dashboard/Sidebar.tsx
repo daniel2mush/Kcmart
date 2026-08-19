@@ -34,6 +34,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
+import {useUserStore} from "@/lib/store";
 
 interface NavItem {
   navName: string
@@ -83,6 +84,8 @@ export default function Sidebar({ mobile = false, onClose, user }: SidebarProps)
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+
+  const setUser = useUserStore((state) => state.setUser)
   
   const currentCategory = searchParams.get('category') || 'all'
   const collapsed = !mobile && isCollapsed
@@ -96,8 +99,11 @@ export default function Sidebar({ mobile = false, onClose, user }: SidebarProps)
 
       if (res.ok) {
         toast.success('Logged out successfully')
-        router.push('/signin')
+        setUser(null)
+        router.push('/')
+
         router.refresh()
+
       } else {
         toast.error('Failed to logout')
       }

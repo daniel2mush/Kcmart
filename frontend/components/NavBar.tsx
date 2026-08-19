@@ -232,6 +232,7 @@ const NavBar = () => {
               return (
                 <Link
                   key={nav.title}
+                  onClick={()=>setIsMobileMenuOpen(false)}
                   href={nav.link}
                   className={`text-2xl font-bold transition-colors ${
                     active ? 'text-primary' : 'text-secondary hover:text-primary'
@@ -244,7 +245,7 @@ const NavBar = () => {
           </nav>
 
           <div className="mt-auto mb-8 flex flex-col items-center gap-8">
-            <div className="flex gap-4 text-secondary">
+            <div className="flex gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.link}
@@ -258,14 +259,15 @@ const NavBar = () => {
                 </a>
               ))}
             </div>
-            <Button
-              onClick={() => router.push('/signin')}
-              variant="outline"
-              size="lg"
-              className="w-full max-w-[200px] border-border text-secondary hover:text-primary hover:bg-hover"
-            >
-              Sign In
-            </Button>
+            <Link
+                onClick={()=>setIsMobileMenuOpen(false)}
+                  href={user.user? '/dashboard' : '/login'}
+                  className="rounded-lg border border-border bg-surface px-5 py-2 text-sm font-medium text-secondary transition-all hover:bg-hover hover:text-primary hover:border-primary/50"
+                >
+                  {
+                    user.user ? 'Dashboard' : "Login"
+                  }
+                </Link>
           </div>
         </div>
       )}
