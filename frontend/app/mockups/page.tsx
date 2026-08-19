@@ -7,7 +7,7 @@ const Mockups = () => {
      return (
        <div>
       <HeaderHelper />
-      <div className={' max-w-[125rem] mx-auto'}>
+      <div className={' max-w-500 mx-auto'}>
         <Card iterable={Mock} />
       </div>
     </div>
