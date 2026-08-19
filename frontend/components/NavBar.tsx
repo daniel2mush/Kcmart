@@ -12,6 +12,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from './ui/collapsible'
+import {useUserStore} from "@/lib/store";
 
 type NavItem = { title: string; link: string }
 type SocialLink = { icon: React.ReactNode; link: string; label: string }
@@ -46,6 +47,8 @@ const NavBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+
+  const user = useUserStore()
 
   const isMobile = useMediaQuery({ maxWidth: 1024 })
   const pathname = usePathname()
@@ -187,10 +190,12 @@ const NavBar = () => {
                   ))}
                 </div>
                 <Link
-                  href="/signin"
+                  href={user.user? '/dashboard' : '/login'}
                   className="rounded-lg border border-border bg-surface px-5 py-2 text-sm font-medium text-secondary transition-all hover:bg-hover hover:text-primary hover:border-primary/50"
                 >
-                  Sign In
+                  {
+                    user.user ? 'Dashboard' : "Login"
+                  }
                 </Link>
               </div>
             </>

@@ -1,12 +1,22 @@
 'use client'
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import DashboardContent from '@/components/Dashboard/DashboardContent'
 import Sidebar from '@/components/Dashboard/Sidebar'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import {useUserStore} from "@/lib/store";
+import {User} from "@/lib/types/UserTypes";
 
 const Dashboard = ({user}:{user:User}) => {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
+
+  const setUser = useUserStore((state) => state.setUser)
+
+  useEffect(() => {
+    if (user) {
+      setUser(user)
+    }
+  }, [user, setUser])
 
   return (
     <div className="flex min-h-screen w-full overflow-x-hidden bg-app">

@@ -1,9 +1,11 @@
-import { create } from 'zustand/react'
+import { create } from 'zustand' // ✅ Correct import path
 import { persist } from 'zustand/middleware'
+import type { User } from '@/lib/types/UserTypes' // ✅ Import your User type
 
 interface UserStore {
   user: User | null
-  setUser: (user: User) => void
+  // Allow null so you can clear the user on logout
+  setUser: (user: User | null) => void
 }
 
 export const useUserStore = create<UserStore>()(
